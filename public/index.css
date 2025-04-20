@@ -91,6 +91,17 @@ html, body, #root, .app {
 	animation: flicker 0.33s infinite;
 }
 
+.light-flicker
+{
+	z-index: 102;
+	position: fixed;
+	pointer-events: none;
+	width: 100%;
+	height: 100%;
+	background: rgba(9, 8, 8, 0.1);
+	animation: light-flicker 0.33s infinite;
+}
+
 .scanline {
 	z-index: 101;
 	position: fixed;
@@ -181,6 +192,72 @@ html, body, #root, .app {
 	}
 	100% {
 		opacity: 0.78042;
+	}
+}
+
+@keyframes light-flicker {
+	0% {
+		opacity: 0.119;
+	}
+	5% {
+		opacity: 0.02841;
+	}
+	10% {
+		opacity: 0.35748;
+	}
+	15% {
+		opacity: 0.58852;
+	}
+	20% {
+		opacity: 0.3408;
+	}
+	25% {
+		opacity: 0.45088;
+	}
+	30% {
+		opacity: 0.42426;
+	}
+	35% {
+		opacity: 0.06418;
+	}
+	40% {
+		opacity: 0.39249;
+	}
+	45% {
+		opacity: 0.55312;
+	}
+	50% {
+		opacity: 0.29436;
+	}
+	55% {
+		opacity: 0.1574;
+	}
+	60% {
+		opacity: 0.49754;
+	}
+	65% {
+		opacity: 0.55086;
+	}
+	70% {
+		opacity: 0.12137;
+	}
+	75% {
+		opacity: 0.35791;
+	}
+	80% {
+		opacity: 0.49617;
+	}
+	85% {
+		opacity: 0.10183;
+	}
+	90% {
+		opacity: 0.20657;
+	}
+	95% {
+		opacity: 0.54125;
+	}
+	100% {
+		opacity: 0.28042;
 	}
 }
 

@@ -1,15 +1,6 @@
-﻿/* Fonts */
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-
-.roboto-mono {
-	font-family: "Roboto Mono", monospace;
-	font-optical-sizing: auto;
-	font-weight: var(--font-weight-normal);
-	font-style: normal;
-}
-
-/* Main */
+/* CSS variables */
 
 .dark-theme
 {
@@ -32,6 +23,17 @@
 	--font-textShadow-color-2: rgba(0, 0, 0, 0.075);
 	--font-weight-normal: 600;
 }
+
+/* Fonts */
+
+.roboto-mono {
+	font-family: "Roboto Mono", monospace;
+	font-optical-sizing: auto;
+	font-weight: var(--font-weight-normal);
+	font-style: normal;
+}
+
+/* Main */
 
 html {
 	font-size: 17px;

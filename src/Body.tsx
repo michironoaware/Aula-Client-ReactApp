@@ -4,5 +4,5 @@ const exampleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 
 export default function App()
 {
-	return <div className="body roboto-mono text-shadow">{exampleText}</div>
+	return <div className="body dark-theme roboto-mono text-shadow">{exampleText}</div>
 }

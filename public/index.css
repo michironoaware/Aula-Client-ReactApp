@@ -11,6 +11,11 @@
 	--font-textShadow-color-1: rgba(0, 0, 0, 0.5);
 	--font-textShadow-color-2: rgba(255, 0, 80, 0.3);
 	--font-weight-normal: 200;
+
+	font-family: "Roboto Mono", monospace;
+	font-optical-sizing: auto;
+	font-weight: var(--font-weight-normal);
+	font-style: normal;
 }
 
 .light-theme
@@ -22,11 +27,7 @@
 	--font-textShadow-color-1: rgba(80, 0, 255, 0.075);
 	--font-textShadow-color-2: rgba(0, 0, 0, 0.075);
 	--font-weight-normal: 600;
-}
 
-/* Fonts */
-
-.roboto-mono {
 	font-family: "Roboto Mono", monospace;
 	font-optical-sizing: auto;
 	font-weight: var(--font-weight-normal);

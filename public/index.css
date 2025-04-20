@@ -21,12 +21,12 @@
 .light-theme
 {
 	--background-color-1: rgb(200, 200, 200);
-	--font-color-1: rgb(100, 100, 100);
+	--font-color-1: rgb(80, 80, 80);
 	--background-color-1-selection: rgb(100, 100, 100);
 	--font-color-1-selection: rgb(200, 200, 200);
 	--font-textShadow-color-1: rgba(80, 0, 255, 0.075);
 	--font-textShadow-color-2: rgba(0, 0, 0, 0.075);
-	--font-weight-normal: 600;
+	--font-weight-normal: 400;
 
 	font-family: "Roboto Mono", monospace;
 	font-optical-sizing: auto;

@@ -2,8 +2,7 @@
 
 /* CSS variables */
 
-.dark-theme
-{
+.dark-theme {
 	--background-color-1: rgb(40, 40, 40);
 	--font-color-1: white;
 	--background-color-1-selection: rgb(255, 255, 255);
@@ -23,8 +22,7 @@
 	font-style: normal;
 }
 
-.light-theme
-{
+.light-theme {
 	--background-color-1: rgb(200, 200, 200);
 	--font-color-1: rgb(80, 80, 80);
 	--background-color-1-selection: rgb(100, 100, 100);
@@ -44,8 +42,7 @@
 	font-style: normal;
 }
 
-.onyx-theme
-{
+.onyx-theme {
 	--background-color-1: rgb(0, 0, 0);
 	--font-color-1: rgb(255, 255, 255);
 	--background-color-1-selection: rgb(255, 255, 255);
@@ -53,7 +50,7 @@
 	--font-textShadow-color-1: rgba(255, 0, 100, 0.5);
 	--font-textShadow-color-2: rgba(0, 100, 255, 0.5);
 	--font-weight-normal: 200;
-	
+
 	--effects-radial-z: 99;
 	--effects-radial-background: radial-gradient(
 		rgba(255, 255, 255, 0.125),
@@ -65,8 +62,7 @@
 	font-style: normal;
 }
 
-.matrix-theme
-{
+.matrix-theme {
 	--background-color-1: rgb(0, 10, 0);
 	--font-color-1: rgb(0, 255, 0);
 	--background-color-1-selection: rgb(0, 255, 0);
@@ -110,13 +106,11 @@ html, body, #root, .app {
 	overflow-wrap: anywhere;
 }
 
-.body > .body
-{
+.body > .body {
 	max-height: max-content;
 }
 
-.body::selection
-{
+.body::selection {
 	background-color: var(--background-color-1-selection);
 	color: var(--font-color-1-selection);
 }
@@ -146,8 +140,7 @@ html, body, #root, .app {
 	animation: flicker 0.33s infinite;
 }
 
-.light-flicker
-{
+.light-flicker {
 	z-index: 102;
 	position: fixed;
 	pointer-events: none;

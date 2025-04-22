@@ -3,7 +3,7 @@ import Body from "./Body";
 
 export default function App()
 {
-	return <div className="app">
+	return <div className="app dark-theme">
 		<div className="radial"></div>
 		<div className="flicker"></div>
 		<div className="scanline"></div>

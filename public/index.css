@@ -12,6 +12,7 @@
 	--font-textShadow-color-2: rgba(255, 0, 80, 0.3);
 	--font-weight-normal: 200;
 
+	--effects-radial-z: 103;
 	--effects-radial-background: radial-gradient(
 		rgba(255, 255, 255, 0.1),
 		rgba(0, 0, 0, 0.3) 120%);
@@ -32,6 +33,7 @@
 	--font-textShadow-color-2: rgba(0, 0, 0, 0.075);
 	--font-weight-normal: 400;
 
+	--effects-radial-z: 103;
 	--effects-radial-background: radial-gradient(
 		rgba(255, 255, 255, 0.1),
 		rgba(0, 0, 0, 0.3) 120%);
@@ -52,6 +54,7 @@
 	--font-textShadow-color-2: rgba(0, 100, 255, 0.5);
 	--font-weight-normal: 200;
 	
+	--effects-radial-z: 99;
 	--effects-radial-background: radial-gradient(
 		rgba(255, 255, 255, 0.1),
 		rgba(0, 0, 0, 0) 120%);
@@ -104,7 +107,7 @@ html, body, #root, .app {
 }
 
 .radial {
-	z-index: 103;
+	z-index: var(--effects-radial-z);
 	position: fixed;
 	width: 100%;
 	height: 100%;

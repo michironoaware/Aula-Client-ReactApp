@@ -34,6 +34,22 @@
 	font-style: normal;
 }
 
+.onyx-theme
+{
+	--background-color-1: rgb(0, 0, 0);
+	--font-color-1: rgb(255, 255, 255);
+	--background-color-1-selection: rgb(255, 255, 255);
+	--font-color-1-selection: rgb(0, 0, 0);
+	--font-textShadow-color-1: rgba(255, 0, 100, 0.5);
+	--font-textShadow-color-2: rgba(0, 100, 255, 0.5);
+	--font-weight-normal: 200;
+
+	font-family: "Roboto Mono", monospace;
+	font-optical-sizing: auto;
+	font-weight: var(--font-weight-normal);
+	font-style: normal;
+}
+
 /* Main */
 
 html {

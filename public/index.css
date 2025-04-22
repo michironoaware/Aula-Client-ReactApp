@@ -56,7 +56,7 @@
 	
 	--effects-radial-z: 99;
 	--effects-radial-background: radial-gradient(
-		rgba(255, 255, 255, 0.1),
+		rgba(255, 255, 255, 0.125),
 		rgba(0, 0, 0, 0) 120%);
 
 	font-family: "Roboto Mono", monospace;

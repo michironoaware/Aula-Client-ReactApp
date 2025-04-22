@@ -104,6 +104,7 @@ html, body, #root, .app {
 	white-space: pre-wrap;
 	word-break: break-all;
 	overflow-wrap: anywhere;
+	overflow: hidden;
 }
 
 .body > .body {

@@ -58,6 +58,11 @@ html, body, #root, .app {
 	overflow-wrap: anywhere;
 }
 
+.body > .body
+{
+	max-height: max-content;
+}
+
 .body::selection
 {
 	background-color: var(--background-color-1-selection);

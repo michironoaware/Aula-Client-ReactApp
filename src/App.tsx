@@ -1,13 +1,10 @@
 import React from "react";
 import Body from "./Body";
+import Theme, { ThemeType } from "./Theme.tsx";
 
 export default function App()
 {
-	return <div className="app dark-theme">
-		<div className="radial"></div>
-		<div className="flicker"></div>
-		<div className="scanline"></div>
-		<div className="scanlines"></div>
+	return <Theme theme={ThemeType.Dark}>
 		<Body></Body>
-	</div>;
+	</Theme>
 }

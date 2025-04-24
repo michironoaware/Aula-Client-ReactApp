@@ -1,7 +1,7 @@
 ﻿import { CancellationToken, ReadonlyDictionary, UnreachableError } from "aula.js";
 import { Command, CommandOption } from ".";
 import { ILogger, LogLevel } from "../Common/Logging";
-import { StringHelper } from "../Common";
+import { ArrayHelper, StringHelper } from "../Common";
 
 export class CommandLine
 {
@@ -60,8 +60,8 @@ export class CommandLine
 			return false;
 		}
 
-		const pendingOptions = [...command.options]
-			.map(o => o[1])
+		const pendingOptions = ArrayHelper
+			.asArray(command.options.values())
 			.filter(opt => opt.isRequired);
 		const args: Map<string, string> = new Map();
 

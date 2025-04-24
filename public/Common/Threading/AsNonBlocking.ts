@@ -1,4 +1,4 @@
-﻿import { Func } from "../Func.ts";
+﻿import { Func } from "../";
 
 export async function AsNonBlocking<TFunc extends Func<[], TReturn>, TReturn>(func: TFunc): Promise<TReturn>
 {

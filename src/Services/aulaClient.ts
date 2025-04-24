@@ -10,3 +10,9 @@ if (storedAddress !== null &&
 {
 	aulaClient.withAddress(new URL(storedAddress));
 }
+
+export function setServerAddress(address: URL)
+{
+	aulaClient.rest.withAddress(address);
+	localStorage.setItem(localStorageAddressName, address.href);
+}

@@ -9,12 +9,12 @@ export default function InputTextBox(args: InputTextBoxArgs)
 		<textarea
 			id={textareaId}
 			autoFocus={true}
-			onChange={args.onChange}>
+			onKeyDown={args.onKeyDown}>
 		</textarea>
 	</div>
 }
 
 export interface InputTextBoxArgs
 {
-	onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined
+	onKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> | undefined
 }

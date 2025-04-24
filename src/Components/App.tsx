@@ -16,7 +16,7 @@ export default function App()
 		localStorage.setItem("theme", theme);
 	}
 
-	return <Theme theme={theme}>
+	return <Theme theme={theme} withEffects={true}>
 		<Body>
 			{exampleText}
 			<InputTextBox></InputTextBox>

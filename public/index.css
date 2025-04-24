@@ -29,6 +29,19 @@
 	--font-textShadow-color-left-soft: rgba(0, 0, 0, 0.25);
 	--font-textShadow-color-right-soft: rgba(255, 0, 80, 0.15);
 	--font-weight-normal: 200;
+	--font-weight-bold: 600;
+	--font-color-critical: rgb(200, 20, 20);
+	--font-color-error: rgb(255, 90, 90);
+	--font-color-warning: rgb(255, 255, 120);
+	--font-color-information: var(--font-color-primary);
+	--font-color-debug: rgb(0, 160, 220);
+	--font-color-trace: rgb(0, 100, 160);
+	--font-textshadow-critical: soft-textShadow;
+	--font-textshadow-error: soft-textShadow;
+	--font-textshadow-warning: soft-textShadow;
+	--font-textshadow-information: textShadow;
+	--font-textshadow-debug: soft-textShadow;
+	--font-textshadow-trace: soft-textShadow;
 
 	--effects-radial-z: 103;
 	--effects-radial-background: radial-gradient(
@@ -51,6 +64,19 @@
 	--font-textShadow-color-left-soft: rgba(80, 0, 255, 0.0375);
 	--font-textShadow-color-right-soft: rgba(0, 0, 0, 0.0375);
 	--font-weight-normal: 400;
+	--font-weight-bold: 800;
+	--font-color-critical: rgb(150, 15, 15);
+	--font-color-error: rgb(200, 40, 40);
+	--font-color-warning: rgb(120, 120, 0);
+	--font-color-information: var(--font-color-primary);
+	--font-color-debug: rgb(0, 80, 160);
+	--font-color-trace: rgb(0, 50, 100);
+	--font-textshadow-critical: soft-textShadow;
+	--font-textshadow-error: soft-textShadow;
+	--font-textshadow-warning: soft-textShadow;
+	--font-textshadow-information: textShadow;
+	--font-textshadow-debug: soft-textShadow;
+	--font-textshadow-trace: soft-textShadow;
 
 	--effects-radial-z: 103;
 	--effects-radial-background: radial-gradient(
@@ -73,6 +99,19 @@
 	--font-textShadow-color-left-soft: rgba(255, 0, 100, 0.25);
 	--font-textShadow-color-right-soft: rgba(0, 100, 255, 0.25);
 	--font-weight-normal: 200;
+	--font-weight-bold: 600;
+	--font-color-critical: rgb(200, 20, 20);
+	--font-color-error: rgb(255, 75, 75);
+	--font-color-warning: rgb(255, 255, 155);
+	--font-color-information: var(--font-color-primary); /*rgb(85, 240, 135)*/
+	--font-color-debug: rgb(0, 160, 220);
+	--font-color-trace: rgb(60, 120, 180);
+	--font-textshadow-critical: soft-textShadow;
+	--font-textshadow-error: soft-textShadow;
+	--font-textshadow-warning: soft-textShadow;
+	--font-textshadow-information: textShadow;
+	--font-textshadow-debug: soft-textShadow;
+	--font-textshadow-trace: soft-textShadow;
 
 	--effects-radial-z: 99;
 	--effects-radial-background: radial-gradient(
@@ -95,6 +134,19 @@
 	--font-textShadow-color-left-soft: rgba(255, 0, 0, 0.125);
 	--font-textShadow-color-right-soft: rgba(0, 0, 255, 0.125);
 	--font-weight-normal: 600;
+	--font-weight-bold: var(--font-weight-normal);
+	--font-color-critical: var(--font-color-primary);
+	--font-color-error: var(--font-color-primary);
+	--font-color-warning: var(--font-color-primary);
+	--font-color-information: var(--font-color-primary);
+	--font-color-debug: var(--font-color-primary);
+	--font-color-trace: var(--font-color-primary);
+	--font-textshadow-critical: textShadow;
+	--font-textshadow-error: textShadow;
+	--font-textshadow-warning: textShadow;
+	--font-textshadow-information: textShadow;
+	--font-textshadow-debug: textShadow;
+	--font-textshadow-trace: textShadow;
 
 	--effects-radial-z: 99;
 	--effects-radial-background: radial-gradient(
@@ -164,6 +216,51 @@ textarea {
 	resize: none;
 	field-sizing: content;
 	animation: inherit;
+}
+
+/* Main -> Logs */
+
+pre {
+	white-space: pre-wrap;
+	word-break: break-all;
+	overflow-wrap: anywhere;
+	overflow: hidden;
+}
+
+.loglevel-critical {
+	color: var(--font-color-critical);
+	font-weight: var(--font-weight-bold);
+	animation: var(--font-textshadow-critical) 1s infinite;
+}
+
+.loglevel-error {
+	color: var(--font-color-error);
+	font-weight: var(--font-weight-bold);
+	animation: var(--font-textshadow-error) 1s infinite;
+}
+
+.loglevel-warning {
+	color: var(--font-color-warning);
+	font-weight: var(--font-weight-normal);
+	animation: var(--font-textshadow-warning) 1s infinite;
+}
+
+.loglevel-information {
+	color: var(--font-color-information);
+	font-weight: var(--font-weight-normal);
+	animation: var(--font-textshadow-information) 1s infinite;
+}
+
+.loglevel-debug {
+	color: var(--font-color-debug);
+	font-weight: var(--font-weight-normal);
+	animation: var(--font-textshadow-debug) 1s infinite;
+}
+
+.loglevel-trace {
+	color: var(--font-color-trace);
+	font-weight: var(--font-weight-normal);
+	animation: var(--font-textshadow-trace) 1s infinite;
 }
 
 /* CRT Effects */

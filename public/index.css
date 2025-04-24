@@ -36,6 +36,12 @@
 	--font-color-information: var(--font-color-primary);
 	--font-color-debug: rgb(0, 160, 220);
 	--font-color-trace: rgb(0, 100, 160);
+	--font-weight-critical: 400;
+	--font-weight-error: 400;
+	--font-weight-warning: var(--font-weight-information);
+	--font-weight-information: var(--font-weight-primary);
+	--font-weight-debug: 400;
+	--font-weight-trace: 400;
 	--font-textshadow-critical: soft-textShadow;
 	--font-textshadow-error: soft-textShadow;
 	--font-textshadow-warning: soft-textShadow;
@@ -70,6 +76,12 @@
 	--font-color-information: var(--font-color-primary);
 	--font-color-debug: rgb(0, 80, 160);
 	--font-color-trace: rgb(0, 50, 100);
+	--font-weight-critical: 700;
+	--font-weight-error: 700;
+	--font-weight-warning: var(--font-weight-information);
+	--font-weight-information: var(--font-weight-primary);
+	--font-weight-debug: 700;
+	--font-weight-trace: 700;
 	--font-textshadow-critical: soft-textShadow;
 	--font-textshadow-error: soft-textShadow;
 	--font-textshadow-warning: soft-textShadow;
@@ -104,6 +116,12 @@
 	--font-color-information: var(--font-color-primary); /*rgb(85, 240, 135)*/
 	--font-color-debug: rgb(0, 160, 220);
 	--font-color-trace: rgb(60, 120, 180);
+	--font-weight-critical: var(--font-weight-information);
+	--font-weight-error: var(--font-weight-information);
+	--font-weight-warning: var(--font-weight-information);
+	--font-weight-information: var(--font-weight-primary);
+	--font-weight-debug: var(--font-weight-information);
+	--font-weight-trace: var(--font-weight-information);
 	--font-textshadow-critical: soft-textShadow;
 	--font-textshadow-error: soft-textShadow;
 	--font-textshadow-warning: soft-textShadow;
@@ -138,6 +156,12 @@
 	--font-color-information: var(--font-color-primary);
 	--font-color-debug: var(--font-color-primary);
 	--font-color-trace: var(--font-color-primary);
+	--font-weight-critical: var(--font-weight-information);
+	--font-weight-error: var(--font-weight-information);
+	--font-weight-warning: var(--font-weight-information);
+	--font-weight-information: var(--font-weight-primary);
+	--font-weight-debug: var(--font-weight-information);
+	--font-weight-trace: var(--font-weight-information);
 	--font-textshadow-critical: textShadow;
 	--font-textshadow-error: textShadow;
 	--font-textshadow-warning: textShadow;
@@ -266,31 +290,37 @@ pre {
 
 .loglevel-critical {
 	color: var(--font-color-critical);
+	font-weight: var(--font-weight-critical);
 	animation: var(--font-textshadow-critical) 1s infinite;
 }
 
 .loglevel-error {
 	color: var(--font-color-error);
+	font-weight: var(--font-weight-error);
 	animation: var(--font-textshadow-error) 1s infinite;
 }
 
 .loglevel-warning {
 	color: var(--font-color-warning);
+	font-weight: var(--font-weight-warning);
 	animation: var(--font-textshadow-warning) 1s infinite;
 }
 
 .loglevel-information {
 	color: var(--font-color-information);
+	font-weight: var(--font-weight-information);
 	animation: var(--font-textshadow-information) 1s infinite;
 }
 
 .loglevel-debug {
 	color: var(--font-color-debug);
+	font-weight: var(--font-weight-debug);
 	animation: var(--font-textshadow-debug) 1s infinite;
 }
 
 .loglevel-trace {
 	color: var(--font-color-trace);
+	font-weight: var(--font-weight-trace);
 	animation: var(--font-textshadow-trace) 1s infinite;
 }
 

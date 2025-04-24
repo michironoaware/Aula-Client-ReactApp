@@ -37,7 +37,7 @@ export default function InputTextBox()
 		clearTimeout(timeout);
 	}
 	return <div className="input-text-box">
-		<label htmlFor={textareaId}>{">"}</label>
+		<label htmlFor={textareaId}>{"> "}</label>
 		<textarea
 			id={textareaId}
 			autoFocus={true}

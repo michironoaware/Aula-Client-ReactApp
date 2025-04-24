@@ -242,7 +242,7 @@ html, body, #root, #root > .theme
 
 .input-text-box > label {
 	align-self: center;
-	margin-right: 1em;
+	/*margin-right: 1em;*/ /*Currently simulating the padding with an space character*/
 }
 
 .input-text-box > textarea {

@@ -28,7 +28,7 @@
 	--font-textShadow-color-left: rgba(0, 0, 0, 0.5);
 	--font-textShadow-color-right: rgba(255, 0, 80, 0.3);
 	--font-textShadow-color-left-soft: rgba(0, 0, 0, 0.25);
-	--font-textShadow-color-right-soft: rgba(255, 0, 80, 0.15);
+	--font-textShadow-color-right-soft: rgba(255, 255, 255, 0.15);
 	--font-weight-primary: 200;
 	--font-color-critical: rgb(200, 20, 20);
 	--font-color-error: rgb(255, 90, 90);

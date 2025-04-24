@@ -40,7 +40,8 @@ export default function InputTextBox()
 		<textarea
 			id={textareaId}
 			autoFocus={true}
-			onKeyDown={onKeyDown}>
+			onKeyDown={onKeyDown}
+			spellCheck={false}>
 		</textarea>
 	</div>
 }

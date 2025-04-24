@@ -107,7 +107,7 @@
 	--font-style: normal;
 }
 
-/* Main */
+/* Main -> Body */
 
 html {
 	font-size: 17px;
@@ -137,6 +137,8 @@ html, body, #root, .theme {
 .body > .body {
 	max-height: max-content;
 }
+
+/* Main -> Inputs */
 
 .input-text-box
 {

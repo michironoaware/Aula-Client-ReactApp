@@ -190,6 +190,15 @@ html, body, #root, .theme {
 	max-height: max-content;
 }
 
+.body > .loglist
+{
+	height: 100%;
+}
+
+.body > .input-text-box {
+	height: max-content;
+}
+
 /* Main -> Inputs */
 
 .input-text-box

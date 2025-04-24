@@ -20,6 +20,14 @@ export class StringBuilder
 		this.#_strings.push(string);
 	}
 
+	public appendLine(string?: string)
+	{
+		if (string)
+			this.append(string);
+
+		this.append("\n");
+	}
+
 	public toString()
 	{
 		return typeof this.#_strings === "string" ? this.#_strings : this.#_strings.join();

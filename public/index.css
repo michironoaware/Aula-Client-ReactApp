@@ -180,6 +180,15 @@ html, body, #root, #root > .theme
 	padding: 6vh 4vw;
 }
 
+#root > .theme
+{
+	border-radius: 0;
+}
+
+.theme {
+	border-radius: 0.125rem;
+}
+
 .body {
 	max-height: calc(100% - 4vh);
 	padding: 1em;

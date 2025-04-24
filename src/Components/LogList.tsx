@@ -12,13 +12,13 @@ export default function LogList(args: LogListArgs)
 		const logger = {
 			log: (level, message) =>
 			{
-				setLogs([...logs, { level, message, generatedKey: crypto.randomUUID() }]);
+				setLogs(previousLogs => [...previousLogs, { level, message, generatedKey: crypto.randomUUID() }]);
 			}
 		} satisfies ILogger;
 		loggers.add(logger);
 
 		return () => loggers.remove(logger);
-	}, [logs, setLogs]);
+	}, []);
 
 	return <div className="loglist">
 		{args.children}

@@ -12,6 +12,7 @@ export default function Log(args: LogArgs)
 		case LogLevel.Information: logLevelClass = "loglevel-information"; break;
 		case LogLevel.Debug: logLevelClass = "loglevel-debug"; break;
 		case LogLevel.Trace: logLevelClass = "loglevel-trace"; break;
+		case LogLevel.None: logLevelClass = ""; break;
 		default: throw new InvalidOperationError(`Unexpected log level "${args.logLevel}"`);
 	}
 

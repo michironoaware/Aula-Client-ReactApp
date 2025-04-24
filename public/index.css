@@ -218,6 +218,7 @@ textarea {
 	font-weight: inherit;
 	font-style: inherit;
 	font-size: inherit;
+	animation: inherit;
 	padding: 0;
 	border: none;
 	outline: none;

@@ -1,4 +1,5 @@
 ﻿import React from "react";
+import { ThemeType } from "./ThemeType.tsx";
 
 export default function Theme(args: ThemeArgs)
 {
@@ -17,14 +18,6 @@ export default function Theme(args: ThemeArgs)
 		{effects}
 		{args.children}
 	</div>
-}
-
-export enum ThemeType
-{
-	Dark = "dark-theme",
-	Light = "light-theme",
-	Onyx = "onyx-theme",
-	Matrix = "matrix-theme",
 }
 
 export interface ThemeArgs

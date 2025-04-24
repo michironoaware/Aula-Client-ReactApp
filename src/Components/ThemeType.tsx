@@ -1,6 +1,6 @@
 ﻿export enum ThemeType
 {
-	Dark = "dark-theme",
+	Vintage = "vintage-theme",
 	Light = "light-theme",
 	Onyx = "onyx-theme",
 	Matrix = "matrix-theme",

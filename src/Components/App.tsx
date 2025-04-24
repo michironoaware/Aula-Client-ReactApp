@@ -12,7 +12,7 @@ export default function App()
 	let theme = localStorage.getItem("theme") as ThemeType;
 	if (theme === null || !TypeHelper.isType(theme, ThemeType))
 	{
-		theme = ThemeType.Dark;
+		theme = ThemeType.Vintage;
 		localStorage.setItem("theme", theme);
 	}
 

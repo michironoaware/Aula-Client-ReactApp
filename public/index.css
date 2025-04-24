@@ -20,7 +20,7 @@
 	color: var(--font-color-primary-selection);
 }
 
-.dark-theme {
+.vintage-theme {
 	--background-primary: rgb(40, 40, 40);
 	--font-color-primary: white;
 	--background-primary-selection: rgb(255, 255, 255);

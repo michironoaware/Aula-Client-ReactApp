@@ -8,7 +8,7 @@ import { ThemeType } from "./ThemeType.tsx";
 
 export default function App()
 {
-	let theme = localStorage.getItem("theme") as ThemeType;
+	let theme = localStorage.getItem("theme") as ThemeType | null;
 	if (theme === null || !TypeHelper.isType(theme, ThemeType))
 	{
 		theme = ThemeType.Vintage;

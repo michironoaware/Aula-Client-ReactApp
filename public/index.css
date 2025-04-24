@@ -173,7 +173,7 @@ textarea {
 }
 
 .soft-text-shadow {
-	animation: textShadow 1s infinite;
+	animation: soft-textShadow 1s infinite;
 }
 
 .radial {

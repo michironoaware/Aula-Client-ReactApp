@@ -234,13 +234,18 @@ html, body, #root, #root > .theme
 
 .input-text-box
 {
-	padding: 0.5rem 0;
+	margin: 0.5rem 0;
 	display: flex;
 	flex-direction: row;
 	animation: textShadow 1s infinite;
 }
 
-textarea {
+.input-text-box > label {
+	align-self: center;
+	margin-right: 1em;
+}
+
+.input-text-box > textarea {
 	background: inherit;
 	color: inherit;
 	font-family: inherit;

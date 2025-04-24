@@ -1,7 +1,21 @@
 ﻿export namespace ArrayHelper
 {
-	export function asArray<T>(iterable: Iterable<T>)
+	export function asArray<T>(iter: Iterable<T> | Iterator<T>)
 	{
-		return Array.isArray(iterable) ? iterable as T[] : [ ...iterable ];
+		if (Array.isArray(iter))
+			return iter as T[];
+
+		if (Symbol.iterator in iter)
+			return [ ... iter ];
+
+		const arr = [];
+		let current: IteratorResult<T> = iter.next();
+		while (!current.done)
+		{
+			arr.push(current.value);
+			iter.next();
+		}
+
+		return arr;
 	}
 }

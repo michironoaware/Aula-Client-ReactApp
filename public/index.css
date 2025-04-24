@@ -4,7 +4,7 @@
 
 .theme
 {
-	background-color: var(--background-color-1);
+	background: var(--background-color-1);
 	color: var(--font-color-1);
 
 	font-family: var(--font-family), 'Consolas', monospace;
@@ -15,7 +15,7 @@
 
 .theme::selection
 {
-	background-color: var(--background-color-1-selection);
+	background: var(--background-color-1-selection);
 	color: var(--font-color-1-selection);
 }
 

@@ -30,6 +30,6 @@ export class StringBuilder
 
 	public toString()
 	{
-		return typeof this.#_strings === "string" ? this.#_strings : this.#_strings.join();
+		return typeof this.#_strings === "string" ? this.#_strings : this.#_strings.join("");
 	}
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Body from "./Body";
 import Theme from "./Theme.tsx";
 import InputTextBox from "./InputTextBox.tsx";
-import { TypeHelper } from "../Common";
+import { TypeHelper, ErrorHelper } from "../Common";
 import LogList from "./LogList.tsx";
 import { ThemeType } from "./ThemeType.tsx";
 

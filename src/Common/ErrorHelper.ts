@@ -1,4 +1,4 @@
-﻿import { Func } from "./Common";
+﻿import { Func } from ".";
 
 export namespace ErrorHelper
 {

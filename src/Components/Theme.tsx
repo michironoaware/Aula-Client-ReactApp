@@ -2,7 +2,6 @@
 
 export default function Theme(args: ThemeArgs)
 {
-	const themeClass = `theme ${args.theme}`;
 	const flickerClass = args.theme === "light-theme" ? "light-flicker" : "flicker";
 	
 	const effects  = args.withEffects
@@ -14,7 +13,7 @@ export default function Theme(args: ThemeArgs)
 		</div>
 		: undefined;
 
-	return <div className={themeClass}>
+	return <div className={`theme ${args.theme}`}>
 		{effects}
 		{args.children}
 	</div>

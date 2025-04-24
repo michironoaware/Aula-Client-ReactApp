@@ -23,4 +23,9 @@ export namespace StringHelper
 		textWithPadding.append(text);
 		return textWithPadding.toString();
 	}
+
+	export function capitalize(str: string)
+	{
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	}
 }

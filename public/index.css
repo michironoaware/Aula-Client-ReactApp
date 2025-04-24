@@ -182,7 +182,7 @@ html, body, #root, #root > .theme
 
 .body {
 	max-height: calc(100% - 4vh);
-	padding: 2vh 1vw;
+	padding: 1em;
 	display: flex;
 	flex-direction: column;
 	white-space: pre-wrap;

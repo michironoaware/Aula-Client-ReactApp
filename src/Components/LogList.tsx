@@ -12,7 +12,7 @@ export default function LogList(args: LogListArgs)
 		const logger = {
 			log: (level, message) =>
 			{
-				setLogs([...logs, { level, message }]);
+				setLogs([...logs, { level, message, generatedKey: crypto.randomUUID() }]);
 			}
 		} satisfies ILogger;
 		loggers.add(logger);
@@ -22,7 +22,7 @@ export default function LogList(args: LogListArgs)
 
 	return <div className="loglist">
 		{args.children}
-		{logs.map(l => <Log logLevel={l.level} message={l.message}/>)}
+		{logs.map(l => <Log key={l.generatedKey} logLevel={l.level} message={l.message}/>)}
 	</div>
 }
 
@@ -33,6 +33,7 @@ export interface LogListArgs
 
 interface LogData
 {
+	generatedKey: string;
 	level: LogLevel;
 	message: string;
 }

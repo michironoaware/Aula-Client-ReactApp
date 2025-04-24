@@ -247,7 +247,7 @@ pre {
 	display: none;
 }
 
-.log {
+.loglist > .log {
 	margin: 0 0 1em;
 }
 

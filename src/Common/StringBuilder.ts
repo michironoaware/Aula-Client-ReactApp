@@ -9,7 +9,7 @@ export class StringBuilder
 		this.#_strings = string;
 	}
 
-	public add(string: string)
+	public append(string: string)
 	{
 		if (typeof this.#_strings === "string")
 		{

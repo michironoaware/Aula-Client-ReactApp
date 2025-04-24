@@ -6,3 +6,4 @@ export * from "./IDisposable";
 export * from "./StringBuilder";
 export * from "./StringHelper";
 export * from "./TypeHelper";
+export * from "./ValueOutOfRangeError";

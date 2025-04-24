@@ -1,6 +1,6 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken } from "aula.js";
-import { aulaClient } from "../aulaClient.ts";
+import { aulaClient, setServerAddress } from "../aulaClient.ts";
 import { loggers } from "..";
 import { LogLevel } from "../../Common/Logging";
 
@@ -55,7 +55,7 @@ export class SetAddress extends Command
 			loggers.log(LogLevel.Warning, "The server did not respond. The address may be incorrect or the server is disconnected.");
 		}
 
-		aulaClient.rest.withAddress(address);
+		setServerAddress(address);
 		loggers.log(LogLevel.Information, "Address updated!");
 		return;
 	}

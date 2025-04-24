@@ -235,6 +235,16 @@ pre {
 	overflow: hidden;
 }
 
+.loglist
+{
+	overflow: hidden scroll;
+}
+
+.loglist::-webkit-scrollbar
+{
+	display: none;
+}
+
 .loglevel-critical {
 	color: var(--font-color-critical);
 	font-weight: var(--font-weight-bold);

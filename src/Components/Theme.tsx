@@ -34,7 +34,7 @@ export default function Theme(args: ThemeArgs)
 
 			events.on("ThemeUpdateRequest", listener);
 			return () => events.remove("ThemeUpdateRequest", listener);
-		}, [setTheme]);
+		}, []);
 	}
 
 	const flickerClass = themeToUse === ThemeType.Light ? "light-flicker" : "flicker";

@@ -229,6 +229,8 @@ textarea {
 /* Main -> Logs */
 
 pre {
+	padding: 0;
+	margin: 0;
 	white-space: pre-wrap;
 	word-break: break-all;
 	overflow-wrap: anywhere;

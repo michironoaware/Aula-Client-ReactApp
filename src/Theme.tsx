@@ -2,9 +2,10 @@
 
 export default function Theme(args: ThemeArgs)
 {
+	const themeClass = `theme ${args.theme}`;
 	const flickerClass = args.theme === "light-theme" ? "light-flicker" : "flicker";
 
-	return <div className={`theme ${args.theme}`}>
+	return <div className={themeClass}>
 		<div className="radial"></div>
 		<div className={flickerClass}></div>
 		<div className="scanline"></div>

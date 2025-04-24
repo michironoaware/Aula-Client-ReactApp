@@ -1,4 +1,3 @@
-﻿import { Func } from "../Common";
 ﻿import React, { useId } from "react";
 
 export default function InputTextBox(args: InputTextBoxArgs)

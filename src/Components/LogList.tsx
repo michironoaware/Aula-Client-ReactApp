@@ -9,5 +9,5 @@ export default function LogList(args: LogListArgs)
 
 export interface LogListArgs
 {
-	children: ReactNode
+	children?: ReactNode
 }

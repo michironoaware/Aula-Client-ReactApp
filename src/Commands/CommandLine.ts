@@ -1,6 +1,6 @@
 ﻿import { CancellationToken, ReadonlyDictionary, UnreachableError } from "aula.js-alpha";
 import { Command, CommandOption } from ".";
-import { ILogger, LogLevel } from "../Logging";
+import { ILogger, LogLevel } from "../Common/Logging";
 
 export class CommandLine
 {

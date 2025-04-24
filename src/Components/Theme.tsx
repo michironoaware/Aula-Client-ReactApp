@@ -1,10 +1,43 @@
-﻿import React from "react";
-import { ThemeType } from "./ThemeType.tsx";
+﻿import React, { useEffect, useState } from "react";
+import { ThemeType, ThemeTypeToDomClass } from "./ThemeType.tsx";
+import { events } from "../Services";
+import { TypeHelper } from "../Common";
+
+const localStorageThemeName = "theme";
 
 export default function Theme(args: ThemeArgs)
 {
-	const flickerClass = args.theme === "light-theme" ? "light-flicker" : "flicker";
-	
+	let themeToUse: ThemeType;
+	if (args.theme)
+	{
+		themeToUse = args.theme;
+	}
+	else
+	{
+		let themeStored = Number(localStorage.getItem(localStorageThemeName));
+		if (!TypeHelper.isType(themeStored, ThemeType))
+		{
+			themeStored = ThemeType.Vintage;
+			localStorage.setItem(localStorageThemeName, themeStored.toString());
+		}
+
+		const [theme, setTheme] = useState<ThemeType>(themeStored);
+		themeToUse = theme;
+
+		useEffect(() =>
+		{
+			const listener = (theme: ThemeType) =>
+			{
+				localStorage.setItem(localStorageThemeName, theme.toString());
+				setTheme(theme);
+			};
+
+			events.on("ThemeUpdateRequest", listener);
+			return () => events.remove("ThemeUpdateRequest", listener);
+		}, [setTheme]);
+	}
+
+	const flickerClass = themeToUse === ThemeType.Light ? "light-flicker" : "flicker";
 	const effects  = args.withEffects
 		? <div>
 			<div className="radial"></div>
@@ -14,7 +47,7 @@ export default function Theme(args: ThemeArgs)
 		</div>
 		: undefined;
 
-	return <div className={`theme ${args.theme}`}>
+	return <div className={`theme ${ThemeTypeToDomClass(themeToUse)}`}>
 		{effects}
 		{args.children}
 	</div>
@@ -23,6 +56,6 @@ export default function Theme(args: ThemeArgs)
 export interface ThemeArgs
 {
 	children: React.ReactNode;
-	theme: ThemeType;
+	theme?: ThemeType;
 	withEffects: boolean;
 }

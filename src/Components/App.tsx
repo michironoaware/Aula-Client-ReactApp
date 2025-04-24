@@ -8,14 +8,7 @@ import { ThemeType } from "./ThemeType.tsx";
 
 export default function App()
 {
-	let theme = localStorage.getItem("theme") as ThemeType | null;
-	if (theme === null || !TypeHelper.isType(theme, ThemeType))
-	{
-		theme = ThemeType.Vintage;
-		localStorage.setItem("theme", theme);
-	}
-
-	return <Theme theme={theme} withEffects={true}>
+	return <Theme withEffects={true}>
 		<Body>
 			<LogList></LogList>
 			<InputTextBox></InputTextBox>

@@ -1,7 +1,7 @@
 ﻿import { Func } from "../Common";
-import { useId } from "react";
+﻿import React, { useId } from "react";
 
-export default function InputTextBox()
+export default function InputTextBox(args: InputTextBoxArgs)
 {
 	const textareaId = useId();
 
@@ -9,7 +9,13 @@ export default function InputTextBox()
 		<label htmlFor={textareaId}>{">"}</label>
 		<textarea
 			id={textareaId}
-			autoFocus={true}>
+			autoFocus={true}
+			onChange={args.onChange}>
 		</textarea>
 	</div>
+}
+
+export interface InputTextBoxArgs
+{
+	onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined
 }

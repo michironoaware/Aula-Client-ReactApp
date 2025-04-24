@@ -7,7 +7,7 @@ import { LogLevel } from "../../Common/Logging";
 export class SetAddress extends Command
 {
 	static readonly #s_addressOption = new CommandOption({
-		name: "set-address",
+		name: "address",
 		description: "The address of the server.",
 		isRequired: true,
 		requiresArgument: true,

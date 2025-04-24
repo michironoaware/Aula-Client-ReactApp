@@ -1,5 +1,5 @@
 ﻿import { CancellationToken, ReadonlyDictionary } from "aula.js-alpha";
-import { CommandOption } from "./";
+import { CommandOption } from ".";
 
 export abstract class Command
 {

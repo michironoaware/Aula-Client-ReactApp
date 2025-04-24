@@ -1,7 +1,5 @@
-﻿import { IDisposable } from "../IDisposable";
+﻿import { Func, IDisposable, TypeHelper } from "..";
 import { AsNonBlocking } from ".";
-import { Func } from "../Func";
-import { TypeHelper } from "../TypeHelper";
 import { ObjectDisposedError } from "aula.js-alpha";
 
 /**

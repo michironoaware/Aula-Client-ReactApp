@@ -246,6 +246,11 @@ pre {
 	word-break: break-all;
 	overflow-wrap: anywhere;
 	overflow: hidden;
+	font-family: inherit;
+	font-optical-sizing: inherit;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: inherit;
 }
 
 .loglist

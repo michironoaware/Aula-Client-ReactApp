@@ -22,6 +22,7 @@ export default function InputTextBox()
 
 		try
 		{
+			loggers.log(LogLevel.Information, `> ${content}`);
 			await commandLine.processCommand(content, cancellation.token);
 		}
 		catch (err)

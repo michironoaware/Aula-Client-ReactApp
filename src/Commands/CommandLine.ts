@@ -68,7 +68,7 @@ export class CommandLine
 		while (inputSegments.length > 0)
 		{
 			const segment = inputSegments.shift()!;
-			if (segment.length === 0 || input.trim().length === 0)
+			if (StringHelper.isNullOrWhiteSpace(segment))
 			{
 				continue;
 			}

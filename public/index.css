@@ -247,6 +247,10 @@ pre {
 	display: none;
 }
 
+.log {
+	margin: 0 0 1em;
+}
+
 .loglevel-critical {
 	color: var(--font-color-critical);
 	font-weight: var(--font-weight-bold);

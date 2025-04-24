@@ -15,7 +15,7 @@ export default function Log(args: LogArgs)
 		default: throw new InvalidOperationError(`Unexpected log level "${args.logLevel}"`);
 	}
 
-	return <div className={logLevelClass}>
+	return <div className={`log ${logLevelClass}`}>
 		<pre>{args.message}</pre>
 	</div>
 }

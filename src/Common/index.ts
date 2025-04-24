@@ -1,4 +1,5 @@
-﻿export * from "./ErrorHelper";
+﻿export * from "./ArrayHelper";
+export * from "./ErrorHelper";
 export * from "./Func";
 export * from "./IAsyncDisposable";
 export * from "./IDisposable";

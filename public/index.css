@@ -282,6 +282,9 @@ pre {
 .loglist
 {
 	overflow: hidden scroll;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
 }
 
 .loglist::-webkit-scrollbar

@@ -185,9 +185,6 @@ html, body, #root, #root > .theme
 	padding: 2vh 1vw;
 	display: flex;
 	flex-direction: column;
-	/*
-	justify-content: space-between;
-	*/
 	white-space: pre-wrap;
 	word-break: break-all;
 	overflow-wrap: anywhere;

@@ -1,4 +1,5 @@
-﻿export * from "./Func";
+﻿export * from "./ErrorHelper";
+export * from "./Func";
 export * from "./IAsyncDisposable";
 export * from "./IDisposable";
 export * from "./TypeHelper";

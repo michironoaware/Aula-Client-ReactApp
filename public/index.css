@@ -2,6 +2,23 @@
 
 /* CSS variables */
 
+.theme
+{
+	background-color: var(--background-color-1);
+	color: var(--font-color-1);
+
+	font-family: var(--font-family), 'Consolas', monospace;
+	font-optical-sizing: var(--font-optical-sizing);
+	font-weight: var(--font-weight);
+	font-style: var(--font-style);
+}
+
+.theme::selection
+{
+	background-color: var(--background-color-1-selection);
+	color: var(--font-color-1-selection);
+}
+
 .dark-theme {
 	--background-color-1: rgb(40, 40, 40);
 	--font-color-1: white;
@@ -9,6 +26,8 @@
 	--font-color-1-selection: rgb(0, 0, 0);
 	--font-textShadow-color-1: rgba(0, 0, 0, 0.5);
 	--font-textShadow-color-2: rgba(255, 0, 80, 0.3);
+	--font-textShadow-color-1-soft: rgba(0, 0, 0, 0.25);
+	--font-textShadow-color-2-soft: rgba(255, 0, 80, 0.15);
 	--font-weight-normal: 200;
 
 	--effects-radial-z: 103;
@@ -16,10 +35,10 @@
 		rgba(255, 255, 255, 0.1),
 		rgba(0, 0, 0, 0.3) 120%);
 
-	font-family: "Roboto Mono", monospace;
-	font-optical-sizing: auto;
-	font-weight: var(--font-weight-normal);
-	font-style: normal;
+	--font-family: "Roboto Mono", monospace;
+	--font-optical-sizing: auto;
+	--font-weight: var(--font-weight-normal);
+	--font-style: normal;
 }
 
 .light-theme {
@@ -29,6 +48,8 @@
 	--font-color-1-selection: rgb(200, 200, 200);
 	--font-textShadow-color-1: rgba(80, 0, 255, 0.075);
 	--font-textShadow-color-2: rgba(0, 0, 0, 0.075);
+	--font-textShadow-color-1-soft: rgba(80, 0, 255, 0.0375);
+	--font-textShadow-color-2-soft: rgba(0, 0, 0, 0.0375);
 	--font-weight-normal: 400;
 
 	--effects-radial-z: 103;
@@ -36,10 +57,10 @@
 		rgba(255, 255, 255, 0.1),
 		rgba(0, 0, 0, 0.3) 120%);
 
-	font-family: "Roboto Mono", monospace;
-	font-optical-sizing: auto;
-	font-weight: var(--font-weight-normal);
-	font-style: normal;
+	--font-family: "Roboto Mono", monospace;
+	--font-optical-sizing: auto;
+	--font-weight: var(--font-weight-normal);
+	--font-style: normal;
 }
 
 .onyx-theme {
@@ -49,6 +70,8 @@
 	--font-color-1-selection: rgb(0, 0, 0);
 	--font-textShadow-color-1: rgba(255, 0, 100, 0.5);
 	--font-textShadow-color-2: rgba(0, 100, 255, 0.5);
+	--font-textShadow-color-1-soft: rgba(255, 0, 100, 0.25);
+	--font-textShadow-color-2-soft: rgba(0, 100, 255, 0.25);
 	--font-weight-normal: 200;
 
 	--effects-radial-z: 99;
@@ -56,10 +79,10 @@
 		rgba(255, 255, 255, 0.125),
 		rgba(0, 0, 0, 0) 120%);
 
-	font-family: "Roboto Mono", monospace;
-	font-optical-sizing: auto;
-	font-weight: var(--font-weight-normal);
-	font-style: normal;
+	--font-family: "Roboto Mono", monospace;
+	--font-optical-sizing: auto;
+	--font-weight: var(--font-weight-normal);
+	--font-style: normal;
 }
 
 .matrix-theme {
@@ -69,6 +92,8 @@
 	--font-color-1-selection: rgb(0, 0, 0);
 	--font-textShadow-color-1: rgba(255, 0, 0, 0.25);
 	--font-textShadow-color-2: rgba(0, 0, 255, 0.25);
+	--font-textShadow-color-1-soft: rgba(255, 0, 0, 0.125);
+	--font-textShadow-color-2-soft: rgba(0, 0, 255, 0.125);
 	--font-weight-normal: 600;
 
 	--effects-radial-z: 99;
@@ -76,10 +101,10 @@
 		rgba(0, 255, 0, 0.225),
 		rgba(0, 0, 0, 0.2) 120%);
 
-	font-family: "Roboto Mono", monospace;
-	font-optical-sizing: auto;
-	font-weight: var(--font-weight-normal);
-	font-style: normal;
+	--font-family: "Roboto Mono", monospace;
+	--font-optical-sizing: auto;
+	--font-weight: var(--font-weight-normal);
+	--font-style: normal;
 }
 
 /* Main */
@@ -96,11 +121,13 @@ html, body, #root, .theme {
 }
 
 .body {
-	max-width: 100%;
 	height: calc(100% - 12vh);
 	padding: 6vh 4vw;
-	background-color: var(--background-color-1);
-	color: var(--font-color-1);
+	display: flex;
+	flex-direction: column;
+	/*
+	justify-content: space-between;
+	*/
 	white-space: pre-wrap;
 	word-break: break-all;
 	overflow-wrap: anywhere;
@@ -111,14 +138,39 @@ html, body, #root, .theme {
 	max-height: max-content;
 }
 
-.body::selection {
-	background-color: var(--background-color-1-selection);
-	color: var(--font-color-1-selection);
+.input-text-box
+{
+	padding: 0.5rem 0;
+	display: flex;
+	flex-direction: row;
+	animation: inherit;
+}
+
+textarea {
+	background: inherit;
+	color: inherit;
+	font-family: inherit;
+	font-optical-sizing: inherit;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: inherit;
+	padding: 0;
+	border: none;
+	outline: none;
+	width: 100%;
+	caret: var(--background-color-1-selection) block;
+	resize: none;
+	field-sizing: content;
+	animation: inherit;
 }
 
 /* CRT Effects */
 
 .text-shadow {
+	animation: textShadow 1s infinite;
+}
+
+.soft-text-shadow {
 	animation: textShadow 1s infinite;
 }
 
@@ -385,5 +437,71 @@ html, body, #root, .theme {
 	}
 	100% {
 		text-shadow: 2.6208764473832513px 0 1px var(--font-textShadow-color-1), -2.6208764473832513px 0 1px var(--font-textShadow-color-2), 0 0 3px;
+	}
+}
+
+@keyframes soft-textShadow {
+	0% {
+		text-shadow: 0.4389924193300864px 0 1px var(--font-textShadow-color-1-soft), -0.4389924193300864px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	5% {
+		text-shadow: 2.7928974010788217px 0 1px var(--font-textShadow-color-1-soft), -2.7928974010788217px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	10% {
+		text-shadow: 0.02956275843481219px 0 1px var(--font-textShadow-color-1-soft), -0.02956275843481219px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	15% {
+		text-shadow: 0.40218538552878136px 0 1px var(--font-textShadow-color-1-soft), -0.40218538552878136px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	20% {
+		text-shadow: 3.4794037899852017px 0 1px var(--font-textShadow-color-1-soft), -3.4794037899852017px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	25% {
+		text-shadow: 1.6125630401149584px 0 1px var(--font-textShadow-color-1-soft), -1.6125630401149584px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	30% {
+		text-shadow: 0.7015590085143956px 0 1px var(--font-textShadow-color-1-soft), -0.7015590085143956px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	35% {
+		text-shadow: 3.896914047650351px 0 1px var(--font-textShadow-color-1-soft), -3.896914047650351px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	40% {
+		text-shadow: 3.870905614848819px 0 1px var(--font-textShadow-color-1-soft), -3.870905614848819px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	45% {
+		text-shadow: 2.231056963361899px 0 1px var(--font-textShadow-color-1-soft), -2.231056963361899px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	50% {
+		text-shadow: 0.08084290417898504px 0 1px var(--font-textShadow-color-1-soft), -0.08084290417898504px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	55% {
+		text-shadow: 2.3758461067427543px 0 1px var(--font-textShadow-color-1-soft), -2.3758461067427543px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	60% {
+		text-shadow: 2.202193051050636px 0 1px var(--font-textShadow-color-1-soft), -2.202193051050636px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	65% {
+		text-shadow: 2.8638780614874975px 0 1px var(--font-textShadow-color-1-soft), -2.8638780614874975px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	70% {
+		text-shadow: 0.48874025155497314px 0 1px var(--font-textShadow-color-1-soft), -0.48874025155497314px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	75% {
+		text-shadow: 1.8948491305757957px 0 1px var(--font-textShadow-color-1-soft), -1.8948491305757957px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	80% {
+		text-shadow: 0.0833037308038857px 0 1px var(--font-textShadow-color-1-soft), -0.0833037308038857px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	85% {
+		text-shadow: 0.09769827255241735px 0 1px var(--font-textShadow-color-1-soft), -0.09769827255241735px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	90% {
+		text-shadow: 3.443339761481782px 0 1px var(--font-textShadow-color-1-soft), -3.443339761481782px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	95% {
+		text-shadow: 2.1841838852799786px 0 1px var(--font-textShadow-color-1-soft), -2.1841838852799786px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
+	}
+	100% {
+		text-shadow: 2.6208764473832513px 0 1px var(--font-textShadow-color-1-soft), -2.6208764473832513px 0 1px var(--font-textShadow-color-2-soft), 0 0 3px;
 	}
 }

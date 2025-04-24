@@ -7,5 +7,5 @@ export interface BodyArgs
 
 export default function Body(args: BodyArgs)
 {
-	return <div className="body text-shadow">{args.children}</div>
+	return <div className="body">{args.children}</div>
 }

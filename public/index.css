@@ -265,14 +265,6 @@ pre {
 
 /* CRT Effects */
 
-.text-shadow {
-	animation: textShadow 1s infinite;
-}
-
-.soft-text-shadow {
-	animation: soft-textShadow 1s infinite;
-}
-
 .radial {
 	z-index: var(--effects-radial-z);
 	position: fixed;

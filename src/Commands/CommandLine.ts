@@ -1,6 +1,7 @@
 ﻿import { CancellationToken, ReadonlyDictionary, UnreachableError } from "aula.js";
 import { Command, CommandOption } from ".";
 import { ILogger, LogLevel } from "../Common/Logging";
+import { StringHelper } from "../Common";
 
 export class CommandLine
 {
@@ -44,11 +45,11 @@ export class CommandLine
 		cancellationToken: CancellationToken
 	): Promise<boolean>
 	{
-		if (input.length === 0 || input.trim().length === 0)
+		if (StringHelper.isNullOrWhiteSpace(input))
 			return false;
 
 		const inputSegments = input.split(" ");
-		if (inputSegments.length === 0)
+		if (StringHelper.isNullOrWhiteSpace(input))
 			return false;
 
 		const commandName = inputSegments.shift()!;

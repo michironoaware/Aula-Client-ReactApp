@@ -29,8 +29,7 @@
 	--font-textShadow-color-right: rgba(255, 0, 80, 0.3);
 	--font-textShadow-color-left-soft: rgba(0, 0, 0, 0.25);
 	--font-textShadow-color-right-soft: rgba(255, 0, 80, 0.15);
-	--font-weight-normal: 200;
-	--font-weight-bold: 600;
+	--font-weight-primary: 200;
 	--font-color-critical: rgb(200, 20, 20);
 	--font-color-error: rgb(255, 90, 90);
 	--font-color-warning: rgb(255, 255, 120);
@@ -51,7 +50,7 @@
 
 	--font-family: "Roboto Mono", "Cascadia Mono", "Consolas", monospace;
 	--font-optical-sizing: auto;
-	--font-weight: var(--font-weight-normal);
+	--font-weight: var(--font-weight-primary);
 	--font-style: normal;
 }
 
@@ -64,8 +63,7 @@
 	--font-textShadow-color-right: rgba(0, 0, 0, 0.075);
 	--font-textShadow-color-left-soft: rgba(80, 0, 255, 0.0375);
 	--font-textShadow-color-right-soft: rgba(0, 0, 0, 0.0375);
-	--font-weight-normal: 400;
-	--font-weight-bold: 800;
+	--font-weight-primary: 400;
 	--font-color-critical: rgb(150, 15, 15);
 	--font-color-error: rgb(200, 40, 40);
 	--font-color-warning: rgb(120, 120, 0);
@@ -86,7 +84,7 @@
 
 	--font-family: "Roboto Mono", "Cascadia Mono", "Consolas", monospace;
 	--font-optical-sizing: auto;
-	--font-weight: var(--font-weight-normal);
+	--font-weight: var(--font-weight-primary);
 	--font-style: normal;
 }
 
@@ -99,8 +97,7 @@
 	--font-textShadow-color-right: rgba(0, 100, 255, 0.5);
 	--font-textShadow-color-left-soft: rgba(255, 0, 100, 0.25);
 	--font-textShadow-color-right-soft: rgba(0, 100, 255, 0.25);
-	--font-weight-normal: 200;
-	--font-weight-bold: 600;
+	--font-weight-primary: 200;
 	--font-color-critical: rgb(200, 20, 20);
 	--font-color-error: rgb(255, 75, 75);
 	--font-color-warning: rgb(255, 255, 155);
@@ -121,7 +118,7 @@
 
 	--font-family: "Roboto Mono", "Cascadia Mono", "Consolas", monospace;
 	--font-optical-sizing: auto;
-	--font-weight: var(--font-weight-normal);
+	--font-weight: var(--font-weight-primary);
 	--font-style: normal;
 }
 
@@ -134,8 +131,7 @@
 	--font-textShadow-color-right: rgba(0, 0, 255, 0.25);
 	--font-textShadow-color-left-soft: rgba(255, 0, 0, 0.125);
 	--font-textShadow-color-right-soft: rgba(0, 0, 255, 0.125);
-	--font-weight-normal: 600;
-	--font-weight-bold: var(--font-weight-normal);
+	--font-weight-primary: 600;
 	--font-color-critical: var(--font-color-primary);
 	--font-color-error: var(--font-color-primary);
 	--font-color-warning: var(--font-color-primary);
@@ -156,7 +152,7 @@
 
 	--font-family: "Roboto Mono", "Cascadia Mono", "Consolas", monospace;
 	--font-optical-sizing: auto;
-	--font-weight: var(--font-weight-normal);
+	--font-weight: var(--font-weight-primary);
 	--font-style: normal;
 }
 
@@ -270,37 +266,31 @@ pre {
 
 .loglevel-critical {
 	color: var(--font-color-critical);
-	font-weight: var(--font-weight-bold);
 	animation: var(--font-textshadow-critical) 1s infinite;
 }
 
 .loglevel-error {
 	color: var(--font-color-error);
-	font-weight: var(--font-weight-bold);
 	animation: var(--font-textshadow-error) 1s infinite;
 }
 
 .loglevel-warning {
 	color: var(--font-color-warning);
-	font-weight: var(--font-weight-normal);
 	animation: var(--font-textshadow-warning) 1s infinite;
 }
 
 .loglevel-information {
 	color: var(--font-color-information);
-	font-weight: var(--font-weight-normal);
 	animation: var(--font-textshadow-information) 1s infinite;
 }
 
 .loglevel-debug {
 	color: var(--font-color-debug);
-	font-weight: var(--font-weight-normal);
 	animation: var(--font-textshadow-debug) 1s infinite;
 }
 
 .loglevel-trace {
 	color: var(--font-color-trace);
-	font-weight: var(--font-weight-normal);
 	animation: var(--font-textshadow-trace) 1s infinite;
 }
 

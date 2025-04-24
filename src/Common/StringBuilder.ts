@@ -2,15 +2,21 @@
 
 export class StringBuilder
 {
-	#_strings: string | string[];
+	#_strings: null | string | string[];
 
-	public constructor(string: string = "")
+	public constructor(string?: string)
 	{
-		this.#_strings = string;
+		this.#_strings = string ?? null;
 	}
 
 	public append(string: string)
 	{
+		if (this.#_strings === null)
+		{
+			this.#_strings = string;
+			return;
+		}
+
 		if (typeof this.#_strings === "string")
 		{
 			this.#_strings = [ this.#_strings, string ];
@@ -30,6 +36,8 @@ export class StringBuilder
 
 	public toString()
 	{
+		if (this.#_strings === null)
+			return "";
 		return typeof this.#_strings === "string" ? this.#_strings : this.#_strings.join("");
 	}
 }

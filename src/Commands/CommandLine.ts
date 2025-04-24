@@ -1,4 +1,4 @@
-﻿import { CancellationToken, ReadonlyDictionary, UnreachableError } from "aula.js-alpha";
+﻿import { CancellationToken, ReadonlyDictionary, UnreachableError } from "aula.js";
 import { Command, CommandOption } from ".";
 import { ILogger, LogLevel } from "../Common/Logging";
 

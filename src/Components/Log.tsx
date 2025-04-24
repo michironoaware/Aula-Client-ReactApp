@@ -16,8 +16,21 @@ export default function Log(args: LogArgs)
 		default: throw new InvalidOperationError(`Unexpected log level "${args.logLevel}"`);
 	}
 
+	let logLevelName: string;
+	switch (args.logLevel)
+	{
+		case LogLevel.Critical: logLevelName = "Critical"; break;
+		case LogLevel.Error: logLevelName = "Error"; break;
+		case LogLevel.Warning: logLevelName = "Warning"; break;
+		case LogLevel.Information: logLevelName = ""; break;
+		case LogLevel.Debug: logLevelName = "Debug"; break;
+		case LogLevel.Trace: logLevelName = "Trace"; break;
+		case LogLevel.None: logLevelName = ""; break;
+		default: throw new InvalidOperationError(`Unexpected log level "${args.logLevel}"`);
+	}
+
 	return <div className={`log ${logLevelClass}`}>
-		<pre>{args.message}</pre>
+		<pre>{logLevelName.length > 0 ? `${logLevelName}: ` : ""}{args.message}</pre>
 	</div>
 }
 

@@ -74,7 +74,7 @@ export class CommandLine
 			}
 
 			const startsWithParameterPrefix = segment.startsWith(CommandOption.prefix);
-			if (startsWithParameterPrefix &&
+			if (!startsWithParameterPrefix &&
 			    command.subCommands.size !== 0)
 			{
 				// Should be a subcommand

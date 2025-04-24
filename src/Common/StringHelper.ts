@@ -20,7 +20,7 @@ export namespace StringHelper
 		for (let i = 0; i < padding; i++)
 			textWithPadding.append(" ");
 
-		textWithPadding.appendLine(text);
+		textWithPadding.append(text);
 		return textWithPadding.toString();
 	}
 }

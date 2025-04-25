@@ -66,5 +66,8 @@ export class LogIn extends Command
 		}
 
 		setToken(logInResponse.token);
+
+		const currentUser = await aulaClient.rest.getCurrentUser();
+		loggers.log(LogLevel.Information, `Logged in as ${currentUser.displayName}.`);
 	}
 }

@@ -240,13 +240,14 @@ html, body, #root, #root > .theme
 }
 
 .input-text-box > label {
-	align-self: center;
+	line-height: 23px;
 	/*margin-right: 1em;*/ /*Currently simulating the padding with an space character*/
 }
 
 .input-text-box > textarea {
 	background: inherit;
 	color: inherit;
+	line-height: 23px;
 	font-family: inherit;
 	font-optical-sizing: inherit;
 	font-weight: inherit;

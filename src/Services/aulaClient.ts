@@ -21,3 +21,14 @@ export function setServerAddress(address: URL)
 	aulaClient.withAddress(address);
 	localStorage.setItem(localStorageAddressName, address.href);
 }
+
+export function setToken(token: string | null)
+{
+	// This throws when the token is null; Is expected to not throw in future versions of aula.js (current version: 1.0.0-alpha.2).
+	aulaClient.withToken(token as string);
+
+	if (token !== null)
+		localStorage.setItem(localStorageTokenName, token);
+	else
+		localStorage.removeItem(localStorageTokenName);
+}

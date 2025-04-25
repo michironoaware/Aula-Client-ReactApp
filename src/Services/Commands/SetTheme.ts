@@ -32,7 +32,7 @@ export class SetTheme extends Command
 
 	public get description()
 	{
-		return "Sets the theme for the interface";
+		return "Sets the theme for the interface.";
 	}
 
 	public async callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken)

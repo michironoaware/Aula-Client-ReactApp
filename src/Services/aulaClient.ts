@@ -3,7 +3,7 @@ import { ErrorHelper } from "../Common";
 
 export const aulaClient = new GatewayClient();
 
-const localStorageAddressName = "server-address";
+const localStorageAddressName = "serverAddress";
 const storedAddress = localStorage.getItem(localStorageAddressName);
 if (storedAddress !== null &&
     ErrorHelper.Try(() => new URL(storedAddress)))

@@ -42,7 +42,8 @@ export default function InputTextBox()
 			id={textareaId}
 			autoFocus={true}
 			onKeyDown={onKeyDown}
-			spellCheck={false}>
+			spellCheck={false}
+			rows={1}>
 		</textarea>
 	</div>
 }

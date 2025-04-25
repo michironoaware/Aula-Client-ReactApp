@@ -105,7 +105,10 @@ export class Help extends Command
 		message.appendLine(StringHelper.padLeft(command.description, command.description.length + alignment - command.name.length));
 
 		if (parameters.options.length > 0)
+		{
+			message.appendLine();
 			message.appendLine("OPTIONS: ");
+		}
 
 		for (let i = 0; i < parameters.options.length; i++)
 		{

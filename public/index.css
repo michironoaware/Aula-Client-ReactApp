@@ -284,6 +284,9 @@ pre {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
+
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
 
 .loglist::-webkit-scrollbar

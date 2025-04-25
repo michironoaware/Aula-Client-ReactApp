@@ -50,7 +50,7 @@ export class SetAddress extends Command
 		}
 
 		loggers.log(LogLevel.Information, "Checking in with the server...");
-		if (!await aulaClient.rest.ping(address))
+		if (!await aulaClient.rest.ping(address, cancellationToken))
 		{
 			loggers.log(LogLevel.Warning, "The server did not respond. The address may be incorrect or the server is disconnected.");
 		}

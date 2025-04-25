@@ -85,7 +85,7 @@ export class CommandLine
 			if (startsWithParameterPrefix)
 			{
 				const optionName = segment.slice(CommandOption.prefix.length);
-				const option = command.options.get(optionName);
+				option = command.options.get(optionName);
 				if (option === undefined)
 				{
 					this.#_logger.log(LogLevel.Error, `Invalid command option name "${commandName}"`);

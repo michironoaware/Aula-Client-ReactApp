@@ -37,24 +37,23 @@ export class SetTheme extends Command
 
 	public async callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken)
 	{
-		const themeString = StringHelper.capitalize(args.get(SetTheme.#s_themeOption.name)!.toLowerCase());
+		const themeString = args.get(SetTheme.#s_themeOption.name)!;
 		if (!isNaN(Number(themeString)))
 		{
 			loggers.log(LogLevel.Error, "The theme specified is invalid.");
 			return;
 		}
 
-		// Doing the casts to take advantage of enum's implementation
-		// by passing the enum's member name instead of the enum value,
-		// so we can get the enum value.
-		const theme = ThemeType[themeString as any] as unknown as ThemeType | undefined;
-		if (theme === undefined)
+		const themeEntry = Object
+			.entries(ThemeType)
+			.find(v => v[0].toLowerCase() === themeString.toLowerCase());
+		if (themeEntry === undefined)
 		{
 			loggers.log(LogLevel.Error, "The theme specified is invalid.");
 			return;
 		}
 
-		await events.emit("ThemeUpdateRequest", theme);
-		loggers.log(LogLevel.Information, `Theme set to "${themeString}" successfully!`);
+		await events.emit("ThemeUpdateRequest", themeEntry[1] as ThemeType);
+		loggers.log(LogLevel.Information, `Theme set to "${themeEntry[0]}" successfully!`);
 	}
 }

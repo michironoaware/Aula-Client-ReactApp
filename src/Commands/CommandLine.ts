@@ -67,7 +67,7 @@ export class CommandLine
 
 		while (inputSegments.length > 0)
 		{
-			const segment = inputSegments.shift()!;
+			let segment = inputSegments.shift()!;
 			if (StringHelper.isNullOrWhiteSpace(segment))
 			{
 				continue;
@@ -104,6 +104,8 @@ export class CommandLine
 					this.#_logger.log(LogLevel.Error, `The option "${optionName}" requires to provide a value.`);
 					return false;
 				}
+
+				segment = inputSegments.shift()!;
 			}
 
 			if (option === undefined)

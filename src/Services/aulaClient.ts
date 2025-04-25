@@ -13,8 +13,9 @@ if (storedAddress !== null &&
 
 const localStorageTokenName = "authorizationToken";
 const storedToken = localStorage.getItem(localStorageTokenName);
-// This throws when the token is null; Is expected to not throw in future versions of aula.js (current version: 1.0.0-alpha.2).
-aulaClient.withToken(storedToken as string);
+if (storedToken !== null)
+	// This throws when the token is null; Is expected to not throw in future versions of aula.js (current version: 1.0.0-alpha.2).
+	aulaClient.withToken(storedToken);
 
 export function setServerAddress(address: URL)
 {

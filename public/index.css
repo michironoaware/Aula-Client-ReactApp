@@ -234,7 +234,6 @@ html, body, #root, #root > .theme
 
 .input-text-box
 {
-	margin: 0.5rem 0;
 	display: flex;
 	flex-direction: row;
 	animation: textShadow 1s infinite;

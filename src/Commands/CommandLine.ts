@@ -126,8 +126,8 @@ export class CommandLine
 			if (option === undefined)
 				throw new UnreachableError("Option should not be undefined at this point");
 
-			args.set(option!.name, option!.canOverflow ? [ segment, ...inputSegments ].join(" ") : segment);
-			pendingOptions.splice(pendingOptions.indexOf(option!), 1);
+			args.set(option.name, option.canOverflow ? [ segment, ...inputSegments ].join(" ") : segment);
+			pendingOptions.splice(pendingOptions.indexOf(option), 1);
 		}
 
 		if (pendingOptions.length > 0)

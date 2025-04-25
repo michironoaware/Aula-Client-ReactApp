@@ -1,7 +1,9 @@
 ﻿import { Command, CommandOption } from "../../Commands";
-import { AulaRestError, CancellationToken, LogInRequestBody, LogInResponse } from "aula.js";
-import { aulaClient, events, loggers, setToken } from "..";
+import { AulaRestError, CancellationToken, LogInRequestBody, LogInResponse, RestClientNullAddressError } from "aula.js";
+import { aulaClient, loggers, setToken } from "..";
 import { LogLevel } from "../../Common/Logging";
+import { TypeHelper } from "../../Common";
+import { SetAddress } from "./SetAddress.ts";
 
 export class LogIn extends Command
 {
@@ -55,13 +57,13 @@ export class LogIn extends Command
 				throw err;
 			}
 
-			if (!(err instanceof AulaRestError))
-			{
-				loggers.log(LogLevel.Critical, `An unexpected error occurred. ${err}`);
-				return;
-			}
+			if (err instanceof AulaRestError)
+				loggers.log(LogLevel.Error, err.problemDetails?.detail ?? err.message);
+			else if (err instanceof RestClientNullAddressError)
+				loggers.log(LogLevel.Error, `A server address is required first. Execute "set-address" to set the server-address.`);
+			else
+				loggers.log(LogLevel.Critical, `An unexpected error occurred. ${(err as Error).message} ${(err as Error).stack}`);
 
-			loggers.log(LogLevel.Error, err.toString());
 			return;
 		}
 

@@ -120,7 +120,7 @@ export class CommandLine
 				{
 					// The command multiple options, and we cannot guess which select.
 					// returns the same response for unrecognized subcommands.
-					this.#_logger.log(LogLevel.Error, `Unknown command "${commandName}"`);
+					this.#_logger.log(LogLevel.Error, `Impossible to infer which option to fill in, please specify.`);
 					return false;
 				}
 			}

@@ -12,13 +12,13 @@ export default function LogList(args: LogListArgs)
 	useEffect(() =>
 	{
 		const logger = {
-			log: (level, message) =>
+			log: (level, message, id) =>
 			{
 				const selectedLogLevel = LocalStorageFacade.logLevel ?? LogLevel.Information;
 				if (level < selectedLogLevel)
 					return;
 
-				setLogs(previousLogs => [...previousLogs, { level, message }]);
+				setLogs(previousLogs => [...previousLogs, { level, message, id: id ?? `l${previousLogs.length + 1}` }]);
 			}
 		} satisfies ILogger;
 		loggers.add(logger);
@@ -35,7 +35,7 @@ export default function LogList(args: LogListArgs)
 
 	return <div className="loglist">
 		{args.children}
-		{logs.map(l => <Log logLevel={l.level} message={l.message}/>)}
+		{logs.map(l => <Log key={l.id} logLevel={l.level} message={l.message}/>)}
 	</div>
 }
 
@@ -46,6 +46,7 @@ export interface LogListArgs
 
 interface LogData
 {
+	id: string;
 	level: LogLevel;
 	message: string;
 }

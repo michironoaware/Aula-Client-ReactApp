@@ -2,5 +2,5 @@
 
 export interface ILogger
 {
-	log(logLevel: LogLevel, message: string): void;
+	log(logLevel: LogLevel, message: string, id?: string): void;
 }

@@ -1,5 +1,5 @@
-﻿import { ErrorHelper } from "../Common";
-import { aulaClient } from "./aulaClient.ts";
+﻿import { TypeHelper } from "../Common";
+import { ThemeType } from "../Components/ThemeType.tsx";
 
 /**
  * @sealed
@@ -8,6 +8,7 @@ export class LocalStorageFacade
 {
 	static readonly #s_authorizationTokenLocalStorageName = "authorizationToken";
 	static readonly #s_serverAddressLocalStorageName = "serverAddress";
+	static readonly #s_themeLocalStorageName = "theme";
 
 	private constructor()
 	{
@@ -57,5 +58,21 @@ export class LocalStorageFacade
 			localStorage.setItem(LocalStorageFacade.#s_serverAddressLocalStorageName, value.href);
 		else
 			localStorage.removeItem(LocalStorageFacade.#s_serverAddressLocalStorageName);
+	}
+
+	public static get theme()
+	{
+		const storedTheme = Number(localStorage.getItem(LocalStorageFacade.#s_themeLocalStorageName));
+		if (TypeHelper.isType(storedTheme, ThemeType))
+			return storedTheme;
+		return null;
+	}
+
+	public static set theme(value: ThemeType | null)
+	{
+		if (value !== null)
+			localStorage.setItem(LocalStorageFacade.#s_themeLocalStorageName, value.toString());
+		else
+			localStorage.removeItem(LocalStorageFacade.#s_themeLocalStorageName);
 	}
 }

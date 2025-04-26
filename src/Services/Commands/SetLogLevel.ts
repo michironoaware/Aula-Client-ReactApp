@@ -48,7 +48,7 @@ export class SetLogLevel extends Command
 		const logLevelEntry = Object
 			.entries(LogLevel)
 			.find(v => v[0].toLowerCase() === logLevelString.toLowerCase());
-		if (logLevelEntry === undefined || !isNaN(Number(logLevelEntry[1])))
+		if (logLevelEntry === undefined || typeof logLevelEntry[1] !== "number")
 		{
 			loggers.log(LogLevel.Error, "The level specified is invalid.");
 			return;

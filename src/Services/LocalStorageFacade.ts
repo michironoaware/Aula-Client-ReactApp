@@ -1,5 +1,6 @@
 ﻿import { TypeHelper } from "../Common";
 import { ThemeType } from "../Components/ThemeType.tsx";
+import { LogLevel } from "../Common/Logging";
 
 /**
  * @sealed
@@ -9,6 +10,7 @@ export class LocalStorageFacade
 	static readonly #s_authorizationTokenLocalStorageName = "authorizationToken";
 	static readonly #s_serverAddressLocalStorageName = "serverAddress";
 	static readonly #s_themeLocalStorageName = "theme";
+	static readonly #s_logLevelLocalStorageName = "logLevel";
 
 	private constructor()
 	{
@@ -74,5 +76,21 @@ export class LocalStorageFacade
 			localStorage.setItem(LocalStorageFacade.#s_themeLocalStorageName, value.toString());
 		else
 			localStorage.removeItem(LocalStorageFacade.#s_themeLocalStorageName);
+	}
+
+	public static get logLevel()
+	{
+		const storedLogLevel = Number(localStorage.getItem(LocalStorageFacade.#s_logLevelLocalStorageName));
+		if (TypeHelper.isType(storedLogLevel, LogLevel))
+			return storedLogLevel;
+		return null;
+	}
+
+	public static set logLevel(value: LogLevel | null)
+	{
+		if (value !== null)
+			localStorage.setItem(LocalStorageFacade.#s_logLevelLocalStorageName, value.toString());
+		else
+			localStorage.removeItem(LocalStorageFacade.#s_logLevelLocalStorageName);
 	}
 }

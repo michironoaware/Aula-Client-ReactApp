@@ -18,15 +18,15 @@ export class LocalStorageFacade
 
 	public static get authorizationToken()
 	{
-		return localStorage.getItem(LocalStorageFacade.#s_serverAddressLocalStorageName);
+		return localStorage.getItem(LocalStorageFacade.#s_authorizationTokenLocalStorageName);
 	}
 
 	public static set authorizationToken(value: string | null)
 	{
 		if (value !== null)
-			localStorage.setItem(LocalStorageFacade.#s_serverAddressLocalStorageName, value);
+			localStorage.setItem(LocalStorageFacade.#s_authorizationTokenLocalStorageName, value);
 		else
-			localStorage.removeItem(LocalStorageFacade.#s_serverAddressLocalStorageName);
+			localStorage.removeItem(LocalStorageFacade.#s_authorizationTokenLocalStorageName);
 	}
 
 	public static get serverAddress()

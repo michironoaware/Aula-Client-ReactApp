@@ -1,9 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import { ThemeType, ThemeTypeToDomClass } from "./ThemeType.tsx";
-import { events } from "../Services";
+import { events, LocalStorageFacade } from "../Services";
 import { TypeHelper } from "../Common";
-
-const localStorageThemeName = "theme";
 
 export default function Theme(args: ThemeArgs)
 {
@@ -14,21 +12,21 @@ export default function Theme(args: ThemeArgs)
 	}
 	else
 	{
-		let themeStored = Number(localStorage.getItem(localStorageThemeName));
-		if (!TypeHelper.isType(themeStored, ThemeType))
+		let storedTheme = LocalStorageFacade.theme;
+		if (!TypeHelper.isType(storedTheme, ThemeType))
 		{
-			themeStored = ThemeType.Vintage;
-			localStorage.setItem(localStorageThemeName, themeStored.toString());
+			storedTheme = ThemeType.Vintage;
+			LocalStorageFacade.theme = storedTheme;
 		}
 
-		const [theme, setTheme] = useState<ThemeType>(themeStored);
+		const [theme, setTheme] = useState<ThemeType>(storedTheme);
 		themeToUse = theme;
 
 		useEffect(() =>
 		{
 			const listener = (theme: ThemeType) =>
 			{
-				localStorage.setItem(localStorageThemeName, theme.toString());
+				LocalStorageFacade.theme = theme;
 				setTheme(theme);
 			};
 

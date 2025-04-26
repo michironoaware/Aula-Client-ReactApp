@@ -27,6 +27,11 @@ export class CommandLine
 		this.#_commands.set(command.name, command);
 	}
 
+	public removeCommand(command: Command)
+	{
+		this.#_commands.delete(command.name);
+	}
+
 	public async processCommand(
 		input: string,
 		cancellationToken: CancellationToken = CancellationToken.none

@@ -52,17 +52,22 @@ export class LogIn extends Command
 		}
 		catch (err)
 		{
-			if (!(err instanceof Error))
-			{
-				throw err;
-			}
 
 			if (err instanceof AulaRestError)
 				loggers.log(LogLevel.Error, err.problemDetails?.detail ?? err.message);
 			else if (err instanceof RestClientNullAddressError)
 				loggers.log(LogLevel.Error, `A server address is required first. Execute "set-address" to set the server-address.`);
 			else
+			{
 				loggers.log(LogLevel.Critical, `An unexpected error occurred. ${(err as Error).message} ${(err as Error).stack}`);
+				if (err instanceof TypeError)
+					loggers.log(LogLevel.Warning,
+						"A problem occurred with the request; please verify that the address is valid or that the server is online.");
+			}
+			if (!(err instanceof Error))
+			{
+				throw err;
+			}
 
 			return;
 		}

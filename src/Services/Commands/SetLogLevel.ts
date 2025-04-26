@@ -55,5 +55,6 @@ export class SetLogLevel extends Command
 		}
 
 		LocalStorageFacade.logLevel = logLevelEntry[1] as LogLevel;
+		loggers.log(LogLevel.Information, "Log level updated successfully!");
 	}
 }

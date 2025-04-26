@@ -13,4 +13,10 @@
 		const offset = ((inputValue % size) + size) % size;
 		return lo + offset;
 	}
+
+	export function HasFlag(value: bigint, flag: number | bigint)
+	{
+		const flagAsBigInt = AsBigInt(flag);
+		return (value & flagAsBigInt) === flagAsBigInt;
+	}
 }

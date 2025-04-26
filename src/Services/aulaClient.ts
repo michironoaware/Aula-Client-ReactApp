@@ -1,5 +1,5 @@
 ﻿import { GatewayClient } from "aula.js";
-import { LocalStorageFacade } from ".";
+import { LocalStorageFacade } from "../Common";
 
 export const aulaClient = new GatewayClient();
 

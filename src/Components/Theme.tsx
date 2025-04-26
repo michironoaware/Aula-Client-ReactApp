@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import { ThemeType, ThemeTypeToDomClass } from "./ThemeType.tsx";
-import { events, LocalStorageFacade } from "../Services";
-import { TypeHelper } from "../Common";
+import { events } from "../Services";
+import { TypeHelper, LocalStorageFacade } from "../Common";
 
 export default function Theme(args: ThemeArgs)
 {

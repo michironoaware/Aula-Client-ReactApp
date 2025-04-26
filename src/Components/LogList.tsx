@@ -1,5 +1,5 @@
 ﻿import { ReactNode, useEffect, useState } from "react";
-import { loggers } from "../Services";
+import { events, loggers } from "../Services";
 import { ILogger, LogLevel } from "../Common/Logging";
 import Log from "./Log.tsx";
 
@@ -17,7 +17,14 @@ export default function LogList(args: LogListArgs)
 		} satisfies ILogger;
 		loggers.add(logger);
 
-		return () => loggers.remove(logger);
+		const logCleaner = () => setLogs([]);
+		events.on("LogClearRequest", logCleaner);
+
+		return () =>
+		{
+			loggers.remove(logger);
+			events.remove("LogClearRequest", logCleaner);
+		}
 	}, []);
 
 	return <div className="loglist">

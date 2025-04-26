@@ -1,5 +1,7 @@
 ﻿import { ReactNode, useEffect, useState } from "react";
-import { events, LocalStorageFacade, loggers } from "../Services";
+import { events } from "../Services/events";
+import { LocalStorageFacade } from "../Services/LocalStorageFacade";
+import { loggers } from "../Services/loggers";
 import { ILogger, LogLevel } from "../Common/Logging";
 import Log from "./Log.tsx";
 

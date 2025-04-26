@@ -1,7 +1,8 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { ArrayHelper, StringBuilder, StringHelper } from "../../Common";
 import { CancellationToken } from "aula.js";
-import { commandLine, loggers } from "..";
+import { commandLine } from "../commandLine";
+import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
 
 export class Help extends Command

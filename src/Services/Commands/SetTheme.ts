@@ -1,8 +1,8 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { ThemeType } from "../../Components/ThemeType.tsx";
 import { CancellationToken } from "aula.js";
-import { StringHelper } from "../../Common";
-import { events, loggers } from "../../Services";
+import { events } from "../events";
+import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
 
 export class SetTheme extends Command

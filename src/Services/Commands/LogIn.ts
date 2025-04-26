@@ -1,9 +1,8 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { AulaRestError, CancellationToken, LogInRequestBody, LogInResponse, RestClientNullAddressError } from "aula.js";
-import { aulaClient, loggers, setToken } from "..";
+import { aulaClient, setToken } from "../aulaClient";
+import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
-import { TypeHelper } from "../../Common";
-import { SetAddress } from "./SetAddress.ts";
 
 export class LogIn extends Command
 {

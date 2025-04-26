@@ -1,4 +1,4 @@
-﻿import { events } from "..";
+﻿import { events } from "../events";
 import { Command } from "../../Commands";
 
 export class Cls extends Command

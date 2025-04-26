@@ -1,6 +1,7 @@
 ﻿import React, { useId } from "react";
 import { CancellationTokenSource, OperationCanceledError } from "aula.js";
-import { commandLine, loggers } from "../Services";
+import { commandLine } from "../Services/commandLine";
+import { loggers } from "../Services/loggers";
 import { LogLevel } from "../Common/Logging";
 
 export default function InputTextBox()

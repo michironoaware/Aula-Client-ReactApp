@@ -1,7 +1,7 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken } from "aula.js";
 import { aulaClient, setServerAddress } from "../aulaClient.ts";
-import { loggers } from "..";
+import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
 
 export class SetAddress extends Command

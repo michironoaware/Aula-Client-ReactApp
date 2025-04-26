@@ -1,7 +1,7 @@
 import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./Components/App.tsx";
-import { loggers } from "./Services";
+import { loggers } from "./Services/loggers";
 import { LogLevel } from "./Common/Logging";
 
 loggers.add({

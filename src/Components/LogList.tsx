@@ -1,5 +1,5 @@
 ﻿import { ReactNode, useEffect, useState } from "react";
-import { events, loggers } from "../Services";
+import { events, LocalStorageFacade, loggers } from "../Services";
 import { ILogger, LogLevel } from "../Common/Logging";
 import Log from "./Log.tsx";
 
@@ -12,6 +12,10 @@ export default function LogList(args: LogListArgs)
 		const logger = {
 			log: (level, message) =>
 			{
+				const selectedLogLevel = LocalStorageFacade.logLevel ?? LogLevel.Information;
+				if (level < selectedLogLevel)
+					return;
+
 				setLogs(previousLogs => [...previousLogs, { level, message }]);
 			}
 		} satisfies ILogger;

@@ -3,15 +3,16 @@ import { CancellationToken } from "aula.js";
 import { LogLevel } from "../../Common/Logging";
 import { loggers } from "../loggers.ts";
 import { LocalStorageFacade } from "../LocalStorageFacade.ts";
+import { TypeHelper } from "../../Common";
 
 export class SetLogLevel extends Command
 {
 	static readonly #s_logLevelOption = new CommandOption({
 		name: "l",
 		description: `The log level from which to start logging messages. Valid options are ${Object
-			.values(LogLevel)
-			.filter(v => typeof v === "string")
-			.map(t => `"${t}"`)
+			.entries(LogLevel)
+			.filter(e => TypeHelper.isType(e[1], LogLevel) && e[1] <= LogLevel.Information && e[1] >= LogLevel.Trace)
+			.map(t => `"${t[0]}"`)
 			.join(", ")}. Recommended is "${LogLevel[LogLevel.Information]}".`,
 		isRequired: true,
 		requiresArgument: true,
@@ -48,7 +49,10 @@ export class SetLogLevel extends Command
 		const logLevelEntry = Object
 			.entries(LogLevel)
 			.find(v => v[0].toLowerCase() === logLevelString.toLowerCase());
-		if (logLevelEntry === undefined || typeof logLevelEntry[1] !== "number")
+		if (logLevelEntry === undefined ||
+		    typeof logLevelEntry[1] !== "number" ||
+			logLevelEntry[1] < LogLevel.Trace ||
+			logLevelEntry[1] > LogLevel.Information)
 		{
 			loggers.log(LogLevel.Error, "The level specified is invalid.");
 			return;

@@ -1,35 +1,23 @@
 ﻿import { GatewayClient } from "aula.js";
-import { ErrorHelper } from "../Common";
+import { LocalStorageFacade } from ".";
 
 export const aulaClient = new GatewayClient();
 
-const localStorageAddressName = "serverAddress";
-const storedAddress = localStorage.getItem(localStorageAddressName);
-if (storedAddress !== null &&
-    ErrorHelper.Try(() => new URL(storedAddress)))
-{
+const storedAddress = LocalStorageFacade.serverAddress;
+if (storedAddress !== null)
 	aulaClient.withAddress(new URL(storedAddress));
-}
 
-const localStorageTokenName = "authorizationToken";
-const storedToken = localStorage.getItem(localStorageTokenName);
-if (storedToken !== null)
-	// This throws when the token is null; Is expected to not throw in future versions of aula.js (current version: 1.0.0-alpha.2).
-	aulaClient.withToken(storedToken);
+const storedToken = LocalStorageFacade.authorizationToken;
+aulaClient.withToken(storedToken);
 
 export function setServerAddress(address: URL)
 {
+	LocalStorageFacade.serverAddress = address;
 	aulaClient.withAddress(address);
-	localStorage.setItem(localStorageAddressName, address.href);
 }
 
 export function setToken(token: string | null)
 {
-	// This throws when the token is null; Is expected to not throw in future versions of aula.js (current version: 1.0.0-alpha.2).
-	aulaClient.withToken(token as string);
-
-	if (token !== null)
-		localStorage.setItem(localStorageTokenName, token);
-	else
-		localStorage.removeItem(localStorageTokenName);
+	LocalStorageFacade.authorizationToken = token;
+	aulaClient.withToken(token);
 }

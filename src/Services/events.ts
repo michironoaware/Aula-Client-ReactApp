@@ -7,4 +7,5 @@ export const events = new EventEmitter<IEvents>();
 export interface IEvents
 {
 	ThemeUpdateRequest: Func<[ ThemeType ]>;
+	LogClearRequest: Func;
 }

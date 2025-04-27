@@ -47,7 +47,7 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 
 
 
-	return <div className="log">
+	return <div className="log loglevel-information">
 		<pre>{message}</pre>
 	</div>
 }

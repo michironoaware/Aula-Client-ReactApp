@@ -55,6 +55,40 @@ export default function LogList(args: LogListArgs)
 		}
 	}, []);
 
+	useEffect(() =>
+	{
+		const logWelcomeMessages = async () =>
+		{
+			if (!aulaClient.hasToken)
+			{
+				await Delay(1000);
+				loggers.log(LogLevel.Information, "You are not logged in.");
+				await Delay(2500);
+				loggers.log(LogLevel.Information, `New here? Type "help register" to see how to create an account.`);
+			} else
+			{
+				const currentUser = await aulaClient.rest.getCurrentUser();
+				loggers.log(LogLevel.Information, `Logged in as ${currentUser.displayName}`);
+	
+				const currentRoom = await currentUser.getCurrentRoom();
+				if (currentRoom)
+				{
+					loggers.log(LogLevel.Information, `You woke up in ${currentRoom?.name}`);
+					if (currentRoom.description.length > 0)
+					{
+						loggers.log(LogLevel.Information, currentRoom.description);
+					}
+
+					const usersNearby = (await currentRoom.getUsers()).filter(u => u.id !== currentUser.id);
+					if (usersNearby.length > 0)
+						loggers.log(LogLevel.Information, `Presences nearby: ${usersNearby.map(u => u.displayName).join(", ")}.`);
+				}
+			}
+		}
+
+		logWelcomeMessages();
+	}, []);
+
 	return <div className="loglist">
 		{args.children}
 		{logs.map(log =>

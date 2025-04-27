@@ -40,6 +40,7 @@ export default function LogList(args: LogListArgs)
 				key: event.message.id
 			} ]);
 		gatewayClient.on("MessageCreated", aulaMessageReceiver);
+
 		const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
 			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
 		gatewayClient.on("MessageRemoved", aulaMessageRemover);

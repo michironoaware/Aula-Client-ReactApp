@@ -17,7 +17,8 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 				if (!BigIntHelper.HasFlag(props.message.flags, MessageFlags.HideAuthor))
 				{
 					const author = await props.message.getAuthor();
-					const authorName = author?.displayName ?? "System";
+					let authorName = author?.displayName ?? "System";
+					authorName = msg.startsWith("<em>") ? `<em>${authorName}</em>` : authorName;
 					const separator = msg.startsWith("<em>") ? " " : ": ";
 					msg = `${authorName}${separator}${msg}`;
 				}

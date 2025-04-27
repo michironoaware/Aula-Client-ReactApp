@@ -5,7 +5,7 @@ import { loggers } from "../Services/loggers";
 import { ILogger, LogLevel } from "../Common/Logging";
 import Log from "./Log.tsx";
 import { IGatewayClientEvents, Message } from "aula.js";
-import { aulaClient } from "../Services/aulaClient.ts";
+import { gatewayClient } from "../Services/gatewayClient.ts";
 import AulaMessageLog from "./AulaMessageLog.tsx";
 
 export default function LogList(args: LogListArgs)
@@ -38,10 +38,10 @@ export default function LogList(args: LogListArgs)
 				message: event.message,
 				key: event.message.id
 			}]);
-		aulaClient.on("MessageCreated", aulaMessageReceiver);
+		gatewayClient.on("MessageCreated", aulaMessageReceiver);
 		const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
 			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
-		aulaClient.on("MessageRemoved", aulaMessageRemover);
+		gatewayClient.on("MessageRemoved", aulaMessageRemover);
 
 		const logCleaner = () => setLogs([]);
 		events.on("LogClearRequest", logCleaner);
@@ -50,8 +50,8 @@ export default function LogList(args: LogListArgs)
 		{
 			loggers.remove(logger);
 			events.remove("LogClearRequest", logCleaner);
-			aulaClient.remove("MessageCreated", aulaMessageReceiver);
-			aulaClient.remove("MessageRemoved", aulaMessageRemover);
+			gatewayClient.remove("MessageCreated", aulaMessageReceiver);
+			gatewayClient.remove("MessageRemoved", aulaMessageRemover);
 		}
 	}, []);
 
@@ -59,7 +59,7 @@ export default function LogList(args: LogListArgs)
 	{
 		const logWelcomeMessages = async () =>
 		{
-			if (!aulaClient.hasToken)
+			if (!gatewayClient.hasToken)
 			{
 				await Delay(1000);
 				loggers.log(LogLevel.Information, "You are not logged in.");
@@ -67,7 +67,7 @@ export default function LogList(args: LogListArgs)
 				loggers.log(LogLevel.Information, `New here? Type "help register" to see how to create an account.`);
 			} else
 			{
-				const currentUser = await aulaClient.rest.getCurrentUser();
+				const currentUser = await gatewayClient.rest.getCurrentUser();
 				loggers.log(LogLevel.Information, `Logged in as ${currentUser.displayName}`);
 	
 				const currentRoom = await currentUser.getCurrentRoom();

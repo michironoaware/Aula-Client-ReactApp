@@ -1,6 +1,6 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { AulaRestError, CancellationToken, LogInRequestBody, LogInResponse, RestClientNullAddressError } from "aula.js";
-import { aulaClient, setToken } from "../aulaClient";
+import { gatewayClient, setToken } from "../gatewayClient.ts";
 import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
 
@@ -47,7 +47,7 @@ export class LogIn extends Command
 		let logInResponse: LogInResponse;
 		try
 		{
-			logInResponse = await aulaClient.rest.logIn(logInRequestBody, cancellationToken);
+			logInResponse = await gatewayClient.rest.logIn(logInRequestBody, cancellationToken);
 		}
 		catch (err)
 		{
@@ -73,7 +73,7 @@ export class LogIn extends Command
 
 		setToken(logInResponse.token);
 
-		const currentUser = await aulaClient.rest.getCurrentUser();
+		const currentUser = await gatewayClient.rest.getCurrentUser();
 		loggers.log(LogLevel.Information, `Logged in as ${currentUser.displayName}.`);
 	}
 }

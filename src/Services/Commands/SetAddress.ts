@@ -1,6 +1,6 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken } from "aula.js";
-import { aulaClient, setServerAddress } from "../aulaClient.ts";
+import { gatewayClient, setServerAddress } from "../gatewayClient.ts";
 import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
 
@@ -50,7 +50,7 @@ export class SetAddress extends Command
 		}
 
 		loggers.log(LogLevel.Information, "Checking in with the server...");
-		if (!await aulaClient.rest.ping(address, cancellationToken))
+		if (!await gatewayClient.rest.ping(address, cancellationToken))
 		{
 			loggers.log(LogLevel.Warning, "The server did not respond. The address may be incorrect or the server is disconnected.");
 		}

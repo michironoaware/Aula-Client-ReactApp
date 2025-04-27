@@ -1,24 +1,24 @@
 ﻿import { GatewayClient, Intents } from "aula.js";
 import { LocalStorageFacade } from "./LocalStorageFacade";
 
-export const aulaClient = new GatewayClient()
+export const gatewayClient = new GatewayClient()
 	.withIntents(Intents.Users | Intents.Rooms | Intents.Messages | Intents.Moderation);
 
 const storedAddress = LocalStorageFacade.serverAddress;
 if (storedAddress !== null)
-	aulaClient.withAddress(new URL(storedAddress));
+	gatewayClient.withAddress(new URL(storedAddress));
 
 const storedToken = LocalStorageFacade.authorizationToken;
-aulaClient.withToken(storedToken);
+gatewayClient.withToken(storedToken);
 
 export function setServerAddress(address: URL)
 {
 	LocalStorageFacade.serverAddress = address;
-	aulaClient.withAddress(address);
+	gatewayClient.withAddress(address);
 }
 
 export function setToken(token: string | null)
 {
 	LocalStorageFacade.authorizationToken = token;
-	aulaClient.withToken(token);
+	gatewayClient.withToken(token);
 }

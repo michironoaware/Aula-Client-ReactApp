@@ -5,7 +5,7 @@ import { ReactNode, useEffect, useState } from "react";
 
 export default function AulaMessageLog({ props }: { props: AulaMessageLogProps })
 {
-    const [message, setMessage] = useState<ReactNode>(null);
+    const [message, setMessage] = useState<string | null>(null);
 	useEffect(() =>
 	{
 		const constructMessage = async () =>
@@ -28,15 +28,15 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 			{
 				const user = await props.message.userJoin.getUser();
 				const previousRoom = await props.message.userJoin.getPreviousRoom();
-				setMessage(() => <i>{getJoinMessage(props.message.id, user.displayName, previousRoom?.id)}</i>);
+				setMessage(() => `<i>${getJoinMessage(props.message.id, user.displayName, previousRoom?.id)}</i>`);
 			} else if (props.message instanceof UserLeaveMessage)
 			{
 				const user = await props.message.userLeave.getUser();
 				const room = await props.message.userLeave.getRoom();
-				setMessage(() => <i>{getLeaveMessage(props.message.id, user.displayName, room?.id)}</i>)
+				setMessage(() => `<i>${getLeaveMessage(props.message.id, user.displayName, room?.id)}</i>`)
 			} else
 			{
-				setMessage(() => <pre>Received message of an unknown type.</pre>);
+				setMessage(() => "Received message of an unknown type.");
 			}
 
 			return () => {};
@@ -48,7 +48,7 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 
 
 	return <div className="log loglevel-information">
-		<pre>{message}</pre>
+		<pre dangerouslySetInnerHTML={{ __html: message! }}></pre>
 	</div>
 }
 

@@ -1,14 +1,10 @@
-﻿import { Message, MessageAuthorType, MessageFlags, StandardMessage, UserJoinMessage, UserLeaveMessage } from "aula.js";
+﻿import { Message, MessageFlags, StandardMessage, UserJoinMessage, UserLeaveMessage } from "aula.js";
 import { BigIntHelper } from "../Common/BigIntHelper.ts";
 import { HtmlUtility } from "../Common/HtmlUtility.ts";
 import { ReactNode, useEffect, useState } from "react";
 
 export default function AulaMessageLog({ props }: { props: AulaMessageLogProps })
 {
-	const [domClasses, setDomClasses] = useState<string[]>(["log"]);
-	if (props.message.authorType === MessageAuthorType.System)
-		setDomClasses(prev => [...prev, "systemlog"]);
-
     const [message, setMessage] = useState<ReactNode>(null);
 	useEffect(() =>
 	{
@@ -49,7 +45,7 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 
 
 
-	return <div className={domClasses.join(" ")}>
+	return <div className="log">
 		<pre>{message}</pre>
 	</div>
 }

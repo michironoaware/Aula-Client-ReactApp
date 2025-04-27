@@ -18,7 +18,7 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 				{
 					const author = await props.message.getAuthor();
 					const authorName = author?.displayName ?? "System";
-					const separator = msg.startsWith("<italic>") ? ": " : "";
+					const separator = msg.startsWith("<italic>") ? " " : ": ";
 					setMessage(() => `${authorName}${separator}${msg}`);
 				}
 

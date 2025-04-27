@@ -7,6 +7,7 @@ import Log from "./Log.tsx";
 import { IGatewayClientEvents, Message } from "aula.js";
 import { gatewayClient } from "../Services/gatewayClient.ts";
 import AulaMessageLog from "./AulaMessageLog.tsx";
+import { Delay } from "../Common/Delay.ts";
 
 export default function LogList(args: LogListArgs)
 {

@@ -60,6 +60,8 @@ export default function LogList(args: LogListArgs)
 	{
 		const logWelcomeMessages = async () =>
 		{
+			// TODO: Add (first time/welcome/configuration required) messages.
+
 			if (!gatewayClient.hasToken)
 			{
 				await Delay(1000);

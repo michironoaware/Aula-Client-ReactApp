@@ -31,50 +31,13 @@ export class Help extends Command
 		return "Displays the list of available commands.";
 	}
 
-	public callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken)
-	{
-		cancellationToken.throwIfCancellationRequested();
-		
-		const query = args.get(Help.#s_nameOption.name);
-		if (StringHelper.isNullOrWhiteSpace(query))
-		{
-			const commands = ArrayHelper.asArray(commandLine.commands.values());
-			loggers.log(LogLevel.Information, `Here's a list of all available commands: ${Help.createMultipleCommandHelpMessage(commands)}`);
-			return Promise.resolve();
-		}
-
-		const querySegments = query!.split(" ");
-		const commandName = querySegments[0];
-		let command = commandLine.commands.get(commandName);
-		if (!command)
-		{
-			loggers.log(LogLevel.Error, `Unknown command: "${commandName}"`);
-			return Promise.resolve();
-		}
-
-		for (const subCommandName of querySegments.toSpliced(0, 1))
-		{
-			const subCommand: Command | undefined = command.subCommands.get(subCommandName);
-			if (!subCommand)
-			{
-				loggers.log(LogLevel.Error, `Unknown sub-command: "${commandName}"`);
-				return Promise.resolve();
-			}
-
-			command = subCommand;
-		}
-
-		loggers.log(LogLevel.Information, `Here's information about the command: ${Help.createSingleCommandHelpMessage(command)}`);
-		return Promise.resolve();
-	}
-
 	static createSingleCommandHelpMessage(command: Command)
 	{
 		const message = new StringBuilder();
 		let alignment = 16;
 
 		const parameters = new CommandParameters();
-		
+
 		for (const optionEntry of command.options)
 		{
 			const parameter = optionEntry[1];
@@ -100,7 +63,7 @@ export class Help extends Command
 		alignment++;
 
 		const padding = 2;
-		
+
 		message.appendLine();
 		message.append(command.name);
 		message.appendLine(StringHelper.padLeft(command.description, command.description.length + alignment - command.name.length));
@@ -141,7 +104,7 @@ export class Help extends Command
 	static createMultipleCommandHelpMessage(commands: Readonly<Array<Command>>)
 	{
 		const message = new StringBuilder();
-		
+
 		const commandNamesLength = commands.map(c => c.name.length);
 		commandNamesLength.push(16); // Minimum alignment
 		const alignment = Math.max(...commandNamesLength) + 1;
@@ -157,6 +120,43 @@ export class Help extends Command
 		}
 
 		return message.toString();
+	}
+
+	public callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken)
+	{
+		cancellationToken.throwIfCancellationRequested();
+
+		const query = args.get(Help.#s_nameOption.name);
+		if (StringHelper.isNullOrWhiteSpace(query))
+		{
+			const commands = ArrayHelper.asArray(commandLine.commands.values());
+			loggers.log(LogLevel.Information, `Here's a list of all available commands: ${Help.createMultipleCommandHelpMessage(commands)}`);
+			return Promise.resolve();
+		}
+
+		const querySegments = query!.split(" ");
+		const commandName = querySegments[0];
+		let command = commandLine.commands.get(commandName);
+		if (!command)
+		{
+			loggers.log(LogLevel.Error, `Unknown command: "${commandName}"`);
+			return Promise.resolve();
+		}
+
+		for (const subCommandName of querySegments.toSpliced(0, 1))
+		{
+			const subCommand: Command | undefined = command.subCommands.get(subCommandName);
+			if (!subCommand)
+			{
+				loggers.log(LogLevel.Error, `Unknown sub-command: "${commandName}"`);
+				return Promise.resolve();
+			}
+
+			command = subCommand;
+		}
+
+		loggers.log(LogLevel.Information, `Here's information about the command: ${Help.createSingleCommandHelpMessage(command)}`);
+		return Promise.resolve();
 	}
 }
 

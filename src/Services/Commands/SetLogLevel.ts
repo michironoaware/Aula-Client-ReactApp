@@ -51,8 +51,8 @@ export class SetLogLevel extends Command
 			.find(v => v[0].toLowerCase() === logLevelString.toLowerCase());
 		if (logLevelEntry === undefined ||
 		    typeof logLevelEntry[1] !== "number" ||
-			logLevelEntry[1] < LogLevel.Trace ||
-			logLevelEntry[1] > LogLevel.Information)
+		    logLevelEntry[1] < LogLevel.Trace ||
+		    logLevelEntry[1] > LogLevel.Information)
 		{
 			loggers.log(LogLevel.Error, "The level specified is invalid.");
 			return;

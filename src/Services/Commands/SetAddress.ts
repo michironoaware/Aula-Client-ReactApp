@@ -22,12 +22,12 @@ export class SetAddress extends Command
 
 	public get name()
 	{
-		return "set-address"
+		return "set-address";
 	}
 
 	public get description()
 	{
-		return "Sets the address of the Aula server."
+		return "Sets the address of the Aula server.";
 	}
 
 	public async callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken)

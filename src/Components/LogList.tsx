@@ -11,7 +11,7 @@ import { Delay } from "../Common/Delay.ts";
 
 export default function LogList(args: LogListArgs)
 {
-	const [logs, setLogs] = useState<LogData[]>([]);
+	const [ logs, setLogs ] = useState<LogData[]>([]);
 
 	useEffect(() =>
 	{
@@ -22,23 +22,23 @@ export default function LogList(args: LogListArgs)
 				if (logLevel < selectedLogLevel)
 					return;
 
-				setLogs(previousLogs => [...previousLogs, {
+				setLogs(previousLogs => [ ...previousLogs, {
 					type: LogDataType.Console,
 					logLevel,
 					message,
 					key: `l${previousLogs.length + 1}`
-				}]);
+				} ]);
 			}
 		} satisfies ILogger;
 		loggers.add(logger);
 
 		const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
-			setLogs(prev => [...prev, {
+			setLogs(prev => [ ...prev, {
 				type: LogDataType.AulaMessage,
 				logLevel: LogLevel.Information,
 				message: event.message,
 				key: event.message.id
-			}]);
+			} ]);
 		gatewayClient.on("MessageCreated", aulaMessageReceiver);
 		const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
 			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
@@ -70,7 +70,7 @@ export default function LogList(args: LogListArgs)
 			{
 				const currentUser = await gatewayClient.rest.getCurrentUser();
 				loggers.log(LogLevel.Information, `Logged in as ${currentUser.displayName}`);
-	
+
 				const currentRoom = await currentUser.getCurrentRoom();
 				if (currentRoom)
 				{

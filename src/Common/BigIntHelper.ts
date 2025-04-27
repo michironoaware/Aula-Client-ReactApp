@@ -2,7 +2,7 @@
 {
 	export function AsBigInt(value: number | bigint)
 	{
-		return typeof value === 'bigint' ? value : BigInt(value);
+		return typeof value === "bigint" ? value : BigInt(value);
 	}
 
 	export function RangeHash(inputValue: bigint, min: bigint, max: bigint)

@@ -31,7 +31,8 @@ export default function Log(args: LogArgs)
 			logLevelClass = "loglevel-trace";
 			logLevelName = "Trace";
 			break;
-		default: throw new InvalidOperationError(`Unexpected log level "${args.logLevel}"`);
+		default:
+			throw new InvalidOperationError(`Unexpected log level "${args.logLevel}"`);
 	}
 
 	if (logLevelName.length > 0)

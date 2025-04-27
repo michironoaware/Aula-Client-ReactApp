@@ -1,6 +1,4 @@
-﻿import { TypeHelper } from "./TypeHelper.ts";
-
-export class StringBuilder
+﻿export class StringBuilder
 {
 	#_strings: null | string | string[];
 

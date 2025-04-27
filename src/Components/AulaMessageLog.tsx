@@ -1,11 +1,11 @@
 ﻿import { Message, MessageFlags, StandardMessage, UserJoinMessage, UserLeaveMessage } from "aula.js";
 import { BigIntHelper } from "../Common/BigIntHelper.ts";
 import { HtmlUtility } from "../Common/HtmlUtility.ts";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AulaMessageLog({ props }: { props: AulaMessageLogProps })
 {
-    const [message, setMessage] = useState<string | null>(null);
+	const [ message, setMessage ] = useState<string | null>(null);
 	useEffect(() =>
 	{
 		const constructMessage = async () =>
@@ -18,8 +18,8 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 				{
 					const author = await props.message.getAuthor();
 					let authorName = author?.displayName ?? "System";
-					authorName = msg.startsWith("<em>") ? `<em>${authorName}</em>` : authorName;
-					const separator = msg.startsWith("<em>") ? " " : ": ";
+					authorName = msg.startsWith("<em>") ? `<em>${authorName}</em>`:authorName;
+					const separator = msg.startsWith("<em>") ? " ":": ";
 					msg = `${authorName}${separator}${msg}`;
 				}
 
@@ -40,12 +40,13 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 				setMessage(() => "Received message of an unknown type.");
 			}
 
-			return () => {};
+			return () =>
+			{
+			};
 		}
 
 		constructMessage().then();
 	}, []);
-
 
 
 	return <div className="log loglevel-information">

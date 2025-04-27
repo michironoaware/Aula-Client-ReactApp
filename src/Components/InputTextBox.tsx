@@ -25,8 +25,7 @@ export default function InputTextBox()
 		{
 			loggers.log(LogLevel.Information, `> ${content}`);
 			await commandLine.processCommand(content, cancellation.token);
-		}
-		catch (err)
+		} catch (err)
 		{
 			if (!(err instanceof OperationCanceledError))
 				// Unexpected error, rethrow.

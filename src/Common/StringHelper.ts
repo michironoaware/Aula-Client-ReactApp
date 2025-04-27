@@ -14,7 +14,7 @@ export namespace StringHelper
 	{
 		if (text.length >= totalWidth)
 			return text;
-		
+
 		const textWithPadding = new StringBuilder();
 		const padding = totalWidth - text.length;
 		for (let i = 0; i < padding; i++)

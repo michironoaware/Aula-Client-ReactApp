@@ -17,7 +17,7 @@ export class SetTheme extends Command
 		isRequired: true,
 		requiresArgument: true,
 		canOverflow: false,
-	})
+	});
 
 	public constructor()
 	{

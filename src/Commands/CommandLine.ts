@@ -142,10 +142,10 @@ export class CommandLine
 			const optionNames = pendingOptions
 				.map(o => `"${o.name}"`)
 				.join(", ");
-			
+
 			const logMessage = pendingOptions.length > 1
 				? `options ${optionNames} are required but they were not provided.`
-				: `option ${optionNames} is required but was not provided.`
+				: `option ${optionNames} is required but was not provided.`;
 			this.#_logger.log(LogLevel.Error, logMessage);
 			return false;
 		}

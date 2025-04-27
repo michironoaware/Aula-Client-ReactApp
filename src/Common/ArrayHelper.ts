@@ -6,7 +6,7 @@
 			return iter as T[];
 
 		if (Symbol.iterator in iter)
-			return [ ... iter ];
+			return [ ...iter ];
 
 		const arr = [];
 		let current: IteratorResult<T> = iter.next();

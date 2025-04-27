@@ -10,8 +10,7 @@ export default function Theme(args: ThemeArgs)
 	if (args.theme)
 	{
 		themeToUse = args.theme;
-	}
-	else
+	} else
 	{
 		let storedTheme = LocalStorageFacade.theme;
 		if (!TypeHelper.isType(storedTheme, ThemeType))
@@ -20,7 +19,7 @@ export default function Theme(args: ThemeArgs)
 			LocalStorageFacade.theme = storedTheme;
 		}
 
-		const [theme, setTheme] = useState<ThemeType>(storedTheme);
+		const [ theme, setTheme ] = useState<ThemeType>(storedTheme);
 		themeToUse = theme;
 
 		useEffect(() =>
@@ -36,15 +35,15 @@ export default function Theme(args: ThemeArgs)
 		}, []);
 	}
 
-	const flickerClass = themeToUse === ThemeType.Light ? "light-flicker" : "flicker";
-	const effects  = args.withEffects
+	const flickerClass = themeToUse === ThemeType.Light ? "light-flicker":"flicker";
+	const effects = args.withEffects
 		? <div>
 			<div className="radial"></div>
 			<div className={flickerClass}></div>
 			<div className="scanline"></div>
 			<div className="scanlines"></div>
 		</div>
-		: undefined;
+		:undefined;
 
 	return <div className={`theme ${ThemeTypeToDomClass(themeToUse)}`}>
 		{effects}

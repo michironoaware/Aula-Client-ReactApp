@@ -19,8 +19,10 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 					const author = await props.message.getAuthor();
 					const authorName = author?.displayName ?? "System";
 					const separator = msg.startsWith("<italic>") ? " " : ": ";
-					setMessage(() => `${authorName}${separator}${msg}`);
+					msg = `${authorName}${separator}${msg}`;
 				}
+
+				setMessage(() => msg);
 
 			} else if (props.message instanceof UserJoinMessage)
 			{

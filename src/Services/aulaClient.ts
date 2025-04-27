@@ -1,7 +1,8 @@
-﻿import { GatewayClient } from "aula.js";
+﻿import { GatewayClient, Intents } from "aula.js";
 import { LocalStorageFacade } from "./LocalStorageFacade";
 
-export const aulaClient = new GatewayClient();
+export const aulaClient = new GatewayClient()
+	.withIntents(Intents.Users | Intents.Rooms | Intents.Messages | Intents.Moderation);
 
 const storedAddress = LocalStorageFacade.serverAddress;
 if (storedAddress !== null)

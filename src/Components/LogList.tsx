@@ -15,17 +15,17 @@ export default function LogList(args: LogListArgs)
 	useEffect(() =>
 	{
 		const logger = {
-			log: (level, message) =>
+			log: (logLevel, message) =>
 			{
 				const selectedLogLevel = LocalStorageFacade.logLevel ?? LogLevel.Information;
-				if (level < selectedLogLevel)
+				if (logLevel < selectedLogLevel)
 					return;
 
 				setLogs(previousLogs => [...previousLogs, {
 					type: LogDataType.Console,
-					level,
+					logLevel,
 					message,
-					id: `l${previousLogs.length + 1}`
+					key: `l${previousLogs.length + 1}`
 				}]);
 			}
 		} satisfies ILogger;
@@ -34,13 +34,13 @@ export default function LogList(args: LogListArgs)
 		const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
 			setLogs(prev => [...prev, {
 				type: LogDataType.AulaMessage,
-				level: LogLevel.Information,
+				logLevel: LogLevel.Information,
 				message: event.message,
-				id: event.message.id
+				key: event.message.id
 			}]);
 		aulaClient.on("MessageCreated", aulaMessageReceiver);
 		const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
-			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.id === event.messageId), 1));
+			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
 		aulaClient.on("MessageRemoved", aulaMessageRemover);
 
 		const logCleaner = () => setLogs([]);
@@ -60,7 +60,7 @@ export default function LogList(args: LogListArgs)
 		{logs.map(log =>
 		{
 			if (log.type === LogDataType.Console)
-				return <Log key={log.id} logLevel={log.level} message={log.message}/>;
+				return <Log key={log.key} logLevel={log.logLevel} message={log.message}/>;
 			if (log.type === LogDataType.AulaMessage)
 				return <AulaMessageLog props={{ message: log.message }}></AulaMessageLog>;
 		})}
@@ -77,16 +77,16 @@ type LogData = ConsoleLogData | AulaMessageLogData;
 interface ConsoleLogData
 {
 	type: LogDataType.Console;
-	id: string;
-	level: LogLevel;
+	key: string;
+	logLevel: LogLevel;
 	message: string;
 }
 
 interface AulaMessageLogData
 {
 	type: LogDataType.AulaMessage;
-	id: string;
-	level: LogLevel.Information;
+	key: string;
+	logLevel: LogLevel.Information;
 	message: Message;
 }
 

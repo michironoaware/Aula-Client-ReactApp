@@ -65,7 +65,7 @@ export default function LogList(args: LogListArgs)
 				await Delay(1000);
 				loggers.log(LogLevel.Information, "You are not logged in.");
 				await Delay(2500);
-				loggers.log(LogLevel.Information, `New here? Type "help register" to see how to create an account.`);
+				loggers.log(LogLevel.Information, `New here? Type "help TODO" to TODO.`);
 			} else
 			{
 				const currentUser = await gatewayClient.rest.getCurrentUser();

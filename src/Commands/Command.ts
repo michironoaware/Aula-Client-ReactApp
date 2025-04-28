@@ -5,7 +5,6 @@ export abstract class Command
 {
 	readonly #_options: Map<string, CommandOption> = new Map();
 	readonly #_subCommands: Map<string, Command> = new Map();
-	#_previousDefinedOption: CommandOption | null = null;
 	#_optionsView: ReadonlyDictionary<string, CommandOption> | null = null;
 	#_subCommandsView: ReadonlyDictionary<string, Command> | null = null;
 
@@ -35,24 +34,7 @@ export abstract class Command
 			throw new Error(`Duplicate command option name: '${option.name}'.`);
 		}
 
-		if (this.#_previousDefinedOption)
-		{
-			if (option.isRequired && !this.#_previousDefinedOption.isRequired)
-			{
-				throw new Error(
-					`An optional option cannot precede a required one. '${this.#_previousDefinedOption.name}' is optional but '${option.name}' is required.`
-				);
-			}
-			if (this.#_previousDefinedOption.canOverflow)
-			{
-				throw new Error(
-					`The option '${this.#_previousDefinedOption.name}' is marked for overflow, but is followed by another option.`
-				);
-			}
-		}
-
 		this.#_options.set(option.name, option);
-		this.#_previousDefinedOption = option;
 	}
 
 	protected addOptions(...options: CommandOption[]): void

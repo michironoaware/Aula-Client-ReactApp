@@ -1,4 +1,4 @@
-﻿import { Message, MessageFlags, StandardMessage, UserJoinMessage, UserLeaveMessage } from "aula.js";
+﻿import { Message, MessageFlags, Room, StandardMessage, User, UserJoinMessage, UserLeaveMessage } from "aula.js";
 import { BigIntHelper } from "../Common/BigIntHelper.ts";
 import { HtmlUtility } from "../Common/HtmlUtility.ts";
 import { useEffect, useState } from "react";
@@ -10,13 +10,17 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 	{
 		const constructMessage = async () =>
 		{
+			const cache = props.message.restClient.cache;
+
 			if (props.message instanceof StandardMessage)
 			{
 				let msg = HtmlUtility.getHtmlFromMarkdown(HtmlUtility.escapeHtml(props.message.text));
 
 				if (!BigIntHelper.HasFlag(props.message.flags, MessageFlags.HideAuthor))
 				{
-					const author = await props.message.getAuthor();
+					const author = props.message.authorId
+						? cache?.get(props.message.authorId) as User | undefined ?? await props.message.getAuthor()
+						: null;
 					let authorName = author?.displayName ?? "System";
 					authorName = msg.startsWith("<em>") ? `<em>${authorName}</em>`:authorName;
 					const separator = msg.startsWith("<em>") ? " ":": ";
@@ -27,13 +31,19 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 
 			} else if (props.message instanceof UserJoinMessage)
 			{
-				const user = await props.message.userJoin.getUser();
-				const previousRoom = await props.message.userJoin.getPreviousRoom();
+				const user = cache?.get(props.message.userJoin.userId) as User | undefined ?? await props.message.userJoin.getUser();
+				const previousRoom = props.message.userJoin.previousRoomId
+					? cache?.get(props.message.userJoin.previousRoomId) as Room | undefined
+					?? await props.message.userJoin.getPreviousRoom()
+					: null;
 				setMessage(() => `<i>${getJoinMessage(props.message.id, user.displayName, previousRoom?.id)}</i>`);
 			} else if (props.message instanceof UserLeaveMessage)
 			{
-				const user = await props.message.userLeave.getUser();
-				const room = await props.message.userLeave.getRoom();
+				const user = cache?.get(props.message.userLeave.userId) as User | undefined ?? await props.message.userLeave.getUser();
+				const room = props.message.userLeave.roomId
+					? cache?.get(props.message.userLeave.roomId) as Room | undefined
+					?? await props.message.userLeave.getRoom()
+					: null;
 				setMessage(() => `<i>${getLeaveMessage(props.message.id, user.displayName, room?.id)}</i>`)
 			} else
 			{

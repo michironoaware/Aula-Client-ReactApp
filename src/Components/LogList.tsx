@@ -4,7 +4,7 @@ import { LocalStorageFacade } from "../Services/LocalStorageFacade";
 import { loggers } from "../Services/loggers";
 import { ILogger, LogLevel } from "../Common/Logging";
 import Log from "./Log.tsx";
-import { IGatewayClientEvents, Message } from "aula.js";
+import { IGatewayClientEvents, Message, Room } from "aula.js";
 import { gatewayClient } from "../Services/gatewayClient.ts";
 import AulaMessageLog from "./AulaMessageLog.tsx";
 import { Delay } from "../Common/Delay.ts";
@@ -74,7 +74,9 @@ export default function LogList(args: LogListArgs)
 				const currentUser = await gatewayClient.rest.getCurrentUser();
 				loggers.log(LogLevel.Information, `Logged in as ${currentUser.displayName}`);
 
-				const currentRoom = await currentUser.getCurrentRoom();
+				const currentRoom = currentUser.currentRoomId ?
+					gatewayClient.rest.cache?.get(currentUser.currentRoomId) as Room | undefined ?? await currentUser.getCurrentRoom()
+					: null;
 				if (currentRoom)
 				{
 					loggers.log(LogLevel.Information, `You woke up in ${currentRoom?.name}`);

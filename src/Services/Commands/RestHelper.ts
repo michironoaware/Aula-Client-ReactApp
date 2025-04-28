@@ -5,7 +5,7 @@ import { LogLevel } from "../../Common/Logging";
 
 export namespace RestHelper
 {
-	export async function HandleRestErrors<T>(callback: Func<[], T>)
+	export async function HandleRestErrors<T>(callback: Func<[], T>): Promise<RestErrorHandlingResult<Awaited<T>>>
 	{
 		try
 		{
@@ -33,8 +33,15 @@ export namespace RestHelper
 	}
 }
 
-interface HandleRestErrorsResult<T>
+type RestErrorHandlingResult<T> = FailedRestErrorHandlingResult<T> | SuccessfulRestErrorHandlingResult<T>;
+
+interface FailedRestErrorHandlingResult<T>
 {
-	succeeded: boolean;
-	value?: T;
+	succeeded: false;
+}
+
+interface SuccessfulRestErrorHandlingResult<T>
+{
+	succeeded: true;
+	value: T;
 }

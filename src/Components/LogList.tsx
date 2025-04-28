@@ -26,7 +26,7 @@ export default function LogList(args: LogListArgs)
 					type: LogDataType.Console,
 					logLevel,
 					message,
-					key: `l${previousLogs.length + 1}`
+					key: `l${previousLogs.length + 1}d${Date.now()}`
 				} ]);
 			}
 		} satisfies ILogger;

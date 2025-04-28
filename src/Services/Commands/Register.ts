@@ -9,7 +9,7 @@ export class Register extends Command
 {
 	static readonly #s_usernameOption = new CommandOption({
 		name: "u",
-		description: "The username to register the account with." +
+		description: "The username to register the account with. " +
 		             "Used for authentication and account related operations, only visible for you. " +
 		             "Cannot be changed later.",
 		isRequired: true,
@@ -32,14 +32,14 @@ export class Register extends Command
 	});
 	static readonly #s_emailOption = new CommandOption({
 		name: "e",
-		description: "The email to register. Cannot be changed later.",
+		description: "The email to register the account with. Cannot be changed later.",
 		isRequired: true,
 		requiresArgument: true,
 		canOverflow: false,
 	});
 	static readonly #s_displayNameOption = new CommandOption({
 		name: "d",
-		description: "The display name of the account.",
+		description: "The display name for the account. Defaults to the username.",
 		isRequired: false,
 		requiresArgument: true,
 		canOverflow: true,

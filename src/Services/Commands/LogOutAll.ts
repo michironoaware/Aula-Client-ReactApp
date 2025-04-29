@@ -44,6 +44,6 @@ export class LogOutAll extends Command
 		const username = args.get(LogOutAll.#s_usernameOption.name)!;
 		const password = args.get(LogOutAll.#s_passwordOption.name)!;
 		await aula.logOut({ username, password, cancellationToken });
-		logging.log(LogLevel.Information, "Logged out successfully.");
+		window.location.reload();
 	}
 }

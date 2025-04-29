@@ -59,7 +59,7 @@ export default function LogList(args: LogListArgs)
 
 	useEffect(() =>
 	{
-		const logWelcomeMessages = async () =>
+		const connect = async () =>
 		{
 			// TODO: Add (first time/welcome/configuration required) messages.
 
@@ -92,7 +92,7 @@ export default function LogList(args: LogListArgs)
 			}
 		}
 
-		logWelcomeMessages();
+		connect();
 	}, []);
 
 	return <div className="loglist">

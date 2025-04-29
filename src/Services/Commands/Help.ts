@@ -60,8 +60,6 @@ export class Help extends Command
 		if (command.name.length > alignment)
 			alignment = command.name.length;
 
-		alignment++;
-
 		const padding = 2;
 
 		message.appendLine();

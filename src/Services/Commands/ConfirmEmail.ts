@@ -54,12 +54,12 @@ export class ConfirmEmail extends Command
 	{
 		let email = args.get(ConfirmEmail.#s_emailOption.name)!;
 		let confirmationToken = args.get(ConfirmEmail.#s_confirmationTokenOption.name);
-		const sendConfirmationEmailFlag = args.get(ConfirmEmail.#s_sendEConfirmationEmailOption.name);
+		const sendConfirmationEmailFlag = !!args.get(ConfirmEmail.#s_sendEConfirmationEmailOption.name);
 		email = WebEncoders.ToBase64UrlString(email);
 		confirmationToken = confirmationToken ? WebEncoders.ToBase64UrlString(confirmationToken) : confirmationToken;
 
 		if (confirmationToken === undefined &&
-		    sendConfirmationEmailFlag === undefined)
+		    !sendConfirmationEmailFlag)
 		{
 			logging.log(LogLevel.Warning,
 				`No action was selected. Please specify either ` +

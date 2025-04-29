@@ -8,6 +8,7 @@ import { Cls } from "./Commands/Cls.ts";
 import { SetLogLevel } from "./Commands/SetLogLevel.ts";
 import { Register } from "./Commands/Register.ts";
 import { ConfirmEmail } from "./Commands/ConfirmEmail.ts";
+import { ForgotPassword } from "./Commands/ForgotPassword.ts";
 
 export const commandLine = new CommandLine(loggers);
 commandLine.addCommand(new Help());
@@ -18,3 +19,4 @@ commandLine.addCommand(new SetAddress());
 commandLine.addCommand(new Register());
 commandLine.addCommand(new LogIn());
 commandLine.addCommand(new ConfirmEmail());
+commandLine.addCommand(new ForgotPassword());

@@ -1,6 +1,8 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken } from "aula.js";
 import { aula } from "../aula.ts";
+import { logging } from "../logging.ts";
+import { LogLevel } from "../../Common/Logging";
 
 export class LogIn extends Command
 {
@@ -41,5 +43,6 @@ export class LogIn extends Command
 		const username = args.get(LogIn.#s_usernameOption.name)!;
 		const password = args.get(LogIn.#s_passwordOption.name)!;
 		await aula.logIn({ username, password, cancellationToken });
+		logging.log(LogLevel.Information, "Logged in successfully.");
 	}
 }

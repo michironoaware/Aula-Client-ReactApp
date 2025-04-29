@@ -75,8 +75,6 @@ export default function LogList(args: LogListArgs)
 			} else
 			{
 				const currentUser = await aula.rest.getCurrentUser();
-				logging.log(LogLevel.Information, `Logged in as ${currentUser.displayName}`);
-
 				const currentRoom = currentUser.currentRoomId ?
 					aula.rest.cache?.get(currentUser.currentRoomId) as Room | undefined ?? await currentUser.getCurrentRoom()
 					: null;
@@ -91,6 +89,8 @@ export default function LogList(args: LogListArgs)
 					const usersNearby = (await currentRoom.getUsers()).filter(u => u.id !== currentUser.id);
 					if (usersNearby.length > 0)
 						logging.log(LogLevel.Information, `Presences nearby: ${usersNearby.map(u => u.displayName).join(", ")}.`);
+					else
+						logging.log(LogLevel.Information, "No presences nearby.");
 				}
 			}
 		}

@@ -58,6 +58,26 @@ class AulaService
 		this.#_gateway.withToken(logInResponse.token);
 	}
 
+	public async logOut(params: ILogInParams)
+	{
+		AulaServiceStateError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Log out first.");
+
+		const logInRequestBody = new LogInRequestBody()
+			.withUserName(params.username)
+			.withPassword(params.password);
+		await this.#_gateway.rest.logOut(logInRequestBody, params.cancellationToken);
+
+		this.logOutLocally();
+	}
+
+	public logOutLocally()
+	{
+		AulaServiceStateError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Log out first.");
+
+		LocalStorageFacade.authorizationToken = null;
+		this.#_gateway.withToken(null);
+	}
+
 	public setServerAddress(address: URL)
 	{
 		AulaServiceStateError.throwIf(this.#_gateway.hasToken, "Log out first.");

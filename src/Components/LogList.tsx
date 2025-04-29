@@ -67,7 +67,7 @@ export default function LogList(args: LogListArgs)
 			{
 				await Delay(1000);
 				logging.log(LogLevel.Information, "You are not logged in.");
-				await Delay(2500);
+				await Delay(3000);
 				logging.log(LogLevel.Information, `New here? Type "help register" to see how to create an account.`);
 			} else
 			{

@@ -82,9 +82,9 @@ export class ConfirmEmail extends Command
 		}
 
 		const confirmEmailQuery = new ConfirmEmailQuery().withEmail(email);
-		const emailSending = await RestHelper.HandleRestErrors(
+		const sendEmailAttempt = await RestHelper.HandleRestErrors(
 			async () => await gatewayClient.rest.confirmEmail(confirmEmailQuery, cancellationToken));
-		if (!emailSending.succeeded)
+		if (!sendEmailAttempt.succeeded)
 			return;
 
 		loggers.log(LogLevel.Information,

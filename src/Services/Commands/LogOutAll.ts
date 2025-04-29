@@ -36,7 +36,7 @@ export class LogOutAll extends Command
 
 	public get description()
 	{
-		return "Sign out of your account on all device.";
+		return "Sign out of your account on all devices.";
 	}
 
 	public async callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken)

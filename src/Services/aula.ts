@@ -170,7 +170,7 @@ export class AulaServiceStateError extends InvalidOperationError
 	public static throwIf(condition: boolean, message: string): asserts condition is false
 	{
 		if (condition)
-			throw new InvalidOperationError(message);
+			throw new AulaServiceStateError(message);
 	}
 }
 

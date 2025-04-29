@@ -1,9 +1,6 @@
 ﻿import { Command, CommandOption } from "../../Commands";
-import { AulaRestError, CancellationToken, LogInRequestBody, LogInResponse, RestClientNullAddressError } from "aula.js";
-import { gatewayClient, setToken } from "../gatewayClient.ts";
-import { loggers } from "../loggers";
-import { LogLevel } from "../../Common/Logging";
-import { RestHelper } from "./RestHelper.ts";
+import { CancellationToken, LogInRequestBody } from "aula.js";
+import { logIn } from "../Actions/logIn.ts";
 
 export class LogIn extends Command
 {
@@ -41,19 +38,8 @@ export class LogIn extends Command
 
 	public async callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken)
 	{
-		const logInRequestBody = new LogInRequestBody()
-			.withUserName(args.get(LogIn.#s_usernameOption.name)!)
-			.withPassword(args.get(LogIn.#s_passwordOption.name)!);
-
-		let logInAttempt = await RestHelper.HandleRestErrors(
-			async () => await gatewayClient.rest.logIn(logInRequestBody, cancellationToken));
-		if (!logInAttempt.succeeded)
-			return;
-		let logInResponse = logInAttempt.value;
-
-		setToken(logInResponse.token);
-
-		const currentUser = await gatewayClient.rest.getCurrentUser(cancellationToken);
-		loggers.log(LogLevel.Information, `Logged in as ${currentUser.displayName}.`);
+		const username = args.get(LogIn.#s_usernameOption.name)!;
+		const password = args.get(LogIn.#s_passwordOption.name)!;
+		await logIn({ username, password, cancellationToken });
 	}
 }

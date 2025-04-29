@@ -12,7 +12,7 @@ import { LogLevel } from "../Common/Logging";
 import { logging } from "./LoggingService.ts";
 import { LocalStorageFacade } from "./LocalStorageFacade.ts";
 
-export class AulaService
+class AulaService
 {
 	readonly #_gateway: GatewayClient;
 	#_lastSessionId: string | undefined;

@@ -3,6 +3,7 @@ import { AulaRestError, CancellationTokenSource, OperationCanceledError, RestCli
 import { commandLine } from "../Services/commandLine";
 import { LogLevel } from "../Common/Logging";
 import { logging } from "../Services/LoggingService.ts";
+import { AulaServiceStateError } from "../Services/aula.ts";
 
 export default function InputTextBox()
 {
@@ -27,7 +28,9 @@ export default function InputTextBox()
 			await commandLine.processCommand(content, cancellation.token);
 		} catch (err)
 		{
-			if (err instanceof AulaRestError)
+			if (err instanceof AulaServiceStateError)
+				logging.log(LogLevel.Error, err.message);
+			else if (err instanceof AulaRestError)
 				logging.log(LogLevel.Error, err.problemDetails?.detail ?? err.message);
 			else if (err instanceof RestClientNullAddressError)
 				logging.log(LogLevel.Error, `A server address is required first. Execute "set-address" to set the server-address.`);

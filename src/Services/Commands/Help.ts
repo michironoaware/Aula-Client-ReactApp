@@ -78,7 +78,7 @@ export class Help extends Command
 		{
 			const param = parameters.options[i];
 			message.append(StringHelper.padLeft(param.name, param.name.length + padding));
-			message.append(StringHelper.padLeft(param.description, param.description.length + alignment - param.name.length - padding));
+			message.append(StringHelper.padLeft(param.description, param.description.length + alignment - param.name.length + padding));
 			if (i < parameters.options.length - 1)
 				message.appendLine();
 		}
@@ -93,7 +93,7 @@ export class Help extends Command
 		{
 			const param = parameters.subCommands[i];
 			message.append(StringHelper.padLeft(param.name, param.name.length + padding));
-			message.append(StringHelper.padLeft(param.description, param.description.length + alignment - param.name.length - padding));
+			message.append(StringHelper.padLeft(param.description, param.description.length + alignment - param.name.length + padding));
 			if (i < parameters.subCommands.length - 1)
 				message.appendLine();
 		}

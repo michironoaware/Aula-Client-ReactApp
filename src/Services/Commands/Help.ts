@@ -34,6 +34,7 @@ export class Help extends Command
 	static createSingleCommandHelpMessage(command: Command)
 	{
 		const message = new StringBuilder();
+		const padding = 2;
 		let alignment = 16;
 
 		const parameters = new CommandParameters();
@@ -44,8 +45,8 @@ export class Help extends Command
 			const name = `${CommandOption.prefix}${parameter.name}`;
 			parameters.options.push(new ParameterInfo(name, parameter.description));
 
-			if (name.length > alignment)
-				alignment = name.length;
+			if (name.length > alignment - padding)
+				alignment = name.length + padding;
 		}
 
 		for (const commandEntry of command.subCommands)
@@ -57,15 +58,13 @@ export class Help extends Command
 				alignment = subCommand.name.length;
 		}
 
-		if (command.name.length > alignment)
-			alignment = command.name.length;
-
-		const padding = 2;
+		if (command.name.length > alignment - padding)
+			alignment = command.name.length + padding;
 
 		message.appendLine();
 		message.append(command.name);
 		message.appendLine(StringHelper.padLeft(command.description,
-			command.description.length + alignment - command.name.length + padding * 2));
+			command.description.length + alignment - command.name.length));
 
 		if (parameters.options.length > 0)
 		{
@@ -76,8 +75,8 @@ export class Help extends Command
 		for (let i = 0; i < parameters.options.length; i++)
 		{
 			const param = parameters.options[i];
-			message.append(StringHelper.padLeft(param.name, param.name.length + padding));
-			message.append(StringHelper.padLeft(param.description, param.description.length + alignment - param.name.length + padding));
+			message.append(StringHelper.padLeft(param.name, param.name.length));
+			message.append(StringHelper.padLeft(param.description, param.description.length + alignment - param.name.length));
 			if (i < parameters.options.length - 1)
 				message.appendLine();
 		}
@@ -91,8 +90,8 @@ export class Help extends Command
 		for (let i = 0; i < parameters.subCommands.length; i++)
 		{
 			const param = parameters.subCommands[i];
-			message.append(StringHelper.padLeft(param.name, param.name.length + padding));
-			message.append(StringHelper.padLeft(param.description, param.description.length + alignment - param.name.length + padding));
+			message.append(StringHelper.padLeft(param.name, param.name.length));
+			message.append(StringHelper.padLeft(param.description, param.description.length + alignment - param.name.length));
 			if (i < parameters.subCommands.length - 1)
 				message.appendLine();
 		}

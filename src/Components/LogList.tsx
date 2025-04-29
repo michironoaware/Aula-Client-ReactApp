@@ -68,7 +68,7 @@ export default function LogList(args: LogListArgs)
 				await Delay(1000);
 				logging.log(LogLevel.Information, "You are not logged in.");
 				await Delay(3000);
-				logging.log(LogLevel.Information, `New here? Type "help register" to see how to create an account.`);
+				logging.log(LogLevel.Information, `New here? Type "hello-world" to get started.`);
 			} else
 			{
 				const currentUser = await aula.rest.getCurrentUser();

@@ -1,5 +1,5 @@
 ﻿import { Command, CommandOption } from "../../Commands";
-import { CancellationToken, LogInRequestBody } from "aula.js";
+import { CancellationToken } from "aula.js";
 import { aula } from "../aula.ts";
 
 export class LogIn extends Command

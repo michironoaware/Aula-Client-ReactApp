@@ -73,6 +73,7 @@ class AulaService
 	public logOutLocally()
 	{
 		AulaServiceStateError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Log out first.");
+		AulaServiceStateError.throwIf(!this.gateway.hasToken, "Not logged in.");
 
 		LocalStorageFacade.authorizationToken = null;
 		this.#_gateway.withToken(null);

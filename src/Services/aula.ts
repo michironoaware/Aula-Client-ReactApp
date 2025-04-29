@@ -71,14 +71,14 @@ class AulaService
 
 	public async connect()
 	{
-		this.#_tryReconnect = true;
 		await this.#_gateway.connect();
+		this.#_tryReconnect = true;
 	}
 
 	public async disconnect()
 	{
-		this.#_tryReconnect = false;
 		await this.#_gateway.disconnect();
+		this.#_tryReconnect = false;
 	}
 
 	#addReconnecting(gateway: GatewayClient)

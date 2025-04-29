@@ -1,3 +1,3 @@
 ﻿import { LogCollection } from "../Collections";
 
-export const loggers = new LogCollection();
+export const logging = new LogCollection();

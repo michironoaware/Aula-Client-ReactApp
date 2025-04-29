@@ -1,10 +1,10 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken, ConfirmEmailQuery } from "aula.js";
 import { RestHelper } from "./RestHelper.ts";
-import { gatewayClient } from "../gatewayClient.ts";
-import { loggers } from "../loggers.ts";
 import { LogLevel } from "../../Common/Logging";
 import { WebEncoders } from "../../Common/WebEncoders.ts";
+import { logging } from "../LoggingService.ts";
+import { aula } from "../aula.ts";
 
 export class ConfirmEmail extends Command
 {
@@ -62,7 +62,7 @@ export class ConfirmEmail extends Command
 		if (confirmationToken === undefined &&
 		    sendConfirmationEmailFlag === undefined)
 		{
-			loggers.log(LogLevel.Warning,
+			logging.log(LogLevel.Warning,
 				`No action was selected. Please specify either ` +
 				`"${CommandOption.prefix}${ConfirmEmail.#s_confirmationTokenOption.name}" (to confirm with a token) ` +
 				`or "${CommandOption.prefix}${ConfirmEmail.#s_sendEConfirmationEmailOption.name}" (to send a confirmation email).`
@@ -77,17 +77,17 @@ export class ConfirmEmail extends Command
 				.withToken(confirmationToken);
 
 			await RestHelper.HandleRestErrors(
-				async () => await gatewayClient.rest.confirmEmail(confirmEmailQuery, cancellationToken));
+				async () => await aula.rest.confirmEmail(confirmEmailQuery, cancellationToken));
 			return;
 		}
 
 		const confirmEmailQuery = new ConfirmEmailQuery().withEmail(email);
 		const sendEmailAttempt = await RestHelper.HandleRestErrors(
-			async () => await gatewayClient.rest.confirmEmail(confirmEmailQuery, cancellationToken));
+			async () => await aula.rest.confirmEmail(confirmEmailQuery, cancellationToken));
 		if (!sendEmailAttempt.succeeded)
 			return;
 
-		loggers.log(LogLevel.Information,
+		logging.log(LogLevel.Information,
 			"Confirmation email request sent. If an account with the provided email exists, a confirmation email will be sent.");
 	}
 }

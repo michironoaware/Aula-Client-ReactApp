@@ -1,9 +1,9 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken, RegisterRequestBody } from "aula.js";
-import { loggers } from "../loggers.ts";
 import { LogLevel } from "../../Common/Logging";
 import { RestHelper } from "./RestHelper.ts";
-import { gatewayClient } from "../gatewayClient.ts";
+import { logging } from "../LoggingService.ts";
+import { aula } from "../aula.ts";
 
 export class Register extends Command
 {
@@ -75,7 +75,7 @@ export class Register extends Command
 
 		if (password !== passwordConfirmation)
 		{
-			loggers.log(LogLevel.Error, "Passwords doesn't match.");
+			logging.log(LogLevel.Error, "Passwords doesn't match.");
 			return;
 		}
 
@@ -86,10 +86,10 @@ export class Register extends Command
 			.withDisplayName(displayName);
 
 		const registerAttempt = await RestHelper.HandleRestErrors(
-			async () => await gatewayClient.rest.register(registerRequestBody, cancellationToken));
+			async () => await aula.rest.register(registerRequestBody, cancellationToken));
 		if (!registerAttempt.succeeded)
 			return;
 
-		loggers.log(LogLevel.Information, "Registered successfully.");
+		logging.log(LogLevel.Information, "Registered successfully.");
 	}
 }

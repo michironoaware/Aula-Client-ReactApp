@@ -1,10 +1,10 @@
 import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./Components/App.tsx";
-import { loggers } from "./Services/loggers";
 import { LogLevel } from "./Common/Logging";
+import { logging } from "./Services/LoggingService.ts";
 
-loggers.add({
+logging.add({
 	log: (logLevel, message) => console.log(`[${LogLevel[logLevel]}]: ${message}`),
 });
 

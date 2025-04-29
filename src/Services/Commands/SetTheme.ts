@@ -2,8 +2,8 @@
 import { ThemeType } from "../../Components/ThemeType.tsx";
 import { CancellationToken } from "aula.js";
 import { events } from "../events";
-import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
+import { logging } from "../LoggingService.ts";
 
 export class SetTheme extends Command
 {
@@ -40,7 +40,7 @@ export class SetTheme extends Command
 		const themeString = args.get(SetTheme.#s_themeOption.name)!;
 		if (!isNaN(Number(themeString)))
 		{
-			loggers.log(LogLevel.Error, "The theme specified is invalid.");
+			logging.log(LogLevel.Error, "The theme specified is invalid.");
 			return;
 		}
 
@@ -49,11 +49,11 @@ export class SetTheme extends Command
 			.find(v => v[0].toLowerCase() === themeString.toLowerCase());
 		if (themeEntry === undefined)
 		{
-			loggers.log(LogLevel.Error, "The theme specified is invalid.");
+			logging.log(LogLevel.Error, "The theme specified is invalid.");
 			return;
 		}
 
 		await events.emit("ThemeUpdateRequest", themeEntry[1] as ThemeType);
-		loggers.log(LogLevel.Information, `Theme set to "${themeEntry[0]}" successfully!`);
+		logging.log(LogLevel.Information, `Theme set to "${themeEntry[0]}" successfully!`);
 	}
 }

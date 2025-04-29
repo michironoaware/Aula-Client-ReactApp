@@ -1,13 +1,13 @@
 ﻿import { ReactNode, useEffect, useState } from "react";
 import { events } from "../Services/events";
 import { LocalStorageFacade } from "../Services/LocalStorageFacade";
-import { loggers } from "../Services/loggers";
 import { ILogger, LogLevel } from "../Common/Logging";
 import Log from "./Log.tsx";
 import { IGatewayClientEvents, Message, Room } from "aula.js";
-import { gatewayClient } from "../Services/gatewayClient.ts";
 import AulaMessageLog from "./AulaMessageLog.tsx";
 import { Delay } from "../Common/Delay.ts";
+import { aula } from "../Services/aula.ts";
+import { logging } from "../Services/LoggingService.ts";
 
 export default function LogList(args: LogListArgs)
 {
@@ -30,7 +30,7 @@ export default function LogList(args: LogListArgs)
 				} ]);
 			}
 		} satisfies ILogger;
-		loggers.add(logger);
+		logging.add(logger);
 
 		const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
 			setLogs(prev => [ ...prev, {
@@ -39,21 +39,21 @@ export default function LogList(args: LogListArgs)
 				message: event.message,
 				key: event.message.id
 			} ]);
-		gatewayClient.on("MessageCreated", aulaMessageReceiver);
+		aula.gateway.on("MessageCreated", aulaMessageReceiver);
 
 		const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
 			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
-		gatewayClient.on("MessageRemoved", aulaMessageRemover);
+		aula.gateway.on("MessageRemoved", aulaMessageRemover);
 
 		const logCleaner = () => setLogs([]);
 		events.on("LogClearRequest", logCleaner);
 
 		return () =>
 		{
-			loggers.remove(logger);
+			logging.remove(logger);
 			events.remove("LogClearRequest", logCleaner);
-			gatewayClient.remove("MessageCreated", aulaMessageReceiver);
-			gatewayClient.remove("MessageRemoved", aulaMessageRemover);
+			aula.gateway.remove("MessageCreated", aulaMessageReceiver);
+			aula.gateway.remove("MessageRemoved", aulaMessageRemover);
 		}
 	}, []);
 
@@ -63,31 +63,31 @@ export default function LogList(args: LogListArgs)
 		{
 			// TODO: Add (first time/welcome/configuration required) messages.
 
-			if (!gatewayClient.hasToken)
+			if (!aula.gateway.hasToken)
 			{
 				await Delay(1000);
-				loggers.log(LogLevel.Information, "You are not logged in.");
+				logging.log(LogLevel.Information, "You are not logged in.");
 				await Delay(2500);
-				loggers.log(LogLevel.Information, `New here? Type "help register" to see how to create an account.`);
+				logging.log(LogLevel.Information, `New here? Type "help register" to see how to create an account.`);
 			} else
 			{
-				const currentUser = await gatewayClient.rest.getCurrentUser();
-				loggers.log(LogLevel.Information, `Logged in as ${currentUser.displayName}`);
+				const currentUser = await aula.rest.getCurrentUser();
+				logging.log(LogLevel.Information, `Logged in as ${currentUser.displayName}`);
 
 				const currentRoom = currentUser.currentRoomId ?
-					gatewayClient.rest.cache?.get(currentUser.currentRoomId) as Room | undefined ?? await currentUser.getCurrentRoom()
+					aula.rest.cache?.get(currentUser.currentRoomId) as Room | undefined ?? await currentUser.getCurrentRoom()
 					: null;
 				if (currentRoom)
 				{
-					loggers.log(LogLevel.Information, `You woke up in ${currentRoom?.name}`);
+					logging.log(LogLevel.Information, `You woke up in ${currentRoom?.name}`);
 					if (currentRoom.description.length > 0)
 					{
-						loggers.log(LogLevel.Information, currentRoom.description);
+						logging.log(LogLevel.Information, currentRoom.description);
 					}
 
 					const usersNearby = (await currentRoom.getUsers()).filter(u => u.id !== currentUser.id);
 					if (usersNearby.length > 0)
-						loggers.log(LogLevel.Information, `Presences nearby: ${usersNearby.map(u => u.displayName).join(", ")}.`);
+						logging.log(LogLevel.Information, `Presences nearby: ${usersNearby.map(u => u.displayName).join(", ")}.`);
 				}
 			}
 		}

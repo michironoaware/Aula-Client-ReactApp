@@ -1,9 +1,8 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken } from "aula.js";
-import { gatewayClient } from "../gatewayClient.ts";
-import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
-import { setServerAddress } from "../Actions/setServerAddress.ts";
+import { logging } from "../LoggingService.ts";
+import { aula, AulaConnectionState } from "../aula.ts";
 
 export class SetAddress extends Command
 {
@@ -46,18 +45,18 @@ export class SetAddress extends Command
 				// Unexpected error, rethrow.
 				throw err;
 
-			loggers.log(LogLevel.Error, "The address is not a valid URI.");
+			logging.log(LogLevel.Error, "The address is not a valid URI.");
 			return;
 		}
 
-		loggers.log(LogLevel.Information, "Checking in with the server...");
-		if (!await gatewayClient.rest.ping(address, cancellationToken))
+		logging.log(LogLevel.Information, "Checking in with the server...");
+		if (!await aula.rest.ping(address, cancellationToken))
 		{
-			loggers.log(LogLevel.Warning, "The server did not respond. The address may be incorrect or the server is disconnected.");
+			logging.log(LogLevel.Warning, "The server did not respond. The address may be incorrect or the server is disconnected.");
 		}
 
-		setServerAddress(address);
-		loggers.log(LogLevel.Information, "Address updated!");
+		aula.setServerAddress(address);
+		logging.log(LogLevel.Information, "Address updated!");
 		return;
 	}
 }

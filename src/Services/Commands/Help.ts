@@ -2,8 +2,8 @@
 import { ArrayHelper, StringBuilder, StringHelper } from "../../Common";
 import { CancellationToken } from "aula.js";
 import { commandLine } from "../commandLine";
-import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
+import { logging } from "../LoggingService.ts";
 
 export class Help extends Command
 {
@@ -128,7 +128,7 @@ export class Help extends Command
 		if (StringHelper.isNullOrWhiteSpace(query))
 		{
 			const commands = ArrayHelper.asArray(commandLine.commands.values());
-			loggers.log(LogLevel.Information, `Here's a list of all available commands: ${Help.createMultipleCommandHelpMessage(commands)}`);
+			logging.log(LogLevel.Information, `Here's a list of all available commands: ${Help.createMultipleCommandHelpMessage(commands)}`);
 			return Promise.resolve();
 		}
 
@@ -137,7 +137,7 @@ export class Help extends Command
 		let command = commandLine.commands.get(commandName);
 		if (!command)
 		{
-			loggers.log(LogLevel.Error, `Unknown command: "${commandName}"`);
+			logging.log(LogLevel.Error, `Unknown command: "${commandName}"`);
 			return Promise.resolve();
 		}
 
@@ -146,14 +146,14 @@ export class Help extends Command
 			const subCommand: Command | undefined = command.subCommands.get(subCommandName);
 			if (!subCommand)
 			{
-				loggers.log(LogLevel.Error, `Unknown sub-command: "${commandName}"`);
+				logging.log(LogLevel.Error, `Unknown sub-command: "${commandName}"`);
 				return Promise.resolve();
 			}
 
 			command = subCommand;
 		}
 
-		loggers.log(LogLevel.Information, `Here's information about the command: ${Help.createSingleCommandHelpMessage(command)}`);
+		logging.log(LogLevel.Information, `Here's information about the command: ${Help.createSingleCommandHelpMessage(command)}`);
 		return Promise.resolve();
 	}
 }

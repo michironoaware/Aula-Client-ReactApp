@@ -1,8 +1,8 @@
 ﻿import React, { useId } from "react";
 import { CancellationTokenSource, OperationCanceledError } from "aula.js";
 import { commandLine } from "../Services/commandLine";
-import { loggers } from "../Services/loggers";
 import { LogLevel } from "../Common/Logging";
+import { logging } from "../Services/LoggingService.ts";
 
 export default function InputTextBox()
 {
@@ -23,7 +23,7 @@ export default function InputTextBox()
 
 		try
 		{
-			loggers.log(LogLevel.Information, `> ${content}`);
+			logging.log(LogLevel.Information, `> ${content}`);
 			await commandLine.processCommand(content, cancellation.token);
 		} catch (err)
 		{
@@ -31,7 +31,7 @@ export default function InputTextBox()
 				// Unexpected error, rethrow.
 				throw err;
 
-			loggers.log(LogLevel.Error, "The operation has timed out.");
+			logging.log(LogLevel.Error, "The operation has timed out.");
 		}
 
 		clearTimeout(timeout);

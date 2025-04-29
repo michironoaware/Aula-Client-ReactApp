@@ -1,9 +1,9 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken } from "aula.js";
 import { LogLevel } from "../../Common/Logging";
-import { loggers } from "../loggers.ts";
 import { LocalStorageFacade } from "../LocalStorageFacade.ts";
 import { TypeHelper } from "../../Common";
+import { logging } from "../LoggingService.ts";
 
 export class SetLogLevel extends Command
 {
@@ -42,7 +42,7 @@ export class SetLogLevel extends Command
 		const logLevelString = args.get(SetLogLevel.#s_logLevelOption.name)!;
 		if (!isNaN(Number(logLevelString)))
 		{
-			loggers.log(LogLevel.Error, "The level specified is invalid.");
+			logging.log(LogLevel.Error, "The level specified is invalid.");
 			return;
 		}
 
@@ -54,11 +54,11 @@ export class SetLogLevel extends Command
 		    logLevelEntry[1] < LogLevel.Trace ||
 		    logLevelEntry[1] > LogLevel.Information)
 		{
-			loggers.log(LogLevel.Error, "The level specified is invalid.");
+			logging.log(LogLevel.Error, "The level specified is invalid.");
 			return;
 		}
 
 		LocalStorageFacade.logLevel = logLevelEntry[1] as LogLevel;
-		loggers.log(LogLevel.Information, "Log level updated successfully!");
+		logging.log(LogLevel.Information, "Log level updated successfully!");
 	}
 }

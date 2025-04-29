@@ -2,9 +2,9 @@
 import { CancellationToken, ForgotPasswordQuery } from "aula.js";
 import { WebEncoders } from "../../Common/WebEncoders.ts";
 import { RestHelper } from "./RestHelper.ts";
-import { gatewayClient } from "../gatewayClient.ts";
-import { loggers } from "../loggers.ts";
 import { LogLevel } from "../../Common/Logging";
+import { aula } from "../aula.ts";
+import { logging } from "../LoggingService.ts";
 
 export class ForgotPassword extends Command
 {
@@ -37,11 +37,11 @@ export class ForgotPassword extends Command
 		const email = WebEncoders.ToBase64UrlString(args.get(ForgotPassword.#s_emailOption.name)!);
 
 		const sendEmailAttempt = await RestHelper.HandleRestErrors(async () =>
-			await gatewayClient.rest.forgotPassword(new ForgotPasswordQuery().withEmail(email), cancellationToken));
+			await aula.rest.forgotPassword(new ForgotPasswordQuery().withEmail(email), cancellationToken));
 		if (!sendEmailAttempt.succeeded)
 			return;
 
-		loggers.log(LogLevel.Information,
+		logging.log(LogLevel.Information,
 			"Password reset email request sent. If an account with the provided email exists, an email will be sent.");
 	}
 }

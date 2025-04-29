@@ -1,5 +1,4 @@
 ﻿import { CommandLine } from "../Commands";
-import { loggers } from "./loggers.ts";
 import { SetAddress } from "./Commands/SetAddress.ts";
 import { Help } from "./Commands/Help.ts";
 import { SetTheme } from "./Commands/SetTheme.ts";
@@ -9,8 +8,9 @@ import { SetLogLevel } from "./Commands/SetLogLevel.ts";
 import { Register } from "./Commands/Register.ts";
 import { ConfirmEmail } from "./Commands/ConfirmEmail.ts";
 import { ForgotPassword } from "./Commands/ForgotPassword.ts";
+import { logging } from "./LoggingService.ts";
 
-export const commandLine = new CommandLine(loggers);
+export const commandLine = new CommandLine(logging);
 commandLine.addCommand(new Help());
 commandLine.addCommand(new SetTheme());
 commandLine.addCommand(new SetLogLevel());

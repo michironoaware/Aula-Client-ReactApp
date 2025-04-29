@@ -102,7 +102,7 @@
 
 .onyx-theme {
 	--background-primary: rgb(0, 0, 0);
-	--font-color-primary: rgb(255, 255, 255);
+	--font-color-primary: rgb(240, 240, 240);
 	--background-primary-selection: rgb(255, 255, 255);
 	--font-color-primary-selection: rgb(0, 0, 0);
 	--font-textShadow-color-left: rgba(255, 0, 100, 0.5);

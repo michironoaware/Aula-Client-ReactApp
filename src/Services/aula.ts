@@ -56,9 +56,6 @@ class AulaService
 
 		LocalStorageFacade.authorizationToken = logInResponse.token;
 		this.#_gateway.withToken(logInResponse.token);
-
-		const currentUser = await this.#_gateway.rest.getCurrentUser(params.cancellationToken);
-		logging.log(LogLevel.Information, `Logged in as ${currentUser.displayName}.`);
 	}
 
 	public setServerAddress(address: URL)

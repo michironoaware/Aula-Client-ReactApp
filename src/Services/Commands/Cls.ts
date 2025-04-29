@@ -10,7 +10,7 @@ export class Cls extends Command
 
 	public get description()
 	{
-		return "Clear the console logs.";
+		return "Clear the console.";
 	}
 
 	public async callback()

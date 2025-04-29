@@ -46,7 +46,7 @@ class AulaService
 
 	public async logIn(params: ILogInParams)
 	{
-		InvalidOperationError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Log out first.");
+		AulaServiceStateError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Log out first.");
 
 		const logInRequestBody = new LogInRequestBody()
 			.withUserName(params.username)
@@ -62,7 +62,7 @@ class AulaService
 
 	public setServerAddress(address: URL)
 	{
-		InvalidOperationError.throwIf(this.#_gateway.hasToken, "Log out first.");
+		AulaServiceStateError.throwIf(this.#_gateway.hasToken, "Log out first.");
 
 		LocalStorageFacade.serverAddress = address;
 		this.#_gateway.withAddress(address);
@@ -125,6 +125,20 @@ export enum AulaConnectionState
 	Disconnected,
 	Connecting,
 	Connected,
+}
+
+export class AulaServiceStateError extends InvalidOperationError
+{
+	public constructor(message: string)
+	{
+		super(message);
+	}
+
+	public static throwIf(condition: boolean, message: string): asserts condition is false
+	{
+		if (condition)
+			throw new InvalidOperationError(message);
+	}
 }
 
 export const aula = new AulaService();

@@ -27,6 +27,7 @@ class AulaService
 				.withCache(new LruCache(256, false))));
 
 		this.#addReconnecting(this.#_gateway);
+		this.#loadSettings();
 	}
 
 	public get connectionState()
@@ -117,6 +118,19 @@ class AulaService
 				}
 			}
 		});
+	}
+
+	#loadSettings()
+	{
+		if (LocalStorageFacade.serverAddress !== null)
+		{
+			this.#_gateway.withAddress(LocalStorageFacade.serverAddress);
+			this.#_gateway.withToken(LocalStorageFacade.authorizationToken);
+		}
+		else
+		{
+			LocalStorageFacade.authorizationToken = null;
+		}
 	}
 }
 

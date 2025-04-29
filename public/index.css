@@ -174,7 +174,7 @@
 		rgba(0, 255, 0, 0.225),
 		rgba(0, 0, 0, 0.2) 120%);
 
-	--font-family: "Roboto Mono", "Cascadia Mono", "Consolas", monospace;
+	--font-family: "Cascadia Mono", "Roboto Mono", "Consolas", monospace;
 	--font-optical-sizing: auto;
 	--font-weight: var(--font-weight-primary);
 	--font-style: normal;

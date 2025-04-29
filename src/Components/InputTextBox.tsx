@@ -2,7 +2,7 @@
 import { AulaRestError, CancellationTokenSource, OperationCanceledError, RestClientNullAddressError } from "aula.js";
 import { commandLine } from "../Services/commandLine";
 import { LogLevel } from "../Common/Logging";
-import { logging } from "../Services/LoggingService.ts";
+import { logging } from "../Services/logging.ts";
 import { AulaServiceStateError } from "../Services/aula.ts";
 
 export default function InputTextBox()

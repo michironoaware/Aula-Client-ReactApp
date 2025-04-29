@@ -9,7 +9,7 @@
 	RestClientOptions
 } from "aula.js";
 import { LogLevel } from "../Common/Logging";
-import { logging } from "./LoggingService.ts";
+import { logging } from "./logging.ts";
 import { LocalStorageFacade } from "./LocalStorageFacade.ts";
 
 class AulaService

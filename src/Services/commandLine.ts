@@ -8,7 +8,7 @@ import { SetLogLevel } from "./Commands/SetLogLevel.ts";
 import { Register } from "./Commands/Register.ts";
 import { ConfirmEmail } from "./Commands/ConfirmEmail.ts";
 import { ForgotPassword } from "./Commands/ForgotPassword.ts";
-import { logging } from "./LoggingService.ts";
+import { logging } from "./logging.ts";
 
 export const commandLine = new CommandLine(logging);
 commandLine.addCommand(new Help());

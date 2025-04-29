@@ -3,7 +3,7 @@ import { CancellationToken } from "aula.js";
 import { LogLevel } from "../../Common/Logging";
 import { LocalStorageFacade } from "../LocalStorageFacade.ts";
 import { TypeHelper } from "../../Common";
-import { logging } from "../LoggingService.ts";
+import { logging } from "../logging.ts";
 
 export class SetLogLevel extends Command
 {

@@ -2,7 +2,7 @@
 import { CancellationToken, ConfirmEmailQuery } from "aula.js";
 import { LogLevel } from "../../Common/Logging";
 import { WebEncoders } from "../../Common/WebEncoders.ts";
-import { logging } from "../LoggingService.ts";
+import { logging } from "../logging.ts";
 import { aula } from "../aula.ts";
 
 export class ConfirmEmail extends Command

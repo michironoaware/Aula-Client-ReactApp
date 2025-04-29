@@ -3,7 +3,7 @@ import { CancellationToken, ForgotPasswordQuery } from "aula.js";
 import { WebEncoders } from "../../Common/WebEncoders.ts";
 import { LogLevel } from "../../Common/Logging";
 import { aula } from "../aula.ts";
-import { logging } from "../LoggingService.ts";
+import { logging } from "../logging.ts";
 
 export class ForgotPassword extends Command
 {

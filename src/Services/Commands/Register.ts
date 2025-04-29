@@ -1,7 +1,7 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken, RegisterRequestBody } from "aula.js";
 import { LogLevel } from "../../Common/Logging";
-import { logging } from "../LoggingService.ts";
+import { logging } from "../logging.ts";
 import { aula } from "../aula.ts";
 
 export class Register extends Command

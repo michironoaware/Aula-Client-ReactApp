@@ -3,7 +3,7 @@ import { ThemeType } from "../../Components/ThemeType.tsx";
 import { CancellationToken } from "aula.js";
 import { events } from "../events";
 import { LogLevel } from "../../Common/Logging";
-import { logging } from "../LoggingService.ts";
+import { logging } from "../logging.ts";
 
 export class SetTheme extends Command
 {

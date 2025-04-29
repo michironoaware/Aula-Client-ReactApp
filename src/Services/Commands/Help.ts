@@ -3,7 +3,7 @@ import { ArrayHelper, StringBuilder, StringHelper } from "../../Common";
 import { CancellationToken } from "aula.js";
 import { commandLine } from "../commandLine";
 import { LogLevel } from "../../Common/Logging";
-import { logging } from "../LoggingService.ts";
+import { logging } from "../logging.ts";
 
 export class Help extends Command
 {

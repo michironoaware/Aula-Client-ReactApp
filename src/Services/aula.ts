@@ -68,12 +68,14 @@ class AulaService
 
 	public async connect()
 	{
+		InvalidOperationError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Client is already connected.");
 		await this.#_gateway.connect();
 		this.#_tryReconnect = true;
 	}
 
 	public async disconnect()
 	{
+		InvalidOperationError.throwIf(this.#_state !== AulaConnectionState.Connected, "Client is not connected.");
 		await this.#_gateway.disconnect();
 		this.#_tryReconnect = false;
 	}

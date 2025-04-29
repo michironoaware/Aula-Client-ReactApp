@@ -8,7 +8,6 @@
 	LruCache,
 	RestClientOptions
 } from "aula.js";
-import { RestHelper } from "./Commands/RestHelper.ts";
 import { LogLevel } from "../Common/Logging";
 import { logging } from "./LoggingService.ts";
 import { LocalStorageFacade } from "./LocalStorageFacade.ts";
@@ -52,12 +51,7 @@ export class AulaService
 		const logInRequestBody = new LogInRequestBody()
 			.withUserName(params.username)
 			.withPassword(params.password);
-
-		let logInAttempt = await RestHelper.HandleRestErrors(
-			async () => await this.#_gateway.rest.logIn(logInRequestBody, params.cancellationToken));
-		if (!logInAttempt.succeeded)
-			return;
-		let logInResponse = logInAttempt.value;
+		let logInResponse = await this.#_gateway.rest.logIn(logInRequestBody, params.cancellationToken);
 
 		LocalStorageFacade.authorizationToken = logInResponse.token;
 		this.#_gateway.withToken(logInResponse.token);

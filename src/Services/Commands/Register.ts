@@ -1,7 +1,6 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken, RegisterRequestBody } from "aula.js";
 import { LogLevel } from "../../Common/Logging";
-import { RestHelper } from "./RestHelper.ts";
 import { logging } from "../LoggingService.ts";
 import { aula } from "../aula.ts";
 
@@ -84,11 +83,7 @@ export class Register extends Command
 			.withPassword(password)
 			.withEmail(email)
 			.withDisplayName(displayName);
-
-		const registerAttempt = await RestHelper.HandleRestErrors(
-			async () => await aula.rest.register(registerRequestBody, cancellationToken));
-		if (!registerAttempt.succeeded)
-			return;
+		await aula.rest.register(registerRequestBody, cancellationToken);
 
 		logging.log(LogLevel.Information, "Registered successfully.");
 	}

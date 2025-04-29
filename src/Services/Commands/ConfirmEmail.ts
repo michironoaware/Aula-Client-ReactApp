@@ -1,6 +1,5 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken, ConfirmEmailQuery } from "aula.js";
-import { RestHelper } from "./RestHelper.ts";
 import { LogLevel } from "../../Common/Logging";
 import { WebEncoders } from "../../Common/WebEncoders.ts";
 import { logging } from "../LoggingService.ts";
@@ -76,16 +75,12 @@ export class ConfirmEmail extends Command
 				.withEmail(email)
 				.withToken(confirmationToken);
 
-			await RestHelper.HandleRestErrors(
-				async () => await aula.rest.confirmEmail(confirmEmailQuery, cancellationToken));
+			await aula.rest.confirmEmail(confirmEmailQuery, cancellationToken);
 			return;
 		}
 
 		const confirmEmailQuery = new ConfirmEmailQuery().withEmail(email);
-		const sendEmailAttempt = await RestHelper.HandleRestErrors(
-			async () => await aula.rest.confirmEmail(confirmEmailQuery, cancellationToken));
-		if (!sendEmailAttempt.succeeded)
-			return;
+		await aula.rest.confirmEmail(confirmEmailQuery, cancellationToken);
 
 		logging.log(LogLevel.Information,
 			"Confirmation email request sent. If an account with the provided email exists, a confirmation email will be sent.");

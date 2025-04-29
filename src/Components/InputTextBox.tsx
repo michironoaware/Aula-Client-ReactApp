@@ -1,5 +1,5 @@
 ﻿import React, { useId } from "react";
-import { CancellationTokenSource, OperationCanceledError } from "aula.js";
+import { AulaRestError, CancellationTokenSource, OperationCanceledError, RestClientNullAddressError } from "aula.js";
 import { commandLine } from "../Services/commandLine";
 import { LogLevel } from "../Common/Logging";
 import { logging } from "../Services/LoggingService.ts";
@@ -27,11 +27,19 @@ export default function InputTextBox()
 			await commandLine.processCommand(content, cancellation.token);
 		} catch (err)
 		{
-			if (!(err instanceof OperationCanceledError))
-				// Unexpected error, rethrow.
-				throw err;
-
-			logging.log(LogLevel.Error, "The operation has timed out.");
+			if (err instanceof AulaRestError)
+				logging.log(LogLevel.Error, err.problemDetails?.detail ?? err.message);
+			else if (err instanceof RestClientNullAddressError)
+				logging.log(LogLevel.Error, `A server address is required first. Execute "set-address" to set the server-address.`);
+			else if (err instanceof OperationCanceledError)
+				logging.log(LogLevel.Error, "The operation has timed out.");
+			else
+			{
+				logging.log(LogLevel.Critical, `An unexpected error occurred. ${(err as Error).message} ${(err as Error).stack}`);
+				if (err instanceof TypeError)
+					logging.log(LogLevel.Warning,
+						"A problem occurred with the request; please verify that the address is valid or that the server is online.");
+			}
 		}
 
 		clearTimeout(timeout);

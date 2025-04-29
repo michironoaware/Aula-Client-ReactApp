@@ -57,52 +57,6 @@ export default function LogList(args: LogListArgs)
 		}
 	}, []);
 
-	useEffect(() =>
-	{
-		if (aula.connectionState !== AulaConnectionState.Disconnected)
-			return;
-
-		const connect = async () =>
-		{
-			// TODO: Add (first time/welcome/configuration required) messages.
-
-			if (!aula.gateway.hasToken)
-			{
-				await Delay(1000);
-				logging.log(LogLevel.Information, "You are not logged in.");
-				await Delay(3000);
-				logging.log(LogLevel.Information, `New here? Type "hello-world" to get started.`);
-			} else
-			{
-				const currentUser = await aula.rest.getCurrentUser();
-				const currentRoom = currentUser.currentRoomId ?
-					aula.rest.cache?.get(currentUser.currentRoomId) as Room | undefined ?? await currentUser.getCurrentRoom()
-					: null;
-				if (currentRoom)
-				{
-					logging.log(LogLevel.Information, `You woke up in ${currentRoom?.name}`);
-					if (currentRoom.description.length > 0)
-					{
-						logging.log(LogLevel.Information, currentRoom.description);
-					}
-
-					const usersNearby = (await currentRoom.getUsers()).filter(u => u.id !== currentUser.id);
-					if (usersNearby.length > 0)
-						logging.log(LogLevel.Information, `Presences nearby: ${usersNearby.map(u => u.displayName).join(", ")}.`);
-					else
-						logging.log(LogLevel.Information, "No presences nearby.");
-				}
-			}
-		}
-
-		connect();
-
-		return () =>
-		{
-			aula.disconnect();
-		}
-	}, []);
-
 	return <div className="loglist">
 		{args.children}
 		{logs.map(log =>

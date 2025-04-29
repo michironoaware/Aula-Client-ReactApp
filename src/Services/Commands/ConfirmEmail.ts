@@ -76,13 +76,14 @@ export class ConfirmEmail extends Command
 				.withEmail(email)
 				.withToken(confirmationToken);
 
-			await RestHelper.HandleRestErrors(async () => await gatewayClient.rest.confirmEmail(confirmEmailQuery));
+			await RestHelper.HandleRestErrors(
+				async () => await gatewayClient.rest.confirmEmail(confirmEmailQuery, cancellationToken));
 			return;
 		}
 
 		const confirmEmailQuery = new ConfirmEmailQuery().withEmail(email);
 		const emailSending = await RestHelper.HandleRestErrors(
-			async () => await gatewayClient.rest.confirmEmail(confirmEmailQuery));
+			async () => await gatewayClient.rest.confirmEmail(confirmEmailQuery, cancellationToken));
 		if (!emailSending.succeeded)
 			return;
 

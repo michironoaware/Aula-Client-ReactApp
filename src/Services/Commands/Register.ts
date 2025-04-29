@@ -86,7 +86,7 @@ export class Register extends Command
 			.withDisplayName(displayName);
 
 		const registerAttempt = await RestHelper.HandleRestErrors(
-			async () => await gatewayClient.rest.register(registerRequestBody));
+			async () => await gatewayClient.rest.register(registerRequestBody, cancellationToken));
 		if (!registerAttempt.succeeded)
 			return;
 

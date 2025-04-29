@@ -46,14 +46,14 @@ export class LogIn extends Command
 			.withPassword(args.get(LogIn.#s_passwordOption.name)!);
 
 		let logInAttempt = await RestHelper.HandleRestErrors(
-			async () => await gatewayClient.rest.logIn(logInRequestBody));
+			async () => await gatewayClient.rest.logIn(logInRequestBody, cancellationToken));
 		if (!logInAttempt.succeeded)
 			return;
 		let logInResponse = logInAttempt.value;
 
 		setToken(logInResponse.token);
 
-		const currentUser = await gatewayClient.rest.getCurrentUser();
+		const currentUser = await gatewayClient.rest.getCurrentUser(cancellationToken);
 		loggers.log(LogLevel.Information, `Logged in as ${currentUser.displayName}.`);
 	}
 }

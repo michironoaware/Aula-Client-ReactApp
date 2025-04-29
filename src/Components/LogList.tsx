@@ -96,6 +96,11 @@ export default function LogList(args: LogListArgs)
 		}
 
 		connect();
+
+		return () =>
+		{
+			aula.disconnect();
+		}
 	}, []);
 
 	return <div className="loglist">

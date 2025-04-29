@@ -9,6 +9,7 @@ import { Register } from "./Commands/Register.ts";
 import { ConfirmEmail } from "./Commands/ConfirmEmail.ts";
 import { ForgotPassword } from "./Commands/ForgotPassword.ts";
 import { logging } from "./logging.ts";
+import { ResetPassword } from "./Commands/ResetPassword.ts";
 
 export const commandLine = new CommandLine(logging);
 commandLine.addCommand(new Help());
@@ -20,3 +21,4 @@ commandLine.addCommand(new Register());
 commandLine.addCommand(new LogIn());
 commandLine.addCommand(new ConfirmEmail());
 commandLine.addCommand(new ForgotPassword());
+commandLine.addCommand(new ResetPassword());

@@ -1,8 +1,9 @@
 ﻿import { CancellationToken, LogInRequestBody } from "aula.js";
 import { RestHelper } from "../Commands/RestHelper.ts";
-import { gatewayClient, setToken } from "../gatewayClient.ts";
+import { gatewayClient } from "../gatewayClient.ts";
 import { loggers } from "../loggers.ts";
 import { LogLevel } from "../../Common/Logging";
+import { setToken } from "./setToken.ts";
 
 export async function logIn(params: ILogInParams)
 {

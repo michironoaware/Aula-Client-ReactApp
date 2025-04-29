@@ -12,15 +12,3 @@ if (storedAddress !== null)
 
 const storedToken = LocalStorageFacade.authorizationToken;
 gatewayClient.withToken(storedToken);
-
-export function setServerAddress(address: URL)
-{
-	LocalStorageFacade.serverAddress = address;
-	gatewayClient.withAddress(address);
-}
-
-export function setToken(token: string | null)
-{
-	LocalStorageFacade.authorizationToken = token;
-	gatewayClient.withToken(token);
-}

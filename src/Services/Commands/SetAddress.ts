@@ -1,8 +1,9 @@
 ﻿import { Command, CommandOption } from "../../Commands";
 import { CancellationToken } from "aula.js";
-import { gatewayClient, setServerAddress } from "../gatewayClient.ts";
+import { gatewayClient } from "../gatewayClient.ts";
 import { loggers } from "../loggers";
 import { LogLevel } from "../../Common/Logging";
+import { setServerAddress } from "../Actions/setServerAddress.ts";
 
 export class SetAddress extends Command
 {

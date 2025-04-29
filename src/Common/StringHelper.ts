@@ -24,6 +24,19 @@ export namespace StringHelper
 		return textWithPadding.toString();
 	}
 
+	export function padRight(text: string, totalWidth: number)
+	{
+		if (text.length >= totalWidth)
+			return text;
+
+		const textWithPadding = new StringBuilder(text);
+		const padding = totalWidth - text.length;
+		for (let i = 0; i < padding; i++)
+			textWithPadding.append(" ");
+
+		return textWithPadding.toString();
+	}
+
 	export function capitalize(str: string)
 	{
 		return str.charAt(0).toUpperCase() + str.slice(1);

@@ -66,7 +66,8 @@ export class Help extends Command
 
 		message.appendLine();
 		message.append(command.name);
-		message.appendLine(StringHelper.padLeft(command.description, command.description.length + alignment - command.name.length));
+		message.appendLine(StringHelper.padLeft(command.description,
+			command.description.length + alignment - command.name.length + padding * 2));
 
 		if (parameters.options.length > 0)
 		{

@@ -60,7 +60,7 @@ class AulaService
 
 	public async logOut(params: ILogInParams)
 	{
-		AulaServiceStateError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Log out first.");
+		InvalidOperationError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Client is not disconnected.");
 
 		const logInRequestBody = new LogInRequestBody()
 			.withUserName(params.username)
@@ -72,7 +72,7 @@ class AulaService
 
 	public logOutLocally()
 	{
-		AulaServiceStateError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Log out first.");
+		InvalidOperationError.throwIf(this.#_state !== AulaConnectionState.Disconnected, "Client is not disconnected.");
 		AulaServiceStateError.throwIf(!this.gateway.hasToken, "Not logged in.");
 
 		LocalStorageFacade.authorizationToken = null;

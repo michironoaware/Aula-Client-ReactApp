@@ -1,5 +1,5 @@
 ﻿import { TypeHelper } from "../Common";
-import { ThemeType } from "../Components/ThemeType.tsx";
+import { ThemeType } from "../Components/ThemeType.ts";
 import { LogLevel } from "../Common/Logging";
 
 /**

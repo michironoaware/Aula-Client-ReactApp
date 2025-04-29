@@ -1,5 +1,5 @@
 ﻿import React, { useEffect, useState } from "react";
-import { ThemeType, ThemeTypeToDomClass } from "./ThemeType.tsx";
+import { ThemeType, ThemeTypeToDomClass } from "./ThemeType.ts";
 import { events } from "../Services/events";
 import { LocalStorageFacade } from "../Services/LocalStorageFacade";
 import { TypeHelper } from "../Common";

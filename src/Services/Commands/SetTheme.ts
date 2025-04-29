@@ -1,5 +1,5 @@
 ﻿import { Command, CommandOption } from "../../Commands";
-import { ThemeType } from "../../Components/ThemeType.tsx";
+import { ThemeType } from "../../Components/ThemeType.ts";
 import { CancellationToken } from "aula.js";
 import { events } from "../events";
 import { LogLevel } from "../../Common/Logging";

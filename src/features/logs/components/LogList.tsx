@@ -35,7 +35,6 @@ export default function LogList(args: LogListArgs)
 		const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
 			setLogs(prev => [ ...prev, {
 				type: LogDataType.AulaMessage,
-				logLevel: LogLevel.Information,
 				message: event.message,
 				key: event.message.id
 			} ]);
@@ -88,7 +87,6 @@ interface AulaMessageLogData
 {
 	type: LogDataType.AulaMessage;
 	key: string;
-	logLevel: LogLevel.Information;
 	message: Message;
 }
 

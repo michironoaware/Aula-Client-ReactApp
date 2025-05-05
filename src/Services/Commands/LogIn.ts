@@ -44,5 +44,6 @@ export class LogIn extends Command
 		const password = args.get(LogIn.#s_passwordOption.name)!;
 		await aula.logIn({ username, password, cancellationToken });
 		logging.log(LogLevel.Information, "Logged in successfully.");
+		await aula.gateway.connect();
 	}
 }

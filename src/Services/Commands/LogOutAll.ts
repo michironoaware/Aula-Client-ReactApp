@@ -1,5 +1,5 @@
 ﻿import { Command, CommandOption } from "../../Commands";
-import { CancellationToken } from "aula.js";
+import { CancellationToken, GatewayClientState } from "aula.js";
 import { aula } from "../aula.ts";
 import { logging } from "../logging.ts";
 import { LogLevel } from "../../Common/Logging";
@@ -43,7 +43,11 @@ export class LogOutAll extends Command
 	{
 		const username = args.get(LogOutAll.#s_usernameOption.name)!;
 		const password = args.get(LogOutAll.#s_passwordOption.name)!;
+
+		if (aula.gateway.state !== GatewayClientState.Disconnected)
+			await aula.gateway.disconnect();
+
 		await aula.logOut({ username, password, cancellationToken });
-		window.location.reload();
+		logging.log(LogLevel.Information, "Logged out successfully.");
 	}
 }

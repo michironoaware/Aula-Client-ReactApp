@@ -1,6 +1,8 @@
 ﻿import { Command } from "../../Commands";
-import { CancellationToken } from "aula.js";
-import { aula, AulaConnectionState } from "../aula.ts";
+import { CancellationToken, GatewayClientState } from "aula.js";
+import { aula } from "../aula.ts";
+import { logging } from "../logging.ts";
+import { LogLevel } from "../../Common/Logging";
 
 export class LogOut extends Command
 {
@@ -16,10 +18,10 @@ export class LogOut extends Command
 
 	public async callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken): Promise<void>
 	{
-		if (aula.connectionState !== AulaConnectionState.Disconnected)
-			await aula.disconnect();
+		if (aula.gateway.state !== GatewayClientState.Disconnected)
+			await aula.gateway.disconnect();
 
 		aula.logOutLocally();
-		window.location.reload();
+		logging.log(LogLevel.Information, "Logged out successfully.");
 	}
 }

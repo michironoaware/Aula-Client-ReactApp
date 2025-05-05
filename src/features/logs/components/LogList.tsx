@@ -6,8 +6,8 @@ import { logging } from "lib/logging.ts";
 import { IGatewayClientEvents, Message } from "aula.js";
 import { aula } from "lib/aula.ts";
 import { events } from "lib/events.ts";
-import Log from "components/Log.tsx";
-import AulaMessageLog from "components/AulaMessageLog.tsx";
+import Log from "./Log.tsx";
+import AulaMessageLog from "./AulaMessageLog.tsx";
 
 export default function LogList(args: LogListArgs)
 {

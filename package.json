@@ -11,7 +11,7 @@
 	},
 	"keywords": [],
 	"dependencies": {
-		"aula.js": "^1.0.0-alpha.21",
+		"aula.js": "^1.0.0-alpha.22",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-scripts": "^5.0.1",

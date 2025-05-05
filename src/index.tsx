@@ -5,7 +5,7 @@ import React, { StrictMode } from "react";
 import Body from "./components/Body.tsx";
 import InputTextBox from "./features/commands/components/InputTextBox.tsx";
 import Theme from "./components/Theme.tsx";
-import LogList from "./features/logs/LogList.tsx";
+import LogList from "./features/logs/components/LogList.tsx";
 
 logging.add({
 	log: (logLevel, message) => console.log(`[${LogLevel[logLevel]}]: ${message}`),

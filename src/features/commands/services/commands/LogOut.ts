@@ -22,6 +22,6 @@ export class LogOut extends Command
 			await aula.gateway.disconnect();
 
 		aula.logOutLocally();
-		logging.log(LogLevel.Information, "Logged out successfully.");
+		window.location.reload();
 	}
 }

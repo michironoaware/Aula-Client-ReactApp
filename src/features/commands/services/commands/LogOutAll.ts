@@ -49,6 +49,6 @@ export class LogOutAll extends Command
 			await aula.gateway.disconnect();
 
 		await aula.logOut({ username, password, cancellationToken });
-		logging.log(LogLevel.Information, "Logged out successfully.");
+		window.location.reload();
 	}
 }

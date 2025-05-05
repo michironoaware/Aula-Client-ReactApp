@@ -9,10 +9,6 @@ import { aula } from "lib/aula.ts";
 
 export default function App()
 {
-	logging.add({
-		log: (logLevel, message) => console.log(`[${LogLevel[logLevel]}]: ${message}`),
-	});
-
 	const startApp = async () =>
 	{
 		if (!aula.gateway.hasToken)

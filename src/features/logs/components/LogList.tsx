@@ -13,6 +13,12 @@ import AulaPresenceUpdateLog from "./AulaPresenceUpdateLog.tsx";
 export default function LogList(args: LogListArgs)
 {
 	const [ logs, setLogs ] = useState<LogData[]>([]);
+
+	if (logs.length > 500)
+	{
+		setLogs(prev => prev.slice(1, 500));
+	}
+
 	const log = (logLevel: LogLevel, message: string) =>
 	{
 		setLogs(previousLogs => [ ...previousLogs, {
@@ -23,10 +29,6 @@ export default function LogList(args: LogListArgs)
 		} ]);
 	}
 
-	if (logs.length > 500)
-	{
-		setLogs(prev => prev.slice(1, 500));
-	}
 
 	useEffect(() =>
 	{

@@ -3,7 +3,7 @@ import { LocalStorageFacade } from "lib/LocalStorageFacade.ts";
 import { LogLevel } from "utils/logging/LogLevel.ts";
 import { ILogger } from "utils/logging/ILogger.ts";
 import { logging } from "lib/logging.ts";
-import { GetRoomsQuery, IGatewayClientEvents, Message, Presence, Room, UserPresenceUpdatedEvent } from "aula.js";
+import { IGatewayClientEvents, Message, Presence, Room, UserPresenceUpdatedEvent } from "aula.js";
 import { aula } from "lib/aula.ts";
 import { events } from "lib/events.ts";
 import Log from "./Log.tsx";
@@ -79,7 +79,8 @@ export default function LogList(args: LogListArgs)
 				return;
 			}
 
-			log(LogLevel.Information, `${room.name}\n${room.description}`);
+			log(LogLevel.Information, room.name);
+			log(LogLevel.Information, room.description);
 			const nearbyPlayerNamesText = (await room.getUsers())
 				.filter(u => u.id !== event.gatewayClient.currentUser!.id)
 				.map(u => u.presence === Presence.Online ? u.displayName : `${u.displayName} (asleep)`)
@@ -116,7 +117,8 @@ export default function LogList(args: LogListArgs)
 				return;
 			}
 
-			log(LogLevel.Information, `${room.name}\n${room.description}`);
+			log(LogLevel.Information, room.name);
+			log(LogLevel.Information, room.description);
 			const nearbyPlayerNamesText = (await room.getUsers())
 				.filter(u => u.id !== event.gatewayClient.currentUser!.id)
 				.map(u => u.presence === Presence.Online ? u.displayName : `${u.displayName} (asleep)`)

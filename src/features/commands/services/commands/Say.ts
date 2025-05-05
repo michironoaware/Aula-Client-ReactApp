@@ -38,7 +38,7 @@ export class Say extends Command
 		if (!aula.gateway.currentUser?.currentRoomId)
 		{
 			logging.log(LogLevel.Error,
-				"Your attempt to speak has been lost to the void—no room exists to give meaning to your words.");
+				"Your attempt to speak has been lost to the void — no room exists to give meaning to your words.");
 			return;
 		}
 

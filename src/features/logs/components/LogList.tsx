@@ -33,15 +33,19 @@ export default function LogList(args: LogListArgs)
 		logging.add(logger);
 
 		const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
+		{
 			setLogs(prev => [ ...prev, {
 				type: LogDataType.AulaMessage,
 				message: event.message,
 				key: event.message.id
 			} ]);
+		}
 		aula.gateway.on("MessageCreated", aulaMessageReceiver);
 
 		const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
+		{
 			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
+		}
 		aula.gateway.on("MessageRemoved", aulaMessageRemover);
 
 		const logCleaner = () => setLogs([]);

@@ -4,18 +4,21 @@
 	"main": "/src/index.tsx",
 	"type": "module",
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test --env=jsdom",
-		"eject": "react-scripts eject"
+		"start": "vite",
+		"build": "tsc && vite build",
+		"serve": "vite preview"
 	},
 	"keywords": [],
 	"dependencies": {
+		"@vitejs/plugin-react": "^4.4.1",
+		"@vitejs/plugin-react-swc": "^3.9.0",
 		"aula.js": "^1.0.0-alpha.22",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
-		"react-scripts": "^5.0.1",
-		"typescript": "^5.8.3"
+		"typescript": "^5.8.3",
+		"vite": "^6.3.5",
+		"vite-plugin-svgr": "^4.3.0",
+		"vite-tsconfig-paths": "^5.1.4"
 	},
 	"devDependencies": {
 		"@types/react": "^19.0.8",

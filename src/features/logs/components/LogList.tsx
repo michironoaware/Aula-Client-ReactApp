@@ -50,6 +50,9 @@ export default function LogList(args: LogListArgs)
 
 		const aulaMessageReceived: IGatewayClientEvents["MessageCreated"] = (event) =>
 		{
+			if (event.message.authorId === event.gatewayClient.currentUser!.id)
+				return;
+
 			setLogs(prev => [ ...prev, {
 				type: LogDataType.AulaMessage,
 				message: event.message,

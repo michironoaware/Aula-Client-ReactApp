@@ -159,7 +159,7 @@ export default function LogList(args: LogListArgs)
 		if (!container)
 			return;
 		const last = container.lastElementChild as HTMLElement | null;
-		last?.scrollIntoView({ behavior: "instant" });
+		last?.scrollIntoView({ behavior: "instant", block: "end" });
 	}, [logs]);
 
 	return <div ref={containerRef} className="loglist">

@@ -15,19 +15,10 @@ export class Say extends Command
 		canOverflow: true,
 	});
 
-	static readonly #s_hideAuthorOption = new CommandOption({
-		name: "h",
-		description: "Indicates the message should not show the author.",
-		isRequired: false,
-		requiresArgument: false,
-		canOverflow: false,
-	});
-
 	public constructor()
 	{
 		super();
 		this.addOption(Say.#s_messageOption);
-		this.addOption(Say.#s_hideAuthorOption);
 	}
 
 	public get name()
@@ -43,7 +34,6 @@ export class Say extends Command
 	public async callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken): Promise<void>
 	{
 		const message = args.get(Say.#s_messageOption.name)!;
-		const hideAuthor = !!args.get(Say.#s_hideAuthorOption.name);
 
 		if (!aula.gateway.currentUser?.currentRoomId)
 		{
@@ -54,7 +44,6 @@ export class Say extends Command
 
 		await aula.rest.sendMessage(aula.gateway.currentUser.currentRoomId, new SendMessageRequestBody()
 			.withType(MessageType.Standard)
-			.withText(message)
-			.withFlags(hideAuthor ? MessageFlags.HideAuthor : null), cancellationToken);
+			.withText(message), cancellationToken);
 	}
 }

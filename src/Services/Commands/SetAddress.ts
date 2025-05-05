@@ -2,7 +2,7 @@
 import { CancellationToken } from "aula.js";
 import { LogLevel } from "../../Common/Logging";
 import { logging } from "../logging.ts";
-import { aula, AulaConnectionState } from "../aula.ts";
+import { aula } from "../aula.ts";
 
 export class SetAddress extends Command
 {

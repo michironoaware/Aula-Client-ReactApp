@@ -138,6 +138,9 @@ export class CommandLine
 
 			args.set(option.name, option.canOverflow ? [ segment, ...inputSegments ].join(" ") : segment);
 			pendingOptions.splice(pendingOptions.indexOf(option), 1);
+
+			if (option.canOverflow)
+				break;
 		}
 
 		if (pendingOptions.length > 0)

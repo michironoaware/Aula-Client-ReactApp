@@ -23,6 +23,11 @@ export default function LogList(args: LogListArgs)
 		} ]);
 	}
 
+	if (logs.length > 500)
+	{
+		setLogs(prev => prev.slice(1, 500));
+	}
+
 	useEffect(() =>
 	{
 		const logger = {

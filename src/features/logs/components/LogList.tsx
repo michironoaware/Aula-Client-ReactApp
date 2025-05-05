@@ -13,42 +13,43 @@ export default function LogList(args: LogListArgs)
 {
 	const [ logs, setLogs ] = useState<LogData[]>([]);
 
-	useEffect(() =>
-	{
-		const logger = {
-			log: (logLevel, message) =>
-			{
-				const selectedLogLevel = LocalStorageFacade.logLevel ?? LogLevel.Information;
-				if (logLevel < selectedLogLevel)
-					return;
-
-				setLogs(previousLogs => [ ...previousLogs, {
-					type: LogDataType.Console,
-					logLevel,
-					message,
-					key: `l${previousLogs.length + 1}d${Date.now()}`
-				} ]);
-			}
-		} satisfies ILogger;
-		logging.add(logger);
-
-		const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
+	const logger = {
+		log: (logLevel, message) =>
 		{
+			const selectedLogLevel = LocalStorageFacade.logLevel ?? LogLevel.Information;
+			if (logLevel < selectedLogLevel)
+				return;
+
 			setLogs(prev => [ ...prev, {
-				type: LogDataType.AulaMessage,
-				message: event.message,
-				key: event.message.id
+				type: LogDataType.Console,
+				logLevel,
+				message,
+				key: `l${prev.length + 1}d${Date.now()}`
 			} ]);
 		}
+	} satisfies ILogger;
+
+	const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
+	{
+		setLogs(prev => [ ...prev, {
+			type: LogDataType.AulaMessage,
+			message: event.message,
+			key: event.message.id
+		} ]);
+	}
+
+	const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
+	{
+		setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
+	}
+
+	const logCleaner = () => setLogs([]);
+
+	useEffect(() =>
+	{
+		logging.add(logger);
 		aula.gateway.on("MessageCreated", aulaMessageReceiver);
-
-		const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
-		{
-			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
-		}
 		aula.gateway.on("MessageRemoved", aulaMessageRemover);
-
-		const logCleaner = () => setLogs([]);
 		events.on("LogClearRequest", logCleaner);
 
 		return () =>

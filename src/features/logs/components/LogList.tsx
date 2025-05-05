@@ -46,7 +46,7 @@ export default function LogList(args: LogListArgs)
 			}
 		} satisfies ILogger;
 
-		const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
+		const aulaMessageReceived: IGatewayClientEvents["MessageCreated"] = (event) =>
 		{
 			setLogs(prev => [ ...prev, {
 				type: LogDataType.AulaMessage,
@@ -55,7 +55,7 @@ export default function LogList(args: LogListArgs)
 			} ]);
 		}
 
-		const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
+		const aulaOnMessageRemoved: IGatewayClientEvents["MessageRemoved"] = (event) =>
 		{
 			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
 		}
@@ -127,8 +127,8 @@ export default function LogList(args: LogListArgs)
 
 		logging.add(logger);
 		events.on("LogClearRequest", logCleaner);
-		aula.gateway.on("MessageCreated", aulaMessageReceiver);
-		aula.gateway.on("MessageRemoved", aulaMessageRemover);
+		aula.gateway.on("MessageCreated", aulaMessageReceived);
+		aula.gateway.on("MessageRemoved", aulaOnMessageRemoved);
 		aula.gateway.on("UserCurrentRoomUpdated", onAulaCurrentUserRoomUpdated);
 		aula.gateway.on("UserPresenceUpdated", onAulaUserPresenceUpdated);
 		aula.gateway.on("Ready", onAulaReady);
@@ -137,8 +137,8 @@ export default function LogList(args: LogListArgs)
 		{
 			logging.remove(logger);
 			events.remove("LogClearRequest", logCleaner);
-			aula.gateway.remove("MessageCreated", aulaMessageReceiver);
-			aula.gateway.remove("MessageRemoved", aulaMessageRemover);
+			aula.gateway.remove("MessageCreated", aulaMessageReceived);
+			aula.gateway.remove("MessageRemoved", aulaOnMessageRemoved);
 			aula.gateway.remove("UserCurrentRoomUpdated", onAulaCurrentUserRoomUpdated);
 			aula.gateway.remove("UserPresenceUpdated", onAulaUserPresenceUpdated);
 			aula.gateway.remove("Ready", onAulaReady);

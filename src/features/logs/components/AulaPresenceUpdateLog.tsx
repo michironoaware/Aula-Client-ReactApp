@@ -23,7 +23,7 @@ export default function AulaPresenceUpdateLog({ props }: { props: AulaPresenceUp
 	}, []);
 
 	return <div className="log loglevel-information">
-		<pre>{message}</pre>
+		<i><pre>{message}</pre></i>
 	</div>
 }
 

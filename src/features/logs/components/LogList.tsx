@@ -23,103 +23,103 @@ export default function LogList(args: LogListArgs)
 		} ]);
 	}
 
-	const logger = {
-		log: (logLevel, message) =>
+	useEffect(() =>
+	{
+		const logger = {
+			log: (logLevel, message) =>
+			{
+				const selectedLogLevel = LocalStorageFacade.logLevel ?? LogLevel.Information;
+				if (logLevel < selectedLogLevel)
+					return;
+
+				setLogs(prev => [ ...prev, {
+					type: LogDataType.Console,
+					logLevel,
+					message,
+					key: `l${prev.length + 1}d${Date.now()}`
+				} ]);
+			}
+		} satisfies ILogger;
+
+		const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
 		{
-			const selectedLogLevel = LocalStorageFacade.logLevel ?? LogLevel.Information;
-			if (logLevel < selectedLogLevel)
+			setLogs(prev => [ ...prev, {
+				type: LogDataType.AulaMessage,
+				message: event.message,
+				key: event.message.id
+			} ]);
+		}
+
+		const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
+		{
+			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
+		}
+
+		const logCleaner = () => setLogs([]);
+
+		const onAulaCurrentUserRoomUpdated: IGatewayClientEvents["UserCurrentRoomUpdated"] = async (event) =>
+		{
+			if (event.userId !== event.gatewayClient.currentUser!.id)
+				return;
+
+			const room = event.currentRoomId
+				? event.gatewayClient.rest.cache?.get(event.currentRoomId) as Room | undefined
+				?? await event.gatewayClient.rest.getRoom(event.currentRoomId)
+				: null;
+			if (!room)
+			{
+				log(LogLevel.Information, "Huh, you find yourself in a weird place.");
+				return;
+			}
+
+			log(LogLevel.Information, `${room.name}\n${room.description}`);
+			const nearbyPlayerNamesText = (await room.getUsers())
+				.filter(u => u.id !== event.gatewayClient.currentUser!.id)
+				.map(u => u.presence === Presence.Online ? u.displayName : `${u.displayName} (asleep)`)
+				.join(", ");
+			if (nearbyPlayerNamesText.length > 0)
+				log(LogLevel.Information, `Nearby presences: ${nearbyPlayerNamesText}.`);
+			else
+				log(LogLevel.Information, "It's just you.");
+		}
+
+		const onAulaUserPresenceUpdated: IGatewayClientEvents["UserPresenceUpdated"] = (event) =>
+		{
+			if (event.userId === event.gatewayClient.currentUser!.id)
 				return;
 
 			setLogs(prev => [ ...prev, {
-				type: LogDataType.Console,
-				logLevel,
-				message,
-				key: `l${prev.length + 1}d${Date.now()}`
+				type: LogDataType.AulaPresenceUpdate,
+				key: `l${prev.length + 1}d${Date.now()}`,
+				event,
 			} ]);
 		}
-	} satisfies ILogger;
 
-	const aulaMessageReceiver: IGatewayClientEvents["MessageCreated"] = (event) =>
-	{
-		setLogs(prev => [ ...prev, {
-			type: LogDataType.AulaMessage,
-			message: event.message,
-			key: event.message.id
-		} ]);
-	}
-
-	const aulaMessageRemover: IGatewayClientEvents["MessageRemoved"] = (event) =>
-	{
-		setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
-	}
-
-	const logCleaner = () => setLogs([]);
-
-	const onAulaCurrentUserRoomUpdated: IGatewayClientEvents["UserCurrentRoomUpdated"] = async (event) =>
-	{
-		if (event.userId !== event.gatewayClient.currentUser!.id)
-			return;
-
-		const room = event.currentRoomId
-			? event.gatewayClient.rest.cache?.get(event.currentRoomId) as Room | undefined
-			?? await event.gatewayClient.rest.getRoom(event.currentRoomId)
-			: null;
-		if (!room)
+		const onAulaReady: IGatewayClientEvents["Ready"] = async (event) =>
 		{
-			log(LogLevel.Information, "Huh, you find yourself in a weird place.");
-			return;
+			log(LogLevel.Information, getRandomMessage(userWakeReturnMessages));
+
+			const room = event.user.currentRoomId
+				? event.gatewayClient.rest.cache?.get(event.user.currentRoomId) as Room | undefined
+				?? await event.gatewayClient.rest.getRoom(event.user.currentRoomId)
+				: null;
+			if (!room)
+			{
+				log(LogLevel.Information, "Huh, you find yourself in a weird place.");
+				return;
+			}
+
+			log(LogLevel.Information, `${room.name}\n${room.description}`);
+			const nearbyPlayerNamesText = (await room.getUsers())
+				.filter(u => u.id !== event.gatewayClient.currentUser!.id)
+				.map(u => u.presence === Presence.Online ? u.displayName : `${u.displayName} (asleep)`)
+				.join(", ");
+			if (nearbyPlayerNamesText.length > 0)
+				log(LogLevel.Information, `Nearby presences: ${nearbyPlayerNamesText}.`);
+			else
+				log(LogLevel.Information, "It's just you.");
 		}
 
-		log(LogLevel.Information, `${room.name}\n${room.description}`);
-		const nearbyPlayerNamesText = (await room.getUsers())
-			.filter(u => u.id !== event.gatewayClient.currentUser!.id)
-			.map(u => u.presence === Presence.Online ? u.displayName : `${u.displayName} (asleep)`)
-			.join(", ");
-		if (nearbyPlayerNamesText.length > 0)
-			log(LogLevel.Information, `Nearby presences: ${nearbyPlayerNamesText}.`);
-		else
-			log(LogLevel.Information, "It's just you.");
-	}
-
-	const onAulaUserPresenceUpdated: IGatewayClientEvents["UserPresenceUpdated"] = (event) =>
-	{
-		if (event.userId === event.gatewayClient.currentUser!.id)
-			return;
-
-		setLogs(prev => [ ...prev, {
-			type: LogDataType.AulaPresenceUpdate,
-			key: `l${prev.length + 1}d${Date.now()}`,
-			event,
-		} ]);
-	}
-
-	const onAulaReady: IGatewayClientEvents["Ready"] = async (event) =>
-	{
-		log(LogLevel.Information, getRandomMessage(userWakeReturnMessages));
-
-		const room = event.user.currentRoomId
-			? event.gatewayClient.rest.cache?.get(event.user.currentRoomId) as Room | undefined
-			?? await event.gatewayClient.rest.getRoom(event.user.currentRoomId)
-			: null;
-		if (!room)
-		{
-			log(LogLevel.Information, "Huh, you find yourself in a weird place.");
-			return;
-		}
-
-		log(LogLevel.Information, `${room.name}\n${room.description}`);
-		const nearbyPlayerNamesText = (await room.getUsers())
-			.filter(u => u.id !== event.gatewayClient.currentUser!.id)
-			.map(u => u.presence === Presence.Online ? u.displayName : `${u.displayName} (asleep)`)
-			.join(", ");
-		if (nearbyPlayerNamesText.length > 0)
-			log(LogLevel.Information, `Nearby presences: ${nearbyPlayerNamesText}.`);
-		else
-			log(LogLevel.Information, "It's just you.");
-	}
-
-	useEffect(() =>
-	{
 		logging.add(logger);
 		aula.gateway.on("MessageCreated", aulaMessageReceiver);
 		aula.gateway.on("MessageRemoved", aulaMessageRemover);

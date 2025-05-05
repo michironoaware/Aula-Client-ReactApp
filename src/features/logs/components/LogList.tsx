@@ -68,7 +68,7 @@ export default function LogList(args: LogListArgs)
 			if (log.type === LogDataType.Console)
 				return <Log key={log.key} logLevel={log.logLevel} message={log.message}/>;
 			if (log.type === LogDataType.AulaMessage)
-				return <AulaMessageLog props={{ message: log.message }}></AulaMessageLog>;
+				return <AulaMessageLog key={log.key} props={{ message: log.message }}></AulaMessageLog>;
 		})}
 	</div>
 }

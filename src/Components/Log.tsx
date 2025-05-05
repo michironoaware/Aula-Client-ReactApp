@@ -1,5 +1,5 @@
-﻿import { LogLevel } from "../Common/Logging";
-import { InvalidOperationError } from "aula.js";
+﻿import { InvalidOperationError } from "aula.js";
+import { LogLevel } from "utils/logging/LogLevel.ts";
 
 export default function Log(args: LogArgs)
 {

@@ -1,13 +1,13 @@
 ﻿import { ReactNode, useEffect, useState } from "react";
-import { events } from "../Services/events";
-import { LocalStorageFacade } from "../Services/LocalStorageFacade";
-import { ILogger, LogLevel } from "../Common/Logging";
-import Log from "./Log.tsx";
-import { IGatewayClientEvents, Message, Room } from "aula.js";
-import AulaMessageLog from "./AulaMessageLog.tsx";
-import { Delay } from "../Common/Delay.ts";
-import { aula } from "../Services/aula.ts";
-import { logging } from "../Services/logging.ts";
+import { LocalStorageFacade } from "lib/LocalStorageFacade.ts";
+import { LogLevel } from "utils/logging/LogLevel.ts";
+import { ILogger } from "utils/logging/ILogger.ts";
+import { logging } from "lib/logging.ts";
+import { IGatewayClientEvents, Message } from "aula.js";
+import { aula } from "lib/aula.ts";
+import { events } from "lib/events.ts";
+import Log from "components/Log.tsx";
+import AulaMessageLog from "components/AulaMessageLog.tsx";
 
 export default function LogList(args: LogListArgs)
 {

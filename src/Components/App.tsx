@@ -1,8 +1,8 @@
 import React from "react";
-import Body from "./Body";
-import Theme from "./Theme.tsx";
-import InputTextBox from "./InputTextBox.tsx";
-import LogList from "./LogList.tsx";
+import Theme from "components/Theme.tsx";
+import Body from "components/Body.tsx";
+import LogList from "components/LogList.tsx";
+import InputTextBox from "../features/commands/components/InputTextBox.tsx";
 
 export default function App()
 {

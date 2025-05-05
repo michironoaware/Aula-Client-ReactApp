@@ -1,0 +1,28 @@
+﻿import { logging } from "lib/logging.ts";
+import { CommandLine } from "lib/commands/CommandLine.ts";
+import { Help } from "./commands/Help.ts";
+import { SetTheme } from "./commands/SetTheme.ts";
+import { SetLogLevel } from "./commands/SetLogLevel.ts";
+import { Cls } from "./commands/Cls.ts";
+import { SetAddress } from "./commands/SetAddress.ts";
+import { Register } from "./commands/Register.ts";
+import { LogIn } from "./commands/LogIn.ts";
+import { ConfirmEmail } from "./commands/ConfirmEmail.ts";
+import { ForgotPassword } from "./commands/ForgotPassword.ts";
+import { ResetPassword } from "./commands/ResetPassword.ts";
+import { LogOut } from "./commands/LogOut.ts";
+import { LogOutAll } from "./commands/LogOutAll.ts";
+
+export const commandLine = new CommandLine(logging);
+commandLine.addCommand(new Help());
+commandLine.addCommand(new SetTheme());
+commandLine.addCommand(new SetLogLevel());
+commandLine.addCommand(new Cls());
+commandLine.addCommand(new SetAddress());
+commandLine.addCommand(new Register());
+commandLine.addCommand(new LogIn());
+commandLine.addCommand(new ConfirmEmail());
+commandLine.addCommand(new ForgotPassword());
+commandLine.addCommand(new ResetPassword());
+commandLine.addCommand(new LogOut());
+commandLine.addCommand(new LogOutAll());

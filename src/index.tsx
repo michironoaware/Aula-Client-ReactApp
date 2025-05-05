@@ -1,8 +1,8 @@
-import React, { StrictMode } from "react";
+import { logging } from "lib/logging.ts";
+import { LogLevel } from "utils/logging/LogLevel.ts";
 import { createRoot } from "react-dom/client";
-import App from "./Components/App.tsx";
-import { LogLevel } from "./Common/Logging";
-import { logging } from "./Services/logging.ts";
+import { StrictMode } from "react";
+import App from "components/App.tsx";
 
 logging.add({
 	log: (logLevel, message) => console.log(`[${LogLevel[logLevel]}]: ${message}`),

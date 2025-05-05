@@ -1,8 +1,8 @@
-﻿import React, { useEffect, useState } from "react";
-import { ThemeType, ThemeTypeToDomClass } from "./ThemeType.ts";
-import { events } from "../Services/events";
-import { LocalStorageFacade } from "../Services/LocalStorageFacade";
-import { TypeHelper } from "../Common";
+﻿import { ThemeType, ThemeTypeToDomClass } from "components/ThemeType.ts";
+import { LocalStorageFacade } from "lib/LocalStorageFacade.ts";
+import { TypeHelper } from "utils/TypeHelper.ts";
+import React, { useEffect, useState } from "react";
+import { events } from "lib/events.ts";
 
 export default function Theme(args: ThemeArgs)
 {

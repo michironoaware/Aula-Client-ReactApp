@@ -1,7 +1,7 @@
-﻿import { Message, MessageFlags, Room, StandardMessage, User, UserJoinMessage, UserLeaveMessage } from "aula.js";
-import { BigIntHelper } from "../Common/BigIntHelper.ts";
-import { HtmlUtility } from "../Common/HtmlUtility.ts";
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
+import { Message, MessageFlags, Room, StandardMessage, User, UserJoinMessage, UserLeaveMessage } from "aula.js";
+import { HtmlUtility } from "utils/HtmlUtility.ts";
+import { BigIntHelper } from "utils/BigIntHelper.ts";
 
 export default function AulaMessageLog({ props }: { props: AulaMessageLogProps })
 {

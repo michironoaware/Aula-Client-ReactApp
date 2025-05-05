@@ -121,9 +121,9 @@ export default function LogList(args: LogListArgs)
 		}
 
 		logging.add(logger);
+		events.on("LogClearRequest", logCleaner);
 		aula.gateway.on("MessageCreated", aulaMessageReceiver);
 		aula.gateway.on("MessageRemoved", aulaMessageRemover);
-		events.on("LogClearRequest", logCleaner);
 		aula.gateway.on("UserCurrentRoomUpdated", onAulaCurrentUserRoomUpdated);
 		aula.gateway.on("UserPresenceUpdated", onAulaUserPresenceUpdated);
 		aula.gateway.on("Ready", onAulaReady);

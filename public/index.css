@@ -216,15 +216,11 @@ html, body, #root, #root > .theme
 	padding: 1em;
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-end;
 	white-space: pre-wrap;
 	word-break: break-all;
 	overflow-wrap: anywhere;
 	overflow: hidden;
-}
-
-.body > .loglist
-{
-	height: 100%;
 }
 
 .body > .input-text-box {
@@ -283,7 +279,6 @@ pre {
 	overflow: hidden scroll;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
 
 	-ms-overflow-style: none;
 	scrollbar-width: none;

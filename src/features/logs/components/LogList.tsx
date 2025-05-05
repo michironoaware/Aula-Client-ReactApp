@@ -1,4 +1,4 @@
-﻿import { ReactNode, useEffect, useState } from "react";
+﻿import { ReactNode, useEffect, useRef, useState } from "react";
 import { LocalStorageFacade } from "lib/LocalStorageFacade.ts";
 import { LogLevel } from "utils/logging/LogLevel.ts";
 import { ILogger } from "utils/logging/ILogger.ts";
@@ -145,7 +145,17 @@ export default function LogList(args: LogListArgs)
 		}
 	}, []);
 
-	return <div className="loglist">
+	const containerRef = useRef<HTMLDivElement>(null);
+	useEffect(() =>
+	{
+		const container = containerRef.current;
+		if (!container)
+			return;
+		const last = container.lastElementChild as HTMLElement | null;
+		last?.scrollIntoView({ behavior: "instant" });
+	}, [logs]);
+
+	return <div ref={containerRef} className="loglist">
 		{args.children}
 		{logs.map(log =>
 		{

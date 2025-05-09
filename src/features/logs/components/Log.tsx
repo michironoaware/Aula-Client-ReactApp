@@ -39,7 +39,7 @@ export default function Log(args: LogArgs)
 		logLevelName += ": "
 
 	return <div className={`log ${logLevelClass}`}>
-		<pre>{logLevelName}{args.message}</pre>
+		{logLevelName}<pre dangerouslySetInnerHTML={{ __html: args.message! }}></pre>
 	</div>
 }
 

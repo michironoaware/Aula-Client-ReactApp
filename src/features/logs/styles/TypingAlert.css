@@ -1,0 +1,8 @@
+﻿.typing-alert {
+	opacity: 90%;
+	font-weight: lighter;
+}
+
+.typing-alert.active {
+	margin-bottom: 1em;
+}

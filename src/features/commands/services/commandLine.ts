@@ -13,7 +13,7 @@ import { ResetPassword } from "./commands/ResetPassword.ts";
 import { LogOut } from "./commands/LogOut.ts";
 import { LogOutAll } from "./commands/LogOutAll.ts";
 import { Say } from "./commands/Say.ts";
-import { Move } from "./commands/Move.ts";
+import { Goto } from "./commands/Goto.ts";
 
 export const commandLine = new CommandLine(logging);
 commandLine.addCommand(new Help());
@@ -29,4 +29,4 @@ commandLine.addCommand(new ResetPassword());
 commandLine.addCommand(new LogOut());
 commandLine.addCommand(new LogOutAll());
 commandLine.addCommand(new Say());
-commandLine.addCommand(new Move());
+commandLine.addCommand(new Goto());

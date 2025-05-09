@@ -8,7 +8,7 @@ import { StringBuilder } from "../../../../utils/StringBuilder.ts";
 import { RestHelper } from "../../../../lib/RestHelper.ts";
 import { ErrorHelper } from "../../../../utils/ErrorHelper.ts";
 
-export class Move extends Command
+export class Goto extends Command
 {
 	static readonly #s_roomNameOption = new CommandOption({
 		name: "n",
@@ -21,22 +21,22 @@ export class Move extends Command
 	public constructor()
 	{
 		super();
-		this.addOption(Move.#s_roomNameOption);
+		this.addOption(Goto.#s_roomNameOption);
 	}
 
 	public get name()
 	{
-		return "move";
+		return "goto";
 	}
 
 	public get description()
 	{
-		return "Move you from one room to another.";
+		return "Go to an adjacent room.";
 	}
 
 	public async callback(args: Readonly<Map<string, string>>, cancellationToken: CancellationToken): Promise<void>
 	{
-		const roomName = args.get(Move.#s_roomNameOption.name);
+		const roomName = args.get(Goto.#s_roomNameOption.name);
 		const currentRoom = aula.gateway.currentUser!.currentRoomId
 			? aula.rest.cache?.get(aula.gateway.currentUser!.currentRoomId) as Room | undefined
 			?? await aula.gateway.currentUser!.getCurrentRoom()

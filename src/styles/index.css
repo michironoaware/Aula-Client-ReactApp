@@ -293,6 +293,11 @@ pre {
 	margin: 0 0 1em;
 }
 
+.log {
+	display: flex;
+	flex-direction: row;
+}
+
 .loglevel-critical {
 	color: var(--font-color-critical);
 	font-weight: var(--font-weight-critical);

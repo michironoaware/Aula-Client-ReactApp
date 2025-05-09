@@ -22,7 +22,6 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 						? cache?.get(props.message.authorId) as User | undefined ?? await props.message.getAuthor()
 						: null;
 					let authorName = author?.displayName ?? "System";
-					authorName = msg.startsWith("<em>") ? `<em>${authorName}</em>`:authorName;
 					const separator = msg.startsWith("<em>") ? " ":": ";
 					msg = `${authorName}${separator}${msg}`;
 				}

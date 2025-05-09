@@ -274,6 +274,12 @@ pre {
 	font-size: inherit;
 }
 
+ul, ol {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
 .loglist
 {
 	overflow: hidden scroll;

@@ -152,9 +152,7 @@ export default function LogList(args: LogListArgs)
 	const containerRef = useRef<HTMLDivElement>(null);
 	useEffect(() =>
 	{
-		const container = containerRef.current;
-		if (!container)
-			return;
+		const container = containerRef.current!;
 		const last = container.lastElementChild as HTMLElement | null;
 		last?.scrollIntoView({ behavior: "instant", block: "end" });
 	}, [logs]);

@@ -24,7 +24,8 @@ export default function InputTextBox()
 
 		try
 		{
-			logging.log(LogLevel.Information, `> ${content}`);
+			if (!content.startsWith("say "))
+				logging.log(LogLevel.Information, `> ${content}`);
 			await commandLine.processCommand(content, cancellation.token);
 		} catch (err)
 		{

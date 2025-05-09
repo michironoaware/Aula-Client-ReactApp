@@ -280,6 +280,13 @@ ul, ol {
 	margin: 0;
 }
 
+.sentbytext
+{
+	opacity: 75%;
+	font-weight: lighter;
+	font-size: 0.85em;
+}
+
 .loglist
 {
 	overflow: hidden scroll;
@@ -299,7 +306,7 @@ ul, ol {
 	margin: 0 0 1em;
 }
 
-.log {
+.log, .log > pre {
 	display: flex;
 	flex-direction: row;
 }

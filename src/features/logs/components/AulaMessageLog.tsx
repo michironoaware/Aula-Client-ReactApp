@@ -15,15 +15,19 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 			if (props.message instanceof StandardMessage)
 			{
 				let msg = HtmlUtility.getHtmlFromMarkdown(HtmlUtility.escapeHtml(props.message.text));
+				const author = props.message.authorId
+					? cache?.get(props.message.authorId) as User | undefined ?? await props.message.getAuthor()
+					: null;
+				let authorName = author?.displayName ?? "System";
 
 				if (!BigIntHelper.HasFlag(props.message.flags, MessageFlags.HideAuthor))
 				{
-					const author = props.message.authorId
-						? cache?.get(props.message.authorId) as User | undefined ?? await props.message.getAuthor()
-						: null;
-					let authorName = author?.displayName ?? "System";
 					const separator = msg.startsWith("<em>") ? " ":": ";
 					msg = `${authorName}${separator}${msg}`;
+				}
+				else
+				{
+					msg = `${msg}${msg.endsWith(".") ? " " : "."}<div class="sentbytext">Sent by ${authorName}.</div>`;
 				}
 
 				setMessage(() => msg);

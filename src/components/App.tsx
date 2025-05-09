@@ -6,6 +6,7 @@ import InputTextBox from "features/commands/components/InputTextBox.tsx";
 import { logging } from "lib/logging.ts";
 import { LogLevel } from "utils/logging/LogLevel.ts";
 import { aula } from "lib/aula.ts";
+import TypingAlert from "../features/logs/components/TypingAlert.tsx";
 
 export default function App()
 {
@@ -36,6 +37,7 @@ export default function App()
 	return <Theme withEffects={true}>
 		<Body>
 			<LogList></LogList>
+			<TypingAlert></TypingAlert>
 			<InputTextBox></InputTextBox>
 		</Body>
 	</Theme>

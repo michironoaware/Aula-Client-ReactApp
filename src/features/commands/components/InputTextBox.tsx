@@ -4,6 +4,7 @@ import { logging } from "lib/logging.ts";
 import { LogLevel } from "utils/logging/LogLevel.ts";
 import { commandLine } from "../services/commandLine.ts";
 import { AulaServiceStateError } from "lib/aula.ts";
+import { Say } from "../services/commands/Say.ts";
 
 export default function InputTextBox()
 {
@@ -24,7 +25,7 @@ export default function InputTextBox()
 
 		try
 		{
-			if (!content.startsWith("say "))
+			if (!content.startsWith(`${Say.name} `))
 				logging.log(LogLevel.Information, `> ${content}`);
 			await commandLine.processCommand(content, cancellation.token);
 		} catch (err)

@@ -21,9 +21,14 @@ export class Say extends Command
 		this.addOption(Say.#s_messageOption);
 	}
 
-	public get name()
+	public static get name()
 	{
 		return "say";
+	}
+
+	public get name()
+	{
+		return Say.name;
 	}
 
 	public get description()

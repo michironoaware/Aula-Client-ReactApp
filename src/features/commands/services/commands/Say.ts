@@ -43,7 +43,7 @@ export class Say extends Command
 		}
 
 		await aula.rest.sendMessage(aula.gateway.currentUser.currentRoomId, new SendMessageRequestBody()
-			.withType(MessageType.Standard)
+			.withType(MessageType.Default)
 			.withText(message), cancellationToken);
 	}
 }

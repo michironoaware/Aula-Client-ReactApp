@@ -57,7 +57,7 @@ export default function LogList(args: LogListArgs)
 			} ]);
 		}
 
-		const aulaOnMessageRemoved: IGatewayClientEvents["MessageRemoved"] = (event) =>
+		const aulaOnMessageDeleted: IGatewayClientEvents["MessageDeleted"] = (event) =>
 		{
 			setLogs(prev => prev.toSpliced(prev.findIndex(v => v.key === event.messageId), 1));
 		}
@@ -81,7 +81,7 @@ export default function LogList(args: LogListArgs)
 
 			log(LogLevel.Information, room.name);
 			log(LogLevel.Information, room.description);
-			const nearbyPlayerNamesText = (await room.getUsers())
+			const nearbyPlayerNamesText = (await room.getResidents())
 				.filter(u => u.id !== event.gatewayClient.currentUser!.id)
 				.map(u => u.presence === Presence.Online ? u.displayName : `${u.displayName} (asleep)`)
 				.join(", ");
@@ -119,7 +119,7 @@ export default function LogList(args: LogListArgs)
 
 			log(LogLevel.Information, room.name);
 			log(LogLevel.Information, room.description);
-			const nearbyPlayerNamesText = (await room.getUsers())
+			const nearbyPlayerNamesText = (await room.getResidents())
 				.filter(u => u.id !== event.gatewayClient.currentUser!.id)
 				.map(u => u.presence === Presence.Online ? u.displayName : `${u.displayName} (asleep)`)
 				.join(", ");
@@ -132,7 +132,7 @@ export default function LogList(args: LogListArgs)
 		logging.add(logger);
 		events.on("LogClearRequest", logCleaner);
 		aula.gateway.on("MessageCreated", aulaMessageReceived);
-		aula.gateway.on("MessageRemoved", aulaOnMessageRemoved);
+		aula.gateway.on("MessageDeleted", aulaOnMessageDeleted);
 		aula.gateway.on("UserCurrentRoomUpdated", onAulaCurrentUserRoomUpdated);
 		aula.gateway.on("UserPresenceUpdated", onAulaUserPresenceUpdated);
 		aula.gateway.on("Ready", onAulaReady);
@@ -142,7 +142,7 @@ export default function LogList(args: LogListArgs)
 			logging.remove(logger);
 			events.remove("LogClearRequest", logCleaner);
 			aula.gateway.remove("MessageCreated", aulaMessageReceived);
-			aula.gateway.remove("MessageRemoved", aulaOnMessageRemoved);
+			aula.gateway.remove("MessageDeleted", aulaOnMessageDeleted);
 			aula.gateway.remove("UserCurrentRoomUpdated", onAulaCurrentUserRoomUpdated);
 			aula.gateway.remove("UserPresenceUpdated", onAulaUserPresenceUpdated);
 			aula.gateway.remove("Ready", onAulaReady);

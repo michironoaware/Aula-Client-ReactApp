@@ -1,7 +1,7 @@
 ﻿import { Command } from "../../../../lib/commands/Command.ts";
 import { CommandOption } from "../../../../lib/commands/CommandOption.ts";
 import { aula } from "lib/aula.ts";
-import { CancellationToken, Room, SetUserRoomRequestBody } from "aula.js";
+import { CancellationToken, ModifyUserRequestBody, Room } from "aula.js";
 import { logging } from "../../../../lib/logging.ts";
 import { LogLevel } from "../../../../utils/logging/LogLevel.ts";
 import { StringBuilder } from "../../../../utils/StringBuilder.ts";
@@ -52,10 +52,10 @@ export class Goto extends Command
 				adjacentRooms.push(...allRooms.filter(r => r.isEntrance));
 			} else
 			{
-				for (const roomId of currentRoom.connectedRoomIds)
+				for (const roomId of currentRoom.destinationIds)
 				{
 					const room = aula.rest.cache?.get(roomId) as Room | undefined
-						?? (await aula.rest.getRoomConnections(currentRoom.id, cancellationToken)).find(r => r.id === roomId);
+						?? (await aula.rest.getRoomDestinations(currentRoom.id, cancellationToken)).find(r => r.id === roomId);
 					if (!room)
 						continue;
 					adjacentRooms.push(room);
@@ -75,7 +75,7 @@ export class Goto extends Command
 
 		if (ErrorHelper.Try(() => BigInt(roomName)))
 		{
-			await aula.rest.setCurrentUserRoom(new SetUserRoomRequestBody().withRoomId(roomName), cancellationToken);
+			await aula.gateway.currentUser!.modify(new ModifyUserRequestBody().withCurrentRoomId(roomName) ,cancellationToken);
 			return;
 		}
 
@@ -86,7 +86,7 @@ export class Goto extends Command
 			{
 				if (room.name.includes(roomName))
 				{
-					await aula.rest.setCurrentUserRoom(new SetUserRoomRequestBody().withRoomId(room.id), cancellationToken);
+					await aula.gateway.currentUser!.modify(new ModifyUserRequestBody().withCurrentRoomId(room.id) ,cancellationToken);
 					break;
 				}
 			}
@@ -94,16 +94,16 @@ export class Goto extends Command
 			return;
 		}
 
-		for (const roomId of currentRoom.connectedRoomIds)
+		for (const roomId of currentRoom.destinationIds)
 		{
 			const room = aula.rest.cache?.get(roomId) as Room | undefined
-				?? (await aula.rest.getRoomConnections(currentRoom.id, cancellationToken)).find(r => r.id === roomId);
+				?? (await aula.rest.getRoomDestinations(currentRoom.id, cancellationToken)).find(r => r.id === roomId);
 			if (!room)
 				continue;
 
 			if (room.name.includes(roomName))
 			{
-				await aula.rest.setCurrentUserRoom(new SetUserRoomRequestBody().withRoomId(room.id), cancellationToken);
+				await aula.gateway.currentUser!.modify(new ModifyUserRequestBody().withCurrentRoomId(room.id) ,cancellationToken);
 				return;
 			}
 		}

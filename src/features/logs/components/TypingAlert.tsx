@@ -57,23 +57,6 @@ export default function TypingAlert()
 			})
 		};
 
-		const aulaOnUserStoppedTyping: IGatewayClientEvents["UserStoppedTyping"] = (event) =>
-		{
-			if (event.roomId !== aula.gateway.currentUser!.currentRoomId)
-				return;
-
-			setUsersTyping(prev =>
-			{
-				const userTyping = prev.find(u => u.id === event.userId);
-				if (!userTyping)
-					return prev;
-
-				const next = [ ...prev ];
-				next.splice(next.indexOf(userTyping), 1);
-				return next;
-			});
-		}
-
 		const aulaOnMessageCreated: IGatewayClientEvents["MessageCreated"] = (event) =>
 		{
 			if (event.message.roomId !== aula.gateway.currentUser!.currentRoomId)
@@ -93,13 +76,11 @@ export default function TypingAlert()
 
 		aula.gateway.on("UserCurrentRoomUpdated", aulaOnUserCurrentRoomUpdated);
 		aula.gateway.on("UserStartedTyping", aulaOnUserStartedTyping);
-		aula.gateway.on("UserStoppedTyping", aulaOnUserStoppedTyping);
 
 		return () =>
 		{
 			aula.gateway.remove("UserCurrentRoomUpdated", aulaOnUserCurrentRoomUpdated);
 			aula.gateway.remove("UserStartedTyping", aulaOnUserStartedTyping);
-			aula.gateway.remove("UserStoppedTyping", aulaOnUserStoppedTyping);
 		}
 	}, []);
 

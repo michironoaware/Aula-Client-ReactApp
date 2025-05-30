@@ -17,9 +17,9 @@ class AulaService
 	public constructor()
 	{
 		this.#_gateway = new GatewayClient(new GatewayClientOptions()
-			.withIntents(Intents.Users | Intents.Rooms | Intents.Messages | Intents.Moderation)
+			.withIntents(Intents.Messages | Intents.Moderation)
 			.withRestClientOptions(new RestClientOptions()
-				.withCache(new LruCache(256, false))));
+				.withCache(new LruCache(256))));
 
 		this.#loadSettings();
 	}

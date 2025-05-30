@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-import { Message, MessageFlags, Room, StandardMessage, User, UserJoinMessage, UserLeaveMessage } from "aula.js";
+import { DefaultMessage, Message, MessageFlags, Room, User, UserJoinMessage, UserLeaveMessage } from "aula.js";
 import { HtmlUtility } from "utils/HtmlUtility.ts";
 import { BigIntHelper } from "utils/BigIntHelper.ts";
 
@@ -12,7 +12,7 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 		{
 			const cache = props.message.restClient.cache;
 
-			if (props.message instanceof StandardMessage)
+			if (props.message instanceof DefaultMessage)
 			{
 				let msg = HtmlUtility.getHtmlFromMarkdown(HtmlUtility.escapeHtml(props.message.text));
 				const author = props.message.authorId
@@ -43,8 +43,8 @@ export default function AulaMessageLog({ props }: { props: AulaMessageLogProps }
 			} else if (props.message instanceof UserLeaveMessage)
 			{
 				const user = cache?.get(props.message.userLeave.userId) as User | undefined ?? await props.message.userLeave.getUser();
-				const room = props.message.userLeave.roomId
-					? cache?.get(props.message.userLeave.roomId) as Room | undefined
+				const room = props.message.userLeave.nextRoomId
+					? cache?.get(props.message.userLeave.nextRoomId) as Room | undefined
 					?? await props.message.userLeave.getRoom()
 					: null;
 				setMessage(() => `<i>${getLeaveMessage(props.message.id, user.displayName, room?.id)}</i>`)
